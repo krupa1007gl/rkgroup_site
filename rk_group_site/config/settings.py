@@ -4,7 +4,7 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-...'  # оставьте сгенерированный ключ (он уже есть)
+SECRET_KEY = '38d2c72cad3996ef66732a0f468b3e98'  # оставьте сгенерированный ключ (он уже есть)
 
 DEBUG = False
 
