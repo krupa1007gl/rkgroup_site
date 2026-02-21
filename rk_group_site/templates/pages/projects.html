@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Наши проекты{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="section-title">Реализованные проекты</h1>
+    <p class="section-subtitle">Крупные компании, которые уже доверились нам</p>
+
+    <div class="row">
+        <!-- ПЭК -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="glass-card h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="fas fa-truck fa-2x text-info me-3"></i>
+                    <h3 class="h5 mb-0">ПЭК</h3>
+                </div>
+                <p>Оптимизация маршрутов и цифровая логистика с помощью AI-агента, который прогнозирует задержки и предлагает альтернативные пути. Экономия топлива 15%.</p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="glass-card h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="fas fa-globe fa-2x text-info me-3"></i>
+                    <h3 class="h5 mb-0">Ростелеком</h3>
+                </div>
+                <p>Голосовой помощник для техподдержки обрабатывает до 5000 звонков в день, снижая нагрузку на операторов на 40%.</p>
+            </div>
+        </div>
+        <!-- ТТК -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="glass-card h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="fas fa-network-wired fa-2x text-info me-3"></i>
+                    <h3 class="h5 mb-0">ТТК</h3>
+                </div>
+                <p>Чат-бот в личном кабинете помогает клиентам подключать услуги, отслеживать статус заявок и оплачивать счета.</p>
+            </div>
+        </div>
+        <!-- 2ГИС -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="glass-card h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="fas fa-map-marked-alt fa-2x text-info me-3"></i>
+                    <h3 class="h5 mb-0">2ГИС</h3>
+                </div>
+                <p>Интеграция геоданных с AI для построения умных маршрутов и рекомендаций для пользователей.</p>
+            </div>
+        </div>
+        <!-- X5 Retail Group -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="glass-card h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="fas fa-shopping-cart fa-2x text-info me-3"></i>
+                    <h3 class="h5 mb-0">X5 Retail Group</h3>
+                </div>
+                <p>AI-агент в мобильном приложении помогает подбирать товары, отвечает на вопросы и оформляет заказы. Конверсия выросла на 25%.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}RK Group — создание AI-агентов{% endblock %}
+
+{% block content %}
+<!-- Герой -->
+<section id="home" class="hero">
+    <div class="container">
+        <h1>Создаём AI-агентов, которые работают за вас</h1>
+        <p>Разрабатываем интеллектуальных ассистентов, чат-ботов и голосовых агентов для автоматизации бизнеса и повышения эффективности.</p>
+        <a href="#contact" class="btn">Обсудить проект</a>
+    </div>
+</section>
+
+<!-- О нас -->
+<section id="about" class="fade-in">
+    <div class="container">
+        <h2 class="section-title">О компании RK group</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Мы — команда экспертов в области искусственного интеллекта и разработки программного обеспечения. Специализируемся на создании AI-агентов, которые помогают бизнесу автоматизировать рутину, улучшать клиентский сервис и принимать данные-ориентированные решения.</p>
+                <p>Наши решения внедрены в финансовом секторе, ритейле, логистике и сфере услуг. Мы сочетаем передовые технологии с глубоким пониманием бизнес-процессов, чтобы каждый агент приносил измеримый результат.</p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">проектов</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5 лет</div>
+                        <div class="stat-label">на рынке AI</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">99%</div>
+                        <div class="stat-label">точность</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Услуги -->
+<section id="services" class="fade-in">
+    <div class="container">
+        <h2 class="section-title">Наши AI-решения</h2>
+        <p class="section-subtitle">Разрабатываем агентов под любые задачи: от поддержки клиентов до сложной аналитики</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-robot"></i></div>
+                <h3>Чат-боты</h3>
+                <p>Умные диалоговые системы для сайтов, мессенджеров и соцсетей. Обрабатывают запросы 24/7.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-microphone-alt"></i></div>
+                <h3>Голосовые агенты</h3>
+                <p>Обзвон клиентов, поддержка по телефону, интеграция с колл-центрами. Распознавание и синтез речи.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-brain"></i></div>
+                <h3>Ассистенты принятия решений</h3>
+                <p>Анализируют данные, прогнозируют спрос, оптимизируют цены и помогают менеджерам.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-cogs"></i></div>
+                <h3>Автоматизация RPA + AI</h3>
+                <p>Сочетаем роботизацию процессов с интеллектом — агенты выполняют рутинные операции в CRM и ERP.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Портфолио -->
+<section id="portfolio" class="fade-in">
+    <div class="container">
+        <h2 class="section-title">Избранные проекты</h2>
+        <p class="section-subtitle">Реальные кейсы, где AI-агенты принесли ощутимую пользу</p>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-image"><i class="fas fa-comments-dollar"></i></div>
+                <div class="portfolio-info">
+                    <h3>Финансовый ассистент для банка</h3>
+                    <p>Голосовой агент обрабатывает до 5000 звонков в день, консультирует клиентов по продуктам. Снижение нагрузки на операторов на 40%.</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image"><i class="fas fa-shopping-cart"></i></div>
+                <div class="portfolio-info">
+                    <h3>Чат-бот для интернет-магазина</h3>
+                    <p>Помогает подбирать товары, отвечает на вопросы, оформляет заказы. Конверсия в покупку выросла на 25%.</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image"><i class="fas fa-truck"></i></div>
+                <div class="portfolio-info">
+                    <h3>Логистический AI-диспетчер</h3>
+                    <p>Оптимизирует маршруты, отслеживает грузы, прогнозирует задержки. Экономия топлива 15%.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Контакты -->
+<section id="contact" class="fade-in">
+    <div class="container">
+        <h2 class="section-title">Свяжитесь с нами</h2>
+        <p class="section-subtitle">Расскажите о своей задаче — мы подберём оптимальное AI-решение</p>
+
+        <!-- Уведомление об успешной отправке -->
+        {% if request.GET.sent == '1' %}
+        <div class="alert alert-success" style="background: #1f2a2a; border: 1px solid #00f0ff; color: #00f0ff; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center;">
+            Спасибо! Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время.
+        </div>
+        {% endif %}
+
+        <div class="contact-grid">
+            <!-- Левая колонка: контактная информация -->
+            <div class="contact-info">
+                <h3>Контакты</h3>
+                <!-- Адрес (Яндекс.Карты) -->
+                <div class="contact-detail">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <a href="https://yandex.ru/maps/?text=Тверь%2C%20Новочеркасская%20улица%2C%2053" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
+                        Тверь, Новочеркасская ул., 53
+                    </a>
+                </div>
+                <!-- Телефон (звонок) -->
+                <div class="contact-detail">
+                    <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                    <a href="tel:+79969645640" style="color: inherit; text-decoration: none;">+7 (996) 964-56-40</a>
+                </div>
+                <!-- Email (письмо) -->
+                <div class="contact-detail">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <a href="mailto:krupa.xleb@gmail.com" style="color: inherit; text-decoration: none;">krupa.xleb@gmail.com</a>
+                </div>
+                <!-- Время работы -->
+                <div class="contact-detail">
+                    <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                    <div>Пн–Пт: 10:00 – 19:00</div>
+                </div>
+            </div>
+            <!-- Правая колонка: форма отправки -->
+            <div class="contact-form">
+                <form method="post" action="{% url 'home' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Опишите задачу..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Отправить сообщение</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Партнёры RK Group{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="section-title">Партнёрская сеть</h1>
+
+    <!-- Ряд с двумя партнёрами (flexbox) -->
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 40px;">
+        <!-- Twin – левая колонка -->
+        <div style="flex: 1 1 300px; min-width: 280px;">
+            <div class="glass-card h-100 d-flex flex-column align-items-center text-center">
+                <a href="https://twin24.ai/" target="_blank" rel="noopener noreferrer">
+                    <img src="{% static 'pnges/twin-logo.png' %}" alt="Twin" class="img-fluid mb-4" style="max-height: 80px;">
+                </a>
+                <h2 class="neon-text h3">Официальный партнёр Twin</h2>
+                <p class="text-secondary">Twin поставляет комплексные цифровые решения для автоматизации процессов и облачных интеграций. Наши совместные проекты фокусируются на надёжности, масштабируемости и быстром выводе на рынок.</p>
+                <ul class="list-unstyled mt-3">
+                    <li><i class="fas fa-check-circle text-info me-2"></i> Совместные R&D</li>
+                    <li><i class="fas fa-check-circle text-info me-2"></i> Интеграция с платформой Twin</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Сколково – правая колонка -->
+        <div style="flex: 1 1 300px; min-width: 280px;">
+            <div class="glass-card h-100 d-flex flex-column align-items-center text-center">
+                <a href="https://skolkovo.ru" target="_blank" rel="noopener noreferrer">
+                    <img src="{% static 'pnges/skolkovo-logo.png' %}" alt="Сколково" class="img-fluid mb-4" style="max-height: 80px;">
+                </a>
+                <h2 class="neon-text h3">Участник «Сколково»</h2>
+                <p class="text-secondary">Мы — участники экосистемы «Сколково», что подтверждает нашу приверженность научно-техническому развитию, доступ к R&D-ресурсам и возможности совместных акселерационных программ.</p>
+                <ul class="list-unstyled mt-3">
+                    <li><i class="fas fa-check-circle text-info me-2"></i> Инновационный центр</li>
+                    <li><i class="fas fa-check-circle text-info me-2"></i> Гранты и акселерация</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Блок "Нам доверяют лидеры рынка" (с ссылками) -->
+    <div class="glass-card mt-5">
+        <h3 class="neon-text text-center mb-4">Нам доверяют лидеры рынка</h3>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-6 col-md-3 mb-3 text-center">
+                <a href="https://x5.ru" target="_blank" rel="noopener noreferrer">
+                    <img src="{% static 'pnges/x5-logo.png' %}" alt="X5" class="img-fluid" style="max-height: 50px;">
+                </a>
+            </div>
+            <div class="col-6 col-md-3 mb-3 text-center">
+                <a href="https://www.pec.ru" target="_blank" rel="noopener noreferrer">
+                    <img src="{% static 'pnges/pek-logo.png' %}" alt="ПЭК" class="img-fluid" style="max-height: 50px;">
+                </a>
+            </div>
+            <div class="col-6 col-md-3 mb-3 text-center">
+                <a href="https://www.company.rt.ru/" target="_blank" rel="noopener noreferrer">
+                    <img src="{% static 'pnges/rostelecom-logo.png' %}" alt="Ростелеком" class="img-fluid" style="max-height: 50px;">
+                </a>
+            </div>
+            <div class="col-6 col-md-3 mb-3 text-center">
+                <a href="https://company.ttk.ru/" target="_blank" rel="noopener noreferrer">
+                    <img src="{% static 'pnges/ttk-logo.png' %}" alt="ТТК" class="img-fluid" style="max-height: 50px;">
+                </a>
+            </div>
+            <div class="col-6 col-md-3 mb-3 text-center">
+                <a href="https://info.2gis.ru/" target="_blank" rel="noopener noreferrer">
+                    <img src="{% static 'pnges/2gis-logo.png' %}" alt="2ГИС" class="img-fluid" style="max-height: 50px;">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

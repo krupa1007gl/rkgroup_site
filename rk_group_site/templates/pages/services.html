@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Услуги RK Group{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="section-title">Наши AI-решения</h1>
+    <p class="section-subtitle">Интеллектуальные агенты для любого бизнеса: от ритейла до логистики</p>
+
+    <div class="row">
+        <!-- AI-Голосовой агент -->
+        <div class="col-lg-6 mb-4">
+            <div class="glass-card h-100">
+                <div class="d-flex align-items-center mb-4">
+                    <i class="fas fa-microphone-alt fa-3x text-info me-3"></i>
+                    <h2 class="h3 mb-0">AI-Голосовой агент</h2>
+                </div>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i> До 1500 параллельных вызовов</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i> Массовые исходящие обзвоны</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i> Естественное распознавание речи</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i> Мгновенное переключение на оператора</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i> Интеграция с CRM и телефонией</li>
+                </ul>
+                <p class="mt-3">Идеально для колл-центров, служб поддержки, обзвона должников и маркетинговых кампаний.</p>
+            </div>
+        </div>
+        <!-- AI-Чат-бот -->
+        <div class="col-lg-6 mb-4">
+            <div class="glass-card h-100">
+                <div class="d-flex align-items-center mb-4">
+                    <i class="fas fa-comment-dots fa-3x text-info me-3"></i>
+                    <h2 class="h3 mb-0">AI-Чат-бот</h2>
+                </div>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i> 24/7 на сайте и в мессенджерах</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i> Квалификация лидов</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i> Сбор контактов и автоматическая передача в отдел продаж</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i> Приоритизация и метки клиентов</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-info me-2"></i> Интеграция с CRM</li>
+                </ul>
+                <p class="mt-3">Повышает конверсию сайта, обрабатывает запросы без выходных и снижает нагрузку на менеджеров.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Дополнительные услуги из КП (например, RPA+AI) -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4">
+            <div class="glass-card">
+                <i class="fas fa-cogs fa-3x text-info mb-3"></i>
+                <h3>Автоматизация RPA + AI</h3>
+                <p>Сочетаем роботизацию процессов с интеллектом — агенты выполняют рутинные операции в CRM и ERP.</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="glass-card">
+                <i class="fas fa-brain fa-3x text-info mb-3"></i>
+                <h3>Ассистенты принятия решений</h3>
+                <p>Анализируют данные, прогнозируют спрос, оптимизируют цены и помогают менеджерам.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

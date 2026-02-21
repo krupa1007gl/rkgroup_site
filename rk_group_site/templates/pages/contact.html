@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="section-title">Свяжитесь с нами</h1>
+    <p class="section-subtitle">Обсудим ваш проект и рассчитаем экономический эффект бесплатно</p>
+
+    <!-- Уведомление об успешной отправке -->
+    {% if request.GET.sent == '1' %}
+    <div class="alert alert-success" style="background: #1f2a2a; border: 1px solid #00f0ff; color: #00f0ff; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center;">
+        Спасибо! Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время.
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="glass-card">
+                <h3 class="neon-text h4">Контактная информация</h3>
+                <p><i class="fas fa-phone-alt text-info me-2"></i> +7 (915) 725-88-78</p>
+                <p><i class="fas fa-envelope text-info me-2"></i> rybakovartem077@gmail.com</p>
+                <p><i class="fab fa-telegram text-info me-2"></i> @rkgtech</p>
+                <p><i class="fas fa-clock text-info me-2"></i> Пн–Пт: 10:00 – 19:00</p>
+                <hr class="bg-secondary">
+                <h4 class="neon-text h5">Тестовый период</h4>
+                <p>Пробная интеграция на вашем трафике с мониторингом KPI.</p>
+                <a href="#" class="btn btn-neon">Заказать расчёт</a>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="glass-card">
+                <h3 class="neon-text h4">Напишите нам</h3>
+                <form method="post" action="{% url 'contact' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="text" name="name" class="form-control bg-dark text-light border-info" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" name="email" class="form-control bg-dark text-light border-info" placeholder="Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea name="message" class="form-control bg-dark text-light border-info" rows="4" placeholder="Опишите задачу..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-neon w-100">Отправить сообщение</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
