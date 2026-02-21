@@ -4,11 +4,11 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = '38d2c72cad3996ef66732a0f468b3e98'  # оставьте сгенерированный ключ (он уже есть)
+SECRET_KEY = 'OQ9MPHgzm_khnlIHpyqcghVqorXj-weVjID1WozEFd6aQH91CuVwHVw6TJ1_8iyDFy0'  # оставьте сгенерированный ключ (он уже есть)
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['rk-group.onrender.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
