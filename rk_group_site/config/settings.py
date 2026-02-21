@@ -8,7 +8,12 @@ SECRET_KEY = 'OQ9MPHgzm_khnlIHpyqcghVqorXj-weVjID1WozEFd6aQH91CuVwHVw6TJ1_8iyDFy
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['rk-group.onrender.com']
+ALLOWED_HOSTS = [
+    'rk-group.onrender.com',  
+    'localhost',
+    '127.0.0.1',
+    '.onrender.com',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
