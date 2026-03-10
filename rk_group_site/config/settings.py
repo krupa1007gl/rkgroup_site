@@ -63,7 +63,7 @@ DATABASES = {
 
 
 # Русский язык и часовой пояс
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'ru-RU'
 TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
