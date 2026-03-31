@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}AI-боты для бизнеса{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="section-title">Наши AI-боты</h1>
+        <p class="section-subtitle">Готовые решения для автоматизации любых бизнес-процессов</p>
+        
+        <div class="grid-3">
+            {% for bot in bots %}
+            <div class="card bot-card">
+                <i class="fas {{ bot.icon }} bot-icon"></i>
+                <h3>{{ bot.name }}</h3>
+                <p style="color: #6b7280; margin: 15px 0;">{{ bot.short_description|truncatechars:100 }}</p>
+                <div class="bot-price" style="font-size: 28px; font-weight: 700; color: #2563eb; margin: 20px 0;">
+                    от {{ bot.price_from|floatformat:0 }} ₽
+                </div>
+                <a href="{% url 'bots:bot_detail' bot.pk %}" class="btn btn-outline" style="width: 100%; text-align: center;">Подробнее</a>
+            </div>
+            {% empty %}
+            <p class="text-center">Боты скоро будут добавлены.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

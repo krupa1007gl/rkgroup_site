@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Партнеры RK Group{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/partners.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/contact.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="section-title">RK Group — опыт и проекты</h1>
+        <p class="section-subtitle">Мы гордимся нашими партнёрствами и проектами с лидерами рынка</p>
+        
+        <!-- Клиенты и крупные проекты -->
+        <div class="partner-section">
+            <h2 class="section-title" style="text-align: left; font-size: 28px; margin-bottom: 32px;">Клиенты и крупные проекты</h2>
+            <div class="grid-2" style="gap: 24px;">
+                <div class="card partner-card">
+                    <div class="partner-icon"><i class="fas fa-truck"></i></div>
+                    <div class="partner-info">
+                        <h3>ПЭК</h3>
+                        <p>Логистика и цифровая оптимизация маршрутов</p>
+                    </div>
+                </div>
+                <div class="card partner-card">
+                    <div class="partner-icon"><i class="fas fa-tower-cell"></i></div>
+                    <div class="partner-info">
+                        <h3>Ростелеком</h3>
+                        <p>Телеком-инфраструктура и облачные сервисы</p>
+                    </div>
+                </div>
+                <div class="card partner-card">
+                    <div class="partner-icon"><i class="fas fa-shield"></i></div>
+                    <div class="partner-info">
+                        <h3>ТТК</h3>
+                        <p>Корпоративные сети и кибербезопасность</p>
+                    </div>
+                </div>
+                <div class="card partner-card">
+                    <div class="partner-icon"><i class="fas fa-map"></i></div>
+                    <div class="partner-info">
+                        <h3>2ГИС</h3>
+                        <p>Интеграция геоданных и API-решения</p>
+                    </div>
+                </div>
+                <div class="card partner-card">
+                    <div class="partner-icon"><i class="fas fa-store"></i></div>
+                    <div class="partner-info">
+                        <h3>X5 Retail Group</h3>
+                        <p>Цифровая трансформация ритейла</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Стратегические партнёрства -->
+        <div class="partner-section">
+            <h2 class="section-title" style="text-align: left; font-size: 28px; margin-bottom: 24px;">Стратегические партнёрства</h2>
+            <p style="color: #475569; margin-bottom: 24px; line-height: 1.6;">RK Group — официальный партнёр Twin, поставляющего комплексные цифровые решения для автоматизации процессов и облачных интеграций. Наши совместные проекты фокусируются на надёжности, масштабируемости и быстром выводе на рынок.</p>
+            <div class="partner-badges">
+                <span class="partner-badge">ПАРТНЁРСТВО</span>
+                <span class="partner-badge">ИННОВАЦИИ</span>
+                <span class="partner-badge">СКОЛКОВО</span>
+            </div>
+            
+            <div style="margin-top: 32px; padding-top: 32px; border-top: 1px solid #e2e8f0;">
+                <h3 style="margin-bottom: 16px;">Индикатор доверия</h3>
+                <p style="color: #475569;">Мы — участники экосистемы «Сколково», что подтверждает нашу приверженность научно-техническому развитию, доступ к R&D-ресурсам и возможности совместных акселерационных программ.</p>
+            </div>
+        </div>
+        
+        <!-- Стать партнером -->
+        <div class="partner-form-block">
+            <h2 style="margin-bottom: 16px;">Стать партнёром</h2>
+            <p style="color: #64748b; margin-bottom: 32px;">Присоединяйтесь к экосистеме RK Group и развивайте бизнес вместе с нами</p>
+            <form method="post" action="{% url 'main:partners' %}" style="max-width: 500px; margin: 0 auto;" id="partner-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="name" class="form-input" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" class="form-input" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="company" class="form-input" placeholder="Название компании" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
+                <div class="form-message" style="margin-top: 16px;"></div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

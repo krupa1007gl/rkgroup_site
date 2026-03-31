@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>RK Group | {% block title %}AI-агенты для бизнеса{% endblock %}</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="{% url 'main:home' %}" class="logo">RK Group</a>
+                <button class="mobile-menu-btn" aria-label="Меню">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="nav">
+                    <div class="nav-item">
+                        <a href="{% url 'main:home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">Главная</a>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">Продукты <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="{% url 'bots:bot_list' %}" class="dropdown-item">Боты</a>
+                            <a href="{% url 'cases:case_list' %}" class="dropdown-item">Кейсы</a>
+                            <a href="{% url 'news:news_list' %}" class="dropdown-item">Новости</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">О компании <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="{% url 'main:about' %}" class="dropdown-item">О нас</a>
+                            <a href="{% url 'main:partners' %}" class="dropdown-item">Партнеры</a>
+                            <a href="{% url 'main:contact' %}" class="dropdown-item">Контакты</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-wave">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="#3b82f6" opacity=".1"></path>
+                <path d="M0,0V15.81C13,21.25,27.93,25.67,44.24,28.45c69.76,11.28,140.36,6.92,207-8.46,41.14-9.45,80.08-24.74,120.86-33.66,47.94-10.46,96.85-8.35,145.12,1.47,36.33,7.4,71.42,19.16,107.18,27.23,48.92,11,99.28,8.09,147.94-3.34,36.44-8.56,71.09-22.34,106.64-33.16,35.8-10.9,72.92-18.16,110.27-21.85C1095.83,5.49,1146.61,12.47,1200,23.38V0Z" fill="#60a5fa" opacity=".2"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#93c5fd" opacity=".3"></path>
+            </svg>
+        </div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>RK Group</h4>
+                    <p style="color: #a0c4e8; font-size: 14px;">Автоматизация коммуникаций с помощью AI-агентов</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Продукты</h4>
+                    <a href="{% url 'bots:bot_list' %}">Боты</a>
+                    <a href="{% url 'cases:case_list' %}">Кейсы</a>
+                    <a href="{% url 'news:news_list' %}">Новости</a>
+                </div>
+                <div class="footer-col">
+                    <h4>О компании</h4>
+                    <a href="{% url 'main:about' %}">О нас</a>
+                    <a href="{% url 'main:partners' %}">Партнеры</a>
+                    <a href="{% url 'main:contact' %}">Контакты</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <a href="tel:+79157258878">+7 (915) 725-88-78</a>
+                    <a href="mailto:info@rkgroup.tech">info@rkgroup.tech</a>
+                    <a href="https://t.me/rkgtech" target="_blank">Telegram: @rkgtech</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 RK Group. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/base.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

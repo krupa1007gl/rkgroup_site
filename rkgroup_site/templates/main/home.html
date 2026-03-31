@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}AI-агенты для автоматизации бизнеса{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section с анимированным текстом -->
+<section class="hero animated-gradient">
+    <div class="container">
+        <div class="hero-content">
+            <h1>
+                <span class="hero-static">AI-агенты,</span>
+                <span class="hero-gradient" id="typed-text"></span>
+            </h1>
+            <p>Автоматизируйте коммуникации с клиентами, снижайте затраты и повышайте продажи с помощью умных голосовых и чат-ботов 24/7.</p>
+            <a href="{% url 'bots:bot_list' %}" class="btn">Начать сейчас <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="wireframe-bg">
+            <svg width="100%" height="100%" viewBox="0 0 400 500" fill="none">
+                <path d="M50,100 L350,100 M50,200 L300,200 M100,300 L400,300" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="6 6"/>
+                <circle cx="320" cy="180" r="28" stroke="#2563EB" stroke-width="1.2" fill="none"/>
+                <rect x="40" y="350" width="280" height="80" rx="16" stroke="#2563EB" stroke-width="1.2" fill="none"/>
+            </svg>
+        </div>
+    </div>
+    <canvas id="heroCanvas" style="position: absolute; top: 0; right: 0; width: 40%; height: 100%; pointer-events: none;"></canvas>
+</section>
+
+<!-- Решение: AI-агенты от RK Group -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title fade-up">Решение: AI-агенты от RK Group</h2>
+        <div class="grid-2" style="margin-top: 40px;">
+            <div class="ai-solution-card fade-up">
+                <i class="fas fa-microphone-alt ai-solution-icon"></i>
+                <h3>AI-Голосовой агент</h3>
+                <p>Обрабатывает входящие до 1500 параллельных вызовов, осуществляет массовые исходящие (напоминания, обзвон должников, акции), понимает естественную речь и переключает на оператора при необходимости.</p>
+            </div>
+            <div class="ai-solution-card fade-up">
+                <i class="fas fa-comment-dots ai-solution-icon"></i>
+                <h3>AI-Чат-бот</h3>
+                <p>Работает 24/7 на сайте и в мессенджерах, квалифицирует лиды, собирает контакты и передаёт готовых клиентов в отдел продаж с метками и приоритетом.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Что вы получаете — выгоды через цифры -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title fade-up">Что вы получаете — выгоды через цифры</h2>
+        <div class="stats-grid">
+            <div class="stat-card fade-up">
+                <div class="stat-value counter-number" data-target="60">0</div>
+                <div class="stat-label">Экономия ФОТ</div>
+            </div>
+            <div class="stat-card fade-up">
+                <div class="stat-value">15-20%</div>
+                <div class="stat-label">Рост собираемости</div>
+            </div>
+            <div class="stat-card fade-up">
+                <div class="stat-value counter-number" data-target="4">0</div>
+                <div class="stat-label">Ускорение обработки</div>
+            </div>
+            <div class="stat-card fade-up">
+                <div class="stat-value counter-number" data-target="7">0</div>
+                <div class="stat-label">Снижение стоимости диалога</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Как это работает -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title fade-up">Как это работает</h2>
+        <div class="ui-mockup">
+            <div class="mockup-header">
+                <span class="mockup-title">AI-агент в действии</span>
+                <span class="mockup-badge">Активен 24/7</span>
+            </div>
+            <div class="mockup-stats">
+                <div class="mockup-stat">
+                    <div class="mockup-stat-value">-60%</div>
+                    <div class="mockup-stat-label">нагрузка колл-центра</div>
+                </div>
+                <div class="mockup-stat">
+                    <div class="mockup-stat-value">+25%</div>
+                    <div class="mockup-stat-label">рост продаж</div>
+                </div>
+                <div class="mockup-stat">
+                    <div class="mockup-stat-value">94%</div>
+                    <div class="mockup-stat-label">лояльность клиентов</div>
+                </div>
+            </div>
+            
+            <div class="problems-solutions">
+                <div class="problems-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Какие проблемы решает</h4>
+                    <ul class="problems-list">
+                        <li><i class="fas fa-circle"></i> Перегруженность колл-центров</li>
+                        <li><i class="fas fa-circle"></i> Ручной приём показаний</li>
+                        <li><i class="fas fa-circle"></i> Низкая собираемость платежей</li>
+                        <li><i class="fas fa-circle"></i> Медленное информирование об авариях</li>
+                        <li><i class="fas fa-circle"></i> Высокая нагрузка на HR</li>
+                    </ul>
+                </div>
+                <div class="solutions-box">
+                    <h4><i class="fas fa-check-circle"></i> Как AI решает эти задачи</h4>
+                    <ul class="solutions-list">
+                        <li><i class="fas fa-check"></i> Автоматический приём показаний за 30 сек</li>
+                        <li><i class="fas fa-check"></i> Обзвон должников с ссылками на оплату</li>
+                        <li><i class="fas fa-check"></i> Оповещения об отключениях в мессенджеры</li>
+                        <li><i class="fas fa-check"></i> Аварийные заявки 24/7</li>
+                        <li><i class="fas fa-check"></i> HR-помощник для подбора персонала</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mockup-chat">
+                <div class="chat-message ai">
+                    <div class="chat-bubble ai">🤖 Добрый день! Я виртуальный помощник RK Group. Чем могу помочь? Я могу принять показания счётчиков, записать на приём, сообщить о задолженности или принять аварийную заявку.</div>
+                </div>
+                <div class="chat-message user">
+                    <div class="chat-bubble user">Здравствуйте! Хочу передать показания счётчиков воды и узнать, нет ли у меня задолженности</div>
+                </div>
+                <div class="chat-message ai">
+                    <div class="chat-bubble ai">✅ Отлично! Назовите, пожалуйста, номер лицевого счёта. Он указан в квитанции или в личном кабинете.</div>
+                </div>
+                <div class="chat-message user">
+                    <div class="chat-bubble user">1234567890</div>
+                </div>
+                <div class="chat-message ai">
+                    <div class="chat-bubble ai">✅ Спасибо! Лицевой счёт 1234567890. Введите показания счётчика холодной воды:</div>
+                </div>
+                <div class="chat-message user">
+                    <div class="chat-bubble user">125,6 куб.м</div>
+                </div>
+                <div class="chat-message ai">
+                    <div class="chat-bubble ai">✅ Принято! Показания горячей воды:</div>
+                </div>
+                <div class="chat-message user">
+                    <div class="chat-bubble user">87,3 куб.м</div>
+                </div>
+                <div class="chat-message ai">
+                    <div class="chat-bubble ai">✅ Отлично! Показания сохранены. По вашему лицевому счёту задолженность составляет 1 250 рублей. Напомнить о платеже через 3 дня?</div>
+                </div>
+                <div class="chat-message user">
+                    <div class="chat-bubble user">Да, напомните, пожалуйста</div>
+                </div>
+                <div class="chat-message ai">
+                    <div class="chat-bubble ai">✅ Хорошо! Напомню завтра. Что-то ещё могу сделать для вас?</div>
+                </div>
+                <div class="chat-message user">
+                    <div class="chat-bubble user">Нет, спасибо, это всё</div>
+                </div>
+                <div class="chat-message ai">
+                    <div class="chat-bubble ai">🤖 Рад был помочь! Хорошего дня! Если появятся вопросы — я всегда на связи 24/7.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Этапы внедрения -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title fade-up">Этапы внедрения — дорожная карта</h2>
+        <div class="stages-grid">
+            <div class="stage-card fade-up">
+                <div class="stage-number">01</div>
+                <h4>Анализ потребностей</h4>
+                <p>Выявляем бизнес-цели и точки роста — основа для технического решения</p>
+            </div>
+            <div class="stage-card fade-up">
+                <div class="stage-number">02</div>
+                <h4>Проектирование решений</h4>
+                <p>Архитектура, интеграция с партнёрами (Twin, операторы связи, платформы данных)</p>
+            </div>
+            <div class="stage-card fade-up">
+                <div class="stage-number">03</div>
+                <h4>Внедрение и поддержка</h4>
+                <p>Пилоты, масштабирование, сопровождение — долгосрочное партнёрство для устойчивого эффекта</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Интеграции -->
+<section class="section">
+    <div class="container">
+        <div class="integrations-block">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <span style="background: #eff6ff; color: #2563eb; padding: 6px 14px; border-radius: 40px; font-size: 13px; font-weight: 500;">ИНТЕГРАЦИИ</span>
+                <h2 class="section-title" style="margin-top: 16px; margin-bottom: 16px;">Подключайтесь ко всему</h2>
+                <p style="color: #64748b; max-width: 600px; margin: 0 auto;">Наша платформа поддерживает интеграции с большинством известных IP-PBX, CRM-систем и мессенджеров</p>
+            </div>
+            <div class="integrations-grid">
+                <div class="integration-card fade-up">
+                    <i class="fas fa-chart-line" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
+                    <h4>AVAYA</h4>
+                </div>
+                <div class="integration-card fade-up">
+                    <i class="fas fa-chart-simple" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
+                    <h4>Мегаплан</h4>
+                </div>
+                <div class="integration-card fade-up">
+                    <i class="fas fa-database" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
+                    <h4>1С</h4>
+                </div>
+                <div class="integration-card fade-up">
+                    <i class="fas fa-chart-bar" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
+                    <h4>Битрикс24</h4>
+                </div>
+                <div class="integration-card fade-up">
+                    <i class="fas fa-calendar-check" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
+                    <h4>Yclients</h4>
+                </div>
+                <div class="integration-card fade-up">
+                    <i class="fas fa-brain" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
+                    <h4>GENESYS</h4>
+                </div>
+                <div class="integration-card fade-up">
+                    <i class="fas fa-cloud" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
+                    <h4>Яндекс.Облако</h4>
+                </div>
+                <div class="integration-card fade-up">
+                    <i class="fas fa-shield" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
+                    <h4>Selectel</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA блок -->
+<section class="hero" style="background: linear-gradient(135deg, #eff6ff, #ffffff); margin-top: 40px;">
+    <div class="container text-center">
+        <h2>Готовы автоматизировать свой бизнес?</h2>
+        <p style="font-size: 18px; margin: 20px 0;">Получите бесплатную консультацию и расчет экономического эффекта</p>
+        <a href="{% url 'main:contact' %}" class="btn">Оставить заявку</a>
+    </div>
+</section>
+{% endblock %}

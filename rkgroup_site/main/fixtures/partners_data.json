@@ -1,0 +1,68 @@
+[
+  {
+    "model": "main.partner",
+    "pk": 1,
+    "fields": {
+      "name": "Twin",
+      "logo": "partners/twin.png",
+      "website": "https://twin24.ai",
+      "order": 1,
+      "is_active": true
+    }
+  },
+  {
+    "model": "main.partner",
+    "pk": 2,
+    "fields": {
+      "name": "Сколково",
+      "logo": "partners/skolkovo.png",
+      "website": "https://sk.ru",
+      "order": 2,
+      "is_active": true
+    }
+  },
+  {
+    "model": "main.partner",
+    "pk": 3,
+    "fields": {
+      "name": "1С",
+      "logo": "partners/1c.png",
+      "website": "https://1c.ru",
+      "order": 3,
+      "is_active": true
+    }
+  },
+  {
+    "model": "main.partner",
+    "pk": 4,
+    "fields": {
+      "name": "Битрикс24",
+      "logo": "partners/bitrix24.png",
+      "website": "https://bitrix24.ru",
+      "order": 4,
+      "is_active": true
+    }
+  },
+  {
+    "model": "main.partner",
+    "pk": 5,
+    "fields": {
+      "name": "Yclients",
+      "logo": "partners/yclients.png",
+      "website": "https://yclients.com",
+      "order": 5,
+      "is_active": true
+    }
+  },
+  {
+    "model": "main.partner",
+    "pk": 6,
+    "fields": {
+      "name": "Ростелеком",
+      "logo": "partners/rostelecom.png",
+      "website": "https://rostelecom.ru",
+      "order": 6,
+      "is_active": true
+    }
+  }
+]

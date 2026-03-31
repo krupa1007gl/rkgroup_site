@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Новости и обновления{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/news.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="section-title">Новости и обновления</h1>
+        <p class="section-subtitle">Следите за последними новостями нашей компании и технологий AI</p>
+        
+        <div class="grid-3">
+            {% for news_item in news %}
+            <div class="card news-card">
+                <div class="news-date">{{ news_item.date|date:"d.m.Y" }}</div>
+                <h3>{{ news_item.title }}</h3>
+                <p>{{ news_item.short_text|truncatechars:120 }}</p>
+                <a href="{% url 'news:news_detail' news_item.pk %}" class="news-read-link">Читать подробнее →</a>
+            </div>
+            {% empty %}
+            <p class="text-center">Новости скоро будут добавлены.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

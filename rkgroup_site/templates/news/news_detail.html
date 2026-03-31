@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ news.title }} | RK Group{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/news.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="news-detail-container">
+            <h1 class="section-title">{{ news.title }}</h1>
+            <p style="text-align: center; color: #64748b; margin-bottom: 32px;">{{ news.date|date:"d.m.Y" }}</p>
+            
+            <div class="news-detail-content">
+                {{ news.full_text|linebreaks }}
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="{% url 'news:news_list' %}" class="btn-outline" style="padding: 12px 24px; border-radius: 40px;">← Все новости</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}AI-боты для бизнеса{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/bots.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="section-title">Наши AI-боты</h1>
+        <p class="section-subtitle">Готовые решения для автоматизации любых бизнес-процессов</p>
+        
+        <div class="bots-grid">
+            {% for bot in bots %}
+            <div class="bot-card">
+                <div class="bot-icon">
+                    <i class="fas {{ bot.icon }}"></i>
+                </div>
+                <h3 class="bot-name">{{ bot.name }}</h3>
+                <p class="bot-description">{{ bot.short_description|truncatechars:100 }}</p>
+                
+                <div class="bot-tags">
+                    {% for tag in bot.get_tags_list|slice:":3" %}
+                    <span class="bot-tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                
+                <div class="bot-price">
+                    от {{ bot.price_from|floatformat:0 }} ₽
+                    <small>/разработка</small>
+                </div>
+                
+                <div class="bot-btn">
+                    <a href="{% url 'bots:bot_detail' bot.pk %}" class="btn btn-outline">Подробнее</a>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">Боты скоро будут добавлены.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

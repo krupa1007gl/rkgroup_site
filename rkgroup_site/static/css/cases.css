@@ -1,0 +1,245 @@
+/* static/css/cases.css - Стили для страниц с кейсами */
+
+/* Hero секция */
+.cases-hero {
+    background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+    padding: 60px 0 40px;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Современные карточки кейсов */
+.case-card-modern {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.case-card-modern:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+    border-color: #3b82f6;
+}
+
+.case-card-image {
+    height: 200px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 48px;
+}
+
+.case-card-content {
+    padding: 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.case-company {
+    display: inline-block;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    width: fit-content;
+}
+
+.case-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.case-card-description {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+/* Результаты в карточке */
+.case-card-stats {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.case-stat {
+    background: #f8fafc;
+    padding: 8px 12px;
+    border-radius: 12px;
+    text-align: center;
+    flex: 1;
+    min-width: 70px;
+}
+
+.case-stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+.case-stat-label {
+    font-size: 10px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.case-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: gap 0.3s ease;
+    margin-top: auto;
+}
+
+.case-card-link:hover {
+    gap: 12px;
+    color: #1d4ed8;
+}
+
+/* Детальная страница кейса */
+.case-detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.case-results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 32px 0;
+}
+
+.case-result-card {
+    text-align: center;
+    padding: 24px 20px;
+    background: #f8fafc;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.case-result-card:hover {
+    transform: translateY(-4px);
+    background: #eff6ff;
+}
+
+.case-result-value {
+    font-size: 36px;
+    font-weight: 700;
+    color: #2563eb;
+    margin-bottom: 8px;
+}
+
+.case-result-label {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.testimonial-block {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border-radius: 24px;
+    padding: 32px;
+    margin: 32px 0;
+    border: 1px solid #e2e8f0;
+    font-style: italic;
+}
+
+/* Навигация между кейсами */
+.case-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 48px 0 40px;
+    padding: 20px 0;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.nav-case-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 40px;
+    text-decoration: none;
+    color: #1e293b;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-case-btn:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+}
+
+.nav-case-btn.prev:hover {
+    transform: translateX(-4px);
+}
+
+.nav-case-btn.next:hover {
+    transform: translateX(4px);
+}
+
+.nav-case-btn.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.case-counter {
+    font-size: 14px;
+    color: #64748b;
+}
+
+@media (max-width: 1024px) {
+    .case-results-grid {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cases-hero {
+        padding: 40px 0 30px;
+    }
+    
+    .case-results-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .case-navigation {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .nav-case-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .case-card-stats {
+        flex-wrap: wrap;
+    }
+}

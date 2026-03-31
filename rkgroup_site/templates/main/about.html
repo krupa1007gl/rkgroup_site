@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}О компании RK Group{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="about-container">
+            <h1 class="section-title">О компании RK Group</h1>
+            <p style="font-size: 18px; color: #475569; margin-top: 16px;">Мы создаём AI-агентов, которые меняют подход к бизнес-коммуникациям</p>
+        </div>
+        
+        <div style="margin: 60px 0;">
+            <h2 class="section-title" style="text-align: center;">Наша миссия</h2>
+            <p style="text-align: center; color: #475569; max-width: 700px; margin: 0 auto;">Помогаем бизнесу автоматизировать коммуникации с клиентами, снижая затраты и повышая качество сервиса. Наши AI-агенты работают 24/7, обрабатывают тысячи обращений и освобождают сотрудников от рутины.</p>
+        </div>
+        
+        <div class="grid-3" style="margin: 60px 0;">
+            <div class="card" style="text-align: center;">
+                <i class="fas fa-star" style="font-size: 32px; color: #3b82f6; margin-bottom: 20px;"></i>
+                <h3>Качество</h3>
+                <p style="color: #64748b;">Только проверенные решения и индивидуальный подход к каждому клиенту</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <i class="fas fa-rocket" style="font-size: 32px; color: #3b82f6; margin-bottom: 20px;"></i>
+                <h3>Инновации</h3>
+                <p style="color: #64748b;">Используем передовые технологии AI и нейросетей</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <i class="fas fa-handshake" style="font-size: 32px; color: #3b82f6; margin-bottom: 20px;"></i>
+                <h3>Надёжность</h3>
+                <p style="color: #64748b;">Долгосрочное партнёрство и гарантия результата</p>
+            </div>
+        </div>
+        
+        <h2 class="section-title" style="text-align: center;">Наша команда</h2>
+        <div class="team-grid">
+            <div class="team-card card">
+                <div class="team-photo"><i class="fas fa-user-circle"></i></div>
+                <h3>Артём Рыбаков</h3>
+                <p style="color: #64748b;">Сооснователь, CEO</p>
+            </div>
+            <div class="team-card card">
+                <div class="team-photo"><i class="fas fa-user-circle"></i></div>
+                <h3>Крупеников Глеб Алексеевич</h3>
+                <p style="color: #64748b;">Сооснователь, CEO</p>
+            </div>
+        </div>
+        
+        <div style="margin-top: 60px; padding: 40px; background: linear-gradient(135deg, #eff6ff, #ffffff); border-radius: 32px;">
+            <h3 style="text-align: center; margin-bottom: 32px;">Ключевые вехи</h3>
+            <div class="timeline-grid">
+                <div style="text-align: center;">
+                    <div class="timeline-year">2025</div>
+                    <div style="color: #64748b;">Основание компании</div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="timeline-year">2025</div>
+                    <div style="color: #64748b;">Первый крупный проект</div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="timeline-year">2025</div>
+                    <div style="color: #64748b;">Запуск платформы</div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="timeline-year">2025</div>
+                    <div style="color: #64748b;">Первые клиенты</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 60px; text-align: center;">
+            <h3 style="margin-bottom: 20px;">Обсудим ваш проект?</h3>
+            <p style="color: #64748b; margin-bottom: 24px;">Рассчитаем экономический эффект для вашей компании бесплатно</p>
+            <a href="{% url 'main:contact' %}" class="btn">Связаться с нами</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

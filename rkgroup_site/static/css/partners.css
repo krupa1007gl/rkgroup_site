@@ -1,0 +1,73 @@
+/* static/css/partners.css - Стили для страницы партнеров */
+
+.partner-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px;
+}
+
+.partner-icon {
+    background: #eff6ff;
+    border-radius: 20px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.partner-icon i {
+    font-size: 28px;
+    color: #2563eb;
+}
+
+.partner-info h3 {
+    margin-bottom: 4px;
+}
+
+.partner-info p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.partner-section {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border-radius: 32px;
+    padding: 48px;
+    margin-bottom: 60px;
+}
+
+.partner-badges {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.partner-badge {
+    background: #2563eb;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.partner-form-block {
+    background: linear-gradient(135deg, #eff6ff, #ffffff);
+    border-radius: 32px;
+    padding: 48px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .partner-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .partner-section {
+        padding: 32px 24px;
+    }
+}
