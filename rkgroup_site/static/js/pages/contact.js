@@ -1,4 +1,4 @@
-// static/js/contact.js - Скрипты для страницы контактов
+// static/js/pages/contact.js - Скрипты для страницы контактов
 
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form');
@@ -12,24 +12,28 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Анимация загрузки
             submitBtn.innerHTML = '<span>⏳ Отправка...</span>';
-            submitBtn.style.opacity = '0.7';
             submitBtn.disabled = true;
             
             const formData = new FormData(this);
-            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
+            
+            if (!csrfToken) {
+                console.error('CSRF token not found');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                return;
+            }
             
             fetch(this.action, {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRFToken': csrfToken
+                    'X-Requested-With': 'XMLHttpRequest'
                 }
             })
             .then(response => response.json())
             .then(data => {
                 submitBtn.innerHTML = originalText;
-                submitBtn.style.opacity = '1';
                 submitBtn.disabled = false;
                 
                 const messageDiv = this.querySelector('.form-message');
@@ -66,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => {
                 console.error('Error:', error);
                 submitBtn.innerHTML = originalText;
-                submitBtn.style.opacity = '1';
                 submitBtn.disabled = false;
                 
                 const messageDiv = contactForm.querySelector('.form-message');

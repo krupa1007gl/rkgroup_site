@@ -1,0 +1,139 @@
+/* static/css/contact.css - Стили для страницы контактов */
+
+.contact-hero {
+    background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+    padding: 60px 0 40px;
+    text-align: center;
+}
+
+.contact-info-card {
+    background: white;
+    border-radius: 28px;
+    padding: 32px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.contact-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 35px -12px rgba(37, 99, 235, 0.15);
+}
+
+.contact-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.contact-icon i {
+    font-size: 28px;
+    color: #2563eb;
+}
+
+.contact-form-card {
+    background: white;
+    border-radius: 28px;
+    padding: 40px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    transition: all 0.3s ease;
+}
+
+.form-input-custom {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: #fafbfc;
+}
+
+.form-input-custom:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background: white;
+    transform: translateY(-2px);
+}
+
+.form-input-custom:hover {
+    border-color: #94a3b8;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    color: white;
+    border: none;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.3);
+}
+
+.map-placeholder {
+    background: linear-gradient(135deg, #dbeafe, #eff6ff);
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    transition: all 0.3s ease;
+    margin-top: 32px;
+}
+
+.map-placeholder:hover {
+    transform: scale(1.02);
+}
+
+.alert-success-custom {
+    background: #d1fae5;
+    color: #065f46;
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 14px;
+    margin-top: 20px;
+    animation: slideInUp 0.4s ease;
+}
+
+.alert-error-custom {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 14px;
+    margin-top: 20px;
+    animation: slideInUp 0.4s ease;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-form-card {
+        padding: 28px;
+    }
+}

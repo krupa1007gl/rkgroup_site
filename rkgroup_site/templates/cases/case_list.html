@@ -1,73 +1,51 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Кейсы внедрения AI-агентов{% endblock %}
+{% block title %}Кейсы | RK Group{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/cases.css' %}">
 {% endblock %}
 
 {% block content %}
-<!-- Hero секция -->
 <section class="cases-hero">
     <div class="container">
-        <h1 class="section-title" style="margin-bottom: 16px;">Наши кейсы</h1>
-        <p class="section-subtitle" style="margin-bottom: 0;">Реальные проекты по автоматизации бизнеса с помощью AI-агентов</p>
+        <h1 class="section-title">Наши проекты</h1>
+        <p class="section-subtitle">Реальные кейсы внедрения AI-агентов в различных отраслях</p>
     </div>
 </section>
 
-<!-- Сетка кейсов -->
-<section class="section" style="padding-top: 60px;">
+<section style="padding: 60px 0;">
     <div class="container">
         <div class="grid-3">
             {% for case in cases %}
-            <div class="case-card-modern">
-                <div class="case-card-image">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <div class="case-card-content">
-                    <span class="case-company">{{ case.company }}</span>
-                    <h3 class="case-card-title">{{ case.title }}</h3>
-                    <p class="case-card-description">{{ case.short_description|truncatechars:100 }}</p>
-                    
-                    <div class="case-card-stats">
-                        {% for result in case.get_results_list|slice:":2" %}
-                        <div class="case-stat">
-                            <div class="case-stat-value">{{ result.value }}</div>
-                            <div class="case-stat-label">{{ result.key|truncatechars:15 }}</div>
-                        </div>
-                        {% endfor %}
+            <a href="{% url 'cases:case_detail' case.pk %}" class="case-card-link" style="text-decoration: none; color: inherit; display: block;">
+                <div class="case-card-modern">
+                    <div class="case-card-image">
+                        {% if case.image %}
+                        <img src="{{ case.image.url }}" alt="{{ case.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        {% else %}
+                        <i class="fas fa-chart-line"></i>
+                        {% endif %}
                     </div>
-                    
-                    <a href="{% url 'cases:case_detail' case.pk %}" class="case-card-link">
-                        Читать кейс <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <div class="case-card-content">
+                        <span class="case-company">{{ case.company }}</span>
+                        <h3 class="case-card-title">{{ case.title }}</h3>
+                        <p class="case-card-description">{{ case.short_description|truncatechars:80 }}</p>
+                        <div class="case-card-stats">
+                            {% for result in case.get_results_list|slice:":3" %}
+                            <div class="case-stat">
+                                <div class="case-stat-value">{{ result.value }}</div>
+                                <div class="case-stat-label">{{ result.key }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <span class="case-card-link">Подробнее <i class="fas fa-arrow-right"></i></span>
+                    </div>
                 </div>
-            </div>
-            {% empty %}
-            <div class="text-center" style="grid-column: 1/-1; padding: 60px;">
-                <i class="fas fa-folder-open" style="font-size: 48px; color: #cbd5e1; margin-bottom: 16px; display: block;"></i>
-                <p style="color: #64748b;">Кейсы скоро будут добавлены.</p>
-            </div>
+            </a>
             {% endfor %}
         </div>
-        
-        <!-- Пагинация (если нужна) -->
-        {% if is_paginated %}
-        <div class="pagination" style="display: flex; justify-content: center; gap: 12px; margin-top: 48px;">
-            {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}" class="btn-outline" style="padding: 10px 20px;">← Назад</a>
-            {% endif %}
-            
-            <span style="padding: 10px 20px; color: #64748b;">
-                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
-            </span>
-            
-            {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}" class="btn-outline" style="padding: 10px 20px;">Вперёд →</a>
-            {% endif %}
-        </div>
-        {% endif %}
     </div>
 </section>
 {% endblock %}

@@ -1,3 +1,5 @@
+# main/forms.py
+
 from django import forms
 
 class CallbackForm(forms.Form):
@@ -34,19 +36,13 @@ class ContactForm(forms.Form):
             'required': 'required'
         })
     )
-    phone = forms.CharField(
-        max_length=20,
-        widget=forms.TextInput(attrs={
-            'placeholder': '+7 (___) ___-__-__',
-            'class': 'form-input',
-            'required': 'required'
-        })
-    )
     message = forms.CharField(
-        required=False,
+        required=True,
         widget=forms.Textarea(attrs={
             'placeholder': 'Ваше сообщение...',
             'class': 'form-textarea',
-            'rows': 4
+            'rows': 4,
+            'required': 'required'
         })
     )
+    # Убираем phone, так как в контактной форме его нет

@@ -8,7 +8,7 @@ from cases.models import Case
 from news.models import News
 from .models import Partner
 from .forms import CallbackForm, ContactForm
-from services.excel_service import excel_service  # <-- меняем импорт
+from services.excel_service import excel_service
 
 class HomePageView(TemplateView):
     template_name = 'main/home.html'
@@ -58,10 +58,10 @@ class ContactPageView(FormView):
     def form_valid(self, form):
         name = form.cleaned_data['name']
         email = form.cleaned_data['email']
-        phone = form.cleaned_data['phone']
-        message = form.cleaned_data.get('message', '')
+        message = form.cleaned_data['message']
         
-        success = excel_service.add_contact(name, email, phone, message)
+        # Сохраняем в Excel (телефон не обязателен)
+        success = excel_service.add_contact(name, email, '', message)
         
         if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
             if success:
@@ -71,7 +71,10 @@ class ContactPageView(FormView):
     
     def form_invalid(self, form):
         if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
+            errors = {}
+            for field, error_list in form.errors.items():
+                errors[field] = error_list[0] if error_list else 'Ошибка'
+            return JsonResponse({'status': 'error', 'errors': errors}, status=400)
         return super().form_invalid(form)
 
 class CallbackCreateView(FormView):

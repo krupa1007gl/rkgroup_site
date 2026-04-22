@@ -1,99 +1,225 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Партнеры RK Group{% endblock %}
+{% block title %}Партнеры | RK Group{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/partners.css' %}">
 {% endblock %}
 
-{% block extra_js %}
-<script src="{% static 'js/contact.js' %}"></script>
-{% endblock %}
-
 {% block content %}
-<section class="section">
+<!-- Hero секция -->
+<section class="cases-hero">
     <div class="container">
-        <h1 class="section-title">RK Group — опыт и проекты</h1>
-        <p class="section-subtitle">Мы гордимся нашими партнёрствами и проектами с лидерами рынка</p>
-        
-        <!-- Клиенты и крупные проекты -->
-        <div class="partner-section">
-            <h2 class="section-title" style="text-align: left; font-size: 28px; margin-bottom: 32px;">Клиенты и крупные проекты</h2>
-            <div class="grid-2" style="gap: 24px;">
-                <div class="card partner-card">
-                    <div class="partner-icon"><i class="fas fa-truck"></i></div>
-                    <div class="partner-info">
-                        <h3>ПЭК</h3>
-                        <p>Логистика и цифровая оптимизация маршрутов</p>
-                    </div>
+        <h1 class="section-title">Наши партнеры</h1>
+        <p class="section-subtitle">Мы сотрудничаем с ведущими технологическими компаниями и платформами</p>
+    </div>
+</section>
+
+<!-- Логотипы партнеров -->
+<section style="padding: 40px 0;">
+    <div class="container">
+        <div class="partners-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 32px; text-align: center;">
+            {% for partner in partners %}
+            <div class="partner-card" style="background: white; border-radius: 20px; padding: 24px; border: 1px solid #e2e8f0; transition: all 0.3s ease;">
+                <div class="partner-icon" style="font-size: 48px; color: #2563eb; margin-bottom: 16px;">
+                    <i class="fas fa-handshake"></i>
                 </div>
-                <div class="card partner-card">
-                    <div class="partner-icon"><i class="fas fa-tower-cell"></i></div>
-                    <div class="partner-info">
-                        <h3>Ростелеком</h3>
-                        <p>Телеком-инфраструктура и облачные сервисы</p>
-                    </div>
-                </div>
-                <div class="card partner-card">
-                    <div class="partner-icon"><i class="fas fa-shield"></i></div>
-                    <div class="partner-info">
-                        <h3>ТТК</h3>
-                        <p>Корпоративные сети и кибербезопасность</p>
-                    </div>
-                </div>
-                <div class="card partner-card">
-                    <div class="partner-icon"><i class="fas fa-map"></i></div>
-                    <div class="partner-info">
-                        <h3>2ГИС</h3>
-                        <p>Интеграция геоданных и API-решения</p>
-                    </div>
-                </div>
-                <div class="card partner-card">
-                    <div class="partner-icon"><i class="fas fa-store"></i></div>
-                    <div class="partner-info">
-                        <h3>X5 Retail Group</h3>
-                        <p>Цифровая трансформация ритейла</p>
-                    </div>
+                <div class="partner-info">
+                    <h3 style="font-size: 18px; margin-bottom: 8px;">{{ partner.name }}</h3>
+                    {% if partner.website %}
+                    <p><a href="{{ partner.website }}" target="_blank" style="color: #64748b; font-size: 13px; text-decoration: none;">{{ partner.website|cut:"https://"|cut:"http://" }}</a></p>
+                    {% endif %}
                 </div>
             </div>
+            {% endfor %}
         </div>
+    </div>
+</section>
+
+<!-- Технологическое партнерство -->
+<section style="padding: 60px 0; background: #f8fafc;">
+    <div class="container">
+        <h2 class="section-title">Технологическое партнерство</h2>
+        <p class="section-subtitle">Наши стратегические партнеры и интеграции</p>
         
-        <!-- Стратегические партнёрства -->
-        <div class="partner-section">
-            <h2 class="section-title" style="text-align: left; font-size: 28px; margin-bottom: 24px;">Стратегические партнёрства</h2>
-            <p style="color: #475569; margin-bottom: 24px; line-height: 1.6;">RK Group — официальный партнёр Twin, поставляющего комплексные цифровые решения для автоматизации процессов и облачных интеграций. Наши совместные проекты фокусируются на надёжности, масштабируемости и быстром выводе на рынок.</p>
-            <div class="partner-badges">
-                <span class="partner-badge">ПАРТНЁРСТВО</span>
-                <span class="partner-badge">ИННОВАЦИИ</span>
-                <span class="partner-badge">СКОЛКОВО</span>
+        <div class="grid-2">
+            <div class="card">
+                <div style="font-size: 48px; color: #2563eb; margin-bottom: 20px;">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h3 style="font-size: 24px; margin-bottom: 16px;">Официальный партнер Twin</h3>
+                <p style="color: #475569; line-height: 1.6;">RK Group — официальный партнёр Twin, поставляющего комплексные цифровые решения для автоматизации процессов и облачных интеграций. Наши совместные проекты фокусируются на надёжности, масштабируемости и быстром выводе на рынок.</p>
+                <div style="margin-top: 20px;">
+                    <span class="partner-badge">Twin AI</span>
+                    <span class="partner-badge">Голосовые боты</span>
+                    <span class="partner-badge">Чат-боты</span>
+                </div>
             </div>
             
-            <div style="margin-top: 32px; padding-top: 32px; border-top: 1px solid #e2e8f0;">
-                <h3 style="margin-bottom: 16px;">Индикатор доверия</h3>
-                <p style="color: #475569;">Мы — участники экосистемы «Сколково», что подтверждает нашу приверженность научно-техническому развитию, доступ к R&D-ресурсам и возможности совместных акселерационных программ.</p>
+            <div class="card">
+                <div style="font-size: 48px; color: #2563eb; margin-bottom: 20px;">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h3 style="font-size: 24px; margin-bottom: 16px;">Участник «Сколково»</h3>
+                <p style="color: #475569; line-height: 1.6;">Мы — участники экосистемы «Сколково», что подтверждает нашу приверженность научно-техническому развитию, доступ к R&D-ресурсам и возможности совместных акселерационных программ.</p>
+                <div style="margin-top: 20px;">
+                    <span class="partner-badge">Сколково</span>
+                    <span class="partner-badge">Инновации</span>
+                    <span class="partner-badge">R&D</span>
+                </div>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- Интеграции -->
+<section style="padding: 60px 0;">
+    <div class="container">
+        <h2 class="section-title">Интеграции с CRM и системами</h2>
+        <p class="section-subtitle">Подключаемся к любым системам через API</p>
         
-        <!-- Стать партнером -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; text-align: center;">
+            <div class="integration-card" style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0;">
+                <i class="fas fa-chart-line" style="font-size: 32px; color: #2563eb;"></i>
+                <p style="margin-top: 12px; font-weight: 500;">1С</p>
+            </div>
+            <div class="integration-card" style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0;">
+                <i class="fas fa-chart-line" style="font-size: 32px; color: #2563eb;"></i>
+                <p style="margin-top: 12px; font-weight: 500;">Битрикс24</p>
+            </div>
+            <div class="integration-card" style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0;">
+                <i class="fas fa-chart-line" style="font-size: 32px; color: #2563eb;"></i>
+                <p style="margin-top: 12px; font-weight: 500;">AmoCRM</p>
+            </div>
+            <div class="integration-card" style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0;">
+                <i class="fas fa-chart-line" style="font-size: 32px; color: #2563eb;"></i>
+                <p style="margin-top: 12px; font-weight: 500;">Yclients</p>
+            </div>
+            <div class="integration-card" style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0;">
+                <i class="fas fa-chart-line" style="font-size: 32px; color: #2563eb;"></i>
+                <p style="margin-top: 12px; font-weight: 500;">ГИС ЖКХ</p>
+            </div>
+            <div class="integration-card" style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0;">
+                <i class="fas fa-chart-line" style="font-size: 32px; color: #2563eb;"></i>
+                <p style="margin-top: 12px; font-weight: 500;">Telegram API</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Крупные проекты -->
+<section style="padding: 60px 0; background: #f8fafc;">
+    <div class="container">
+        <h2 class="section-title">Наши клиенты и проекты</h2>
+        <p class="section-subtitle">Опыт работы с крупнейшими компаниями России</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 24px;">
+            <div class="card" style="text-align: center;">
+                <i class="fas fa-truck" style="font-size: 40px; color: #2563eb; margin-bottom: 16px;"></i>
+                <h3>ПЭК</h3>
+                <p style="color: #64748b; font-size: 14px;">Логистика и цифровая оптимизация маршрутов</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <i class="fas fa-wifi" style="font-size: 40px; color: #2563eb; margin-bottom: 16px;"></i>
+                <h3>Ростелеком</h3>
+                <p style="color: #64748b; font-size: 14px;">Телеком-инфраструктура и облачные сервисы</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <i class="fas fa-network-wired" style="font-size: 40px; color: #2563eb; margin-bottom: 16px;"></i>
+                <h3>ТТК</h3>
+                <p style="color: #64748b; font-size: 14px;">Корпоративные сети и кибербезопасность</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <i class="fas fa-map-marker-alt" style="font-size: 40px; color: #2563eb; margin-bottom: 16px;"></i>
+                <h3>2ГИС</h3>
+                <p style="color: #64748b; font-size: 14px;">Интеграция геоданных и API-решения</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <i class="fas fa-store" style="font-size: 40px; color: #2563eb; margin-bottom: 16px;"></i>
+                <h3>X5 Retail Group</h3>
+                <p style="color: #64748b; font-size: 14px;">Цифровая трансформация ритейла</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <i class="fas fa-charging-station" style="font-size: 40px; color: #2563eb; margin-bottom: 16px;"></i>
+                <h3>Тверская генерация</h3>
+                <p style="color: #64748b; font-size: 14px;">Автоматизация ЖКХ</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Форма для партнеров -->
+<section style="padding: 60px 0;">
+    <div class="container">
         <div class="partner-form-block">
-            <h2 style="margin-bottom: 16px;">Стать партнёром</h2>
-            <p style="color: #64748b; margin-bottom: 32px;">Присоединяйтесь к экосистеме RK Group и развивайте бизнес вместе с нами</p>
-            <form method="post" action="{% url 'main:partners' %}" style="max-width: 500px; margin: 0 auto;" id="partner-form">
+            <h2 style="font-size: 32px; margin-bottom: 16px;">Стать партнером</h2>
+            <p style="color: #64748b; margin-bottom: 32px;">Заполните форму, и мы свяжемся с вами для обсуждения сотрудничества</p>
+            
+            <form id="partner-form" method="post" action="{% url 'main:partners' %}" style="max-width: 500px; margin: 0 auto;">
                 {% csrf_token %}
                 <div class="form-group">
                     <input type="text" name="name" class="form-input" placeholder="Ваше имя" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" name="email" class="form-input" placeholder="Email" required>
+                    <input type="email" name="email" class="form-input" placeholder="Ваш email" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="company" class="form-input" placeholder="Название компании" required>
+                    <input type="text" name="company" class="form-input" placeholder="Компания" required>
                 </div>
-                <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
-                <div class="form-message" style="margin-top: 16px;"></div>
+                <button type="submit" class="btn" style="width: 100%; justify-content: center;">Отправить заявку</button>
+                <div class="form-message" style="margin-top: 20px;"></div>
             </form>
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const partnerForm = document.getElementById('partner-form');
+    if (partnerForm) {
+        partnerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳ Отправка...';
+            submitBtn.disabled = true;
+            
+            const formData = new FormData(this);
+            
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                const messageDiv = this.querySelector('.form-message');
+                
+                if (data.status === 'ok') {
+                    messageDiv.innerHTML = '<div class="alert-success" style="background: #d1fae5; color: #065f46; padding: 12px; border-radius: 12px;">' + data.message + '</div>';
+                    this.reset();
+                    setTimeout(() => messageDiv.innerHTML = '', 3000);
+                } else {
+                    messageDiv.innerHTML = '<div class="alert-error" style="background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 12px;">' + (data.message || 'Ошибка отправки') + '</div>';
+                    setTimeout(() => messageDiv.innerHTML = '', 3000);
+                }
+            })
+            .catch(error => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                const messageDiv = partnerForm.querySelector('.form-message');
+                messageDiv.innerHTML = '<div class="alert-error" style="background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 12px;">Ошибка соединения</div>';
+                setTimeout(() => messageDiv.innerHTML = '', 3000);
+            });
+        });
+    }
+</script>
 {% endblock %}

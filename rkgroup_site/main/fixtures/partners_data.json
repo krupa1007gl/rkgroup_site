@@ -25,9 +25,9 @@
     "model": "main.partner",
     "pk": 3,
     "fields": {
-      "name": "1С",
-      "logo": "partners/1c.png",
-      "website": "https://1c.ru",
+      "name": "Ростелеком",
+      "logo": "partners/rostelecom.png",
+      "website": "https://rostelecom.ru",
       "order": 3,
       "is_active": true
     }
@@ -36,9 +36,9 @@
     "model": "main.partner",
     "pk": 4,
     "fields": {
-      "name": "Битрикс24",
-      "logo": "partners/bitrix24.png",
-      "website": "https://bitrix24.ru",
+      "name": "ПЭК",
+      "logo": "partners/pek.png",
+      "website": "https://pecom.ru",
       "order": 4,
       "is_active": true
     }
@@ -47,9 +47,9 @@
     "model": "main.partner",
     "pk": 5,
     "fields": {
-      "name": "Yclients",
-      "logo": "partners/yclients.png",
-      "website": "https://yclients.com",
+      "name": "ТТК",
+      "logo": "partners/ttk.png",
+      "website": "https://ttk.ru",
       "order": 5,
       "is_active": true
     }
@@ -58,10 +58,43 @@
     "model": "main.partner",
     "pk": 6,
     "fields": {
-      "name": "Ростелеком",
-      "logo": "partners/rostelecom.png",
-      "website": "https://rostelecom.ru",
+      "name": "2ГИС",
+      "logo": "partners/2gis.png",
+      "website": "https://2gis.ru",
       "order": 6,
+      "is_active": true
+    }
+  },
+  {
+    "model": "main.partner",
+    "pk": 7,
+    "fields": {
+      "name": "X5 Retail Group",
+      "logo": "partners/x5.png",
+      "website": "https://x5.ru",
+      "order": 7,
+      "is_active": true
+    }
+  },
+  {
+    "model": "main.partner",
+    "pk": 8,
+    "fields": {
+      "name": "Битрикс24",
+      "logo": "partners/bitrix24.png",
+      "website": "https://bitrix24.ru",
+      "order": 8,
+      "is_active": true
+    }
+  },
+  {
+    "model": "main.partner",
+    "pk": 9,
+    "fields": {
+      "name": "1С",
+      "logo": "partners/1c.png",
+      "website": "https://1c.ru",
+      "order": 9,
       "is_active": true
     }
   }

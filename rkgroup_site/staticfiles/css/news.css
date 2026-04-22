@@ -1,0 +1,55 @@
+/* static/css/news.css - Стили для страниц с новостями */
+
+.news-date {
+    color: #2563eb;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.news-card {
+    padding: 28px;
+}
+
+.news-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.news-card p {
+    color: #6b7280;
+    margin-bottom: 16px;
+}
+
+.news-read-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.news-read-link:hover {
+    color: #1d4ed8;
+}
+
+.news-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.news-detail-image {
+    width: 100%;
+    border-radius: 24px;
+    margin-bottom: 32px;
+}
+
+.news-detail-content {
+    color: #475569;
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+    .news-navigation {
+        flex-direction: column;
+        gap: 16px;
+    }
+}
