@@ -46,6 +46,23 @@
             </a>
             {% endfor %}
         </div>
+        
+        <!-- Пагинация -->
+        {% if is_paginated %}
+        <div class="pagination" style="display: flex; justify-content: center; gap: 10px; margin-top: 40px;">
+            {% if page_obj.has_previous %}
+            <a href="?page=1" class="btn-outline">&laquo; Первая</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn-outline">Назад</a>
+            {% endif %}
+            
+            <span class="btn" style="background: #2563eb; cursor: default;">Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+            
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn-outline">Вперед</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn-outline">Последняя &raquo;</a>
+            {% endif %}
+        </div>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

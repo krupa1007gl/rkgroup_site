@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Управление заявками | RK Group{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/leads.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="leads-container">
+    <div class="leads-header">
+        <h1 class="leads-title">📋 Управление заявками</h1>
+        <div class="leads-stats">
+            <div class="stat-badge">
+                📊 Всего: <span class="count" id="total-count">0</span>
+            </div>
+            <div class="stat-badge">
+                ❌ Не обработано: <span class="count" id="not-processed-count">0</span>
+            </div>
+            <div class="stat-badge">
+                ✅ Обработано: <span class="count" id="processed-count">0</span>
+            </div>
+            <button class="refresh-btn" onclick="location.reload()">
+                🔄 Обновить
+            </button>
+        </div>
+    </div>
+    
+    <div class="leads-table-wrapper">
+        <table class="leads-table">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Имя</th>
+                    <th>Почта</th>
+                    <th>Телефон</th>
+                    <th>Описание</th>
+                    <th>Источник</th>
+                    <th>Статус заявки</th>
+                    <th>Дата</th>
+                    <th>Действие</th>
+                </tr>
+            </thead>
+            <tbody id="leads-tbody">
+                {% for lead in leads %}
+                <tr data-row-num="{{ lead.row_num }}" data-status="{{ lead.status }}">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ lead.data.1|default:"" }}</td>
+                    <td>{{ lead.data.2|default:"" }}</td>
+                    <td>{{ lead.data.3|default:"" }}</td>
+                    <td style="max-width: 250px; word-break: break-word;">{{ lead.data.4|default:""|truncatechars:60 }}</td>
+                    <td style="max-width: 200px; word-break: break-word;">{{ lead.data.5|default:""|truncatechars:50 }}</td>
+                    <td>
+                        {% if lead.status == "Обработано" %}
+                        <span class="status-badge processed">✅ Обработано</span>
+                        {% else %}
+                        <span class="status-badge not-processed">❌ Не обработано</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ lead.data.7|default:"" }}</td>
+                    <td>
+                        {% if lead.status == "Обработано" %}
+                        <button class="status-btn unprocess" onclick="updateStatus(this, 'Не обработано')">
+                            ↺ Отменить
+                        </button>
+                        {% else %}
+                        <button class="status-btn process" onclick="updateStatus(this, 'Обработано')">
+                            ✅ Отметить обработанным
+                        </button>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="9" class="empty-state">
+                        📭 Нет заявок. Заполните форму на сайте, чтобы они появились здесь.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function updateStatus(button, newStatus) {
+        const row = button.closest('tr');
+        const rowNum = row.dataset.rowNum;
+        const originalHtml = button.innerHTML;
+        
+        button.innerHTML = '<span class="loading"></span>';
+        button.disabled = true;
+        
+        fetch('{% url "main:update_lead_status" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]')?.value || '',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({
+                row_num: rowNum,
+                status: newStatus
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const statusCell = row.querySelector('td:nth-child(7)');
+                const newStatusText = newStatus === 'Обработано' ? '✅ Обработано' : '❌ Не обработано';
+                const statusClass = newStatus === 'Обработано' ? 'processed' : 'not-processed';
+                
+                statusCell.innerHTML = `<span class="status-badge ${statusClass}">${newStatusText}</span>`;
+                
+                if (newStatus === 'Обработано') {
+                    button.innerHTML = '↺ Отменить';
+                    button.className = 'status-btn unprocess';
+                    button.onclick = function() { updateStatus(this, 'Не обработано'); };
+                } else {
+                    button.innerHTML = '✅ Отметить обработанным';
+                    button.className = 'status-btn process';
+                    button.onclick = function() { updateStatus(this, 'Обработано'); };
+                }
+                
+                updateCounters();
+                row.dataset.status = newStatus;
+                button.disabled = false;
+            } else {
+                button.innerHTML = originalHtml;
+                button.disabled = false;
+                alert('Ошибка при обновлении статуса');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            button.innerHTML = originalHtml;
+            button.disabled = false;
+            alert('Ошибка соединения');
+        });
+    }
+    
+    function updateCounters() {
+        const rows = document.querySelectorAll('#leads-tbody tr[data-row-num]');
+        let total = rows.length;
+        let processed = 0;
+        
+        rows.forEach(row => {
+            if (row.dataset.status === 'Обработано') {
+                processed++;
+            }
+        });
+        
+        const notProcessed = total - processed;
+        
+        document.getElementById('total-count').textContent = total;
+        document.getElementById('processed-count').textContent = processed;
+        document.getElementById('not-processed-count').textContent = notProcessed;
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCounters();
+    });
+</script>
+{% endblock %}

@@ -8,8 +8,8 @@
 {% endblock %}
 
 {% block content %}
-<!-- Hero Section с анимированным текстом -->
-<section class="hero animated-gradient">
+<!-- Hero Section -->
+<section class="hero">
     <div class="container">
         <div class="hero-content">
             <h1>
@@ -123,43 +123,25 @@
             
             <div class="mockup-chat">
                 <div class="chat-message ai">
-                    <div class="chat-bubble ai">🤖 Добрый день! Я виртуальный помощник RK Group. Чем могу помочь? Я могу принять показания счётчиков, записать на приём, сообщить о задолженности или принять аварийную заявку.</div>
+                    <div class="chat-bubble ai">🤖 Добрый день! Я виртуальный помощник RK Group. Чем могу помочь?</div>
                 </div>
                 <div class="chat-message user">
-                    <div class="chat-bubble user">Здравствуйте! Хочу передать показания счётчиков воды и узнать, нет ли у меня задолженности</div>
+                    <div class="chat-bubble user">Здравствуйте! Хочу передать показания счётчиков воды</div>
                 </div>
                 <div class="chat-message ai">
-                    <div class="chat-bubble ai">✅ Отлично! Назовите, пожалуйста, номер лицевого счёта. Он указан в квитанции или в личном кабинете.</div>
+                    <div class="chat-bubble ai">✅ Отлично! Назовите номер лицевого счёта</div>
                 </div>
                 <div class="chat-message user">
                     <div class="chat-bubble user">1234567890</div>
                 </div>
                 <div class="chat-message ai">
-                    <div class="chat-bubble ai">✅ Спасибо! Лицевой счёт 1234567890. Введите показания счётчика холодной воды:</div>
+                    <div class="chat-bubble ai">✅ Показания сохранены! Что-то ещё?</div>
                 </div>
                 <div class="chat-message user">
-                    <div class="chat-bubble user">125,6 куб.м</div>
+                    <div class="chat-bubble user">Нет, спасибо</div>
                 </div>
                 <div class="chat-message ai">
-                    <div class="chat-bubble ai">✅ Принято! Показания горячей воды:</div>
-                </div>
-                <div class="chat-message user">
-                    <div class="chat-bubble user">87,3 куб.м</div>
-                </div>
-                <div class="chat-message ai">
-                    <div class="chat-bubble ai">✅ Отлично! Показания сохранены. По вашему лицевому счёту задолженность составляет 1 250 рублей. Напомнить о платеже через 3 дня?</div>
-                </div>
-                <div class="chat-message user">
-                    <div class="chat-bubble user">Да, напомните, пожалуйста</div>
-                </div>
-                <div class="chat-message ai">
-                    <div class="chat-bubble ai">✅ Хорошо! Напомню завтра. Что-то ещё могу сделать для вас?</div>
-                </div>
-                <div class="chat-message user">
-                    <div class="chat-bubble user">Нет, спасибо, это всё</div>
-                </div>
-                <div class="chat-message ai">
-                    <div class="chat-bubble ai">🤖 Рад был помочь! Хорошего дня! Если появятся вопросы — я всегда на связи 24/7.</div>
+                    <div class="chat-bubble ai">🤖 Хорошего дня! Я на связи 24/7</div>
                 </div>
             </div>
         </div>
@@ -174,17 +156,17 @@
             <div class="stage-card fade-up">
                 <div class="stage-number">01</div>
                 <h4>Анализ потребностей</h4>
-                <p>Выявляем бизнес-цели и точки роста — основа для технического решения</p>
+                <p>Выявляем бизнес-цели и точки роста</p>
             </div>
             <div class="stage-card fade-up">
                 <div class="stage-number">02</div>
                 <h4>Проектирование решений</h4>
-                <p>Архитектура, интеграция с партнёрами (Twin, операторы связи, платформы данных)</p>
+                <p>Архитектура, интеграция с партнёрами</p>
             </div>
             <div class="stage-card fade-up">
                 <div class="stage-number">03</div>
                 <h4>Внедрение и поддержка</h4>
-                <p>Пилоты, масштабирование, сопровождение — долгосрочное партнёрство для устойчивого эффекта</p>
+                <p>Пилоты, масштабирование, сопровождение</p>
             </div>
         </div>
     </div>
@@ -195,43 +177,19 @@
     <div class="container">
         <div class="integrations-block">
             <div style="text-align: center; margin-bottom: 40px;">
-                <span style="background: #eff6ff; color: #2563eb; padding: 6px 14px; border-radius: 40px; font-size: 13px; font-weight: 500;">ИНТЕГРАЦИИ</span>
-                <h2 class="section-title" style="margin-top: 16px; margin-bottom: 16px;">Подключайтесь ко всему</h2>
-                <p style="color: #64748b; max-width: 600px; margin: 0 auto;">Наша платформа поддерживает интеграции с большинством известных IP-PBX, CRM-систем и мессенджеров</p>
+                <span style="background: #eff6ff; color: #2563eb; padding: 6px 14px; border-radius: 40px; font-size: 13px;">ИНТЕГРАЦИИ</span>
+                <h2 class="section-title" style="margin-top: 16px;">Подключайтесь ко всему</h2>
+                <p style="color: #64748b;">Наша платформа поддерживает интеграции с большинством известных систем</p>
             </div>
             <div class="integrations-grid">
-                <div class="integration-card fade-up">
-                    <i class="fas fa-chart-line" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
-                    <h4>AVAYA</h4>
-                </div>
-                <div class="integration-card fade-up">
-                    <i class="fas fa-chart-simple" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
-                    <h4>Мегаплан</h4>
-                </div>
-                <div class="integration-card fade-up">
-                    <i class="fas fa-database" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
-                    <h4>1С</h4>
-                </div>
-                <div class="integration-card fade-up">
-                    <i class="fas fa-chart-bar" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
-                    <h4>Битрикс24</h4>
-                </div>
-                <div class="integration-card fade-up">
-                    <i class="fas fa-calendar-check" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
-                    <h4>Yclients</h4>
-                </div>
-                <div class="integration-card fade-up">
-                    <i class="fas fa-brain" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
-                    <h4>GENESYS</h4>
-                </div>
-                <div class="integration-card fade-up">
-                    <i class="fas fa-cloud" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
-                    <h4>Яндекс.Облако</h4>
-                </div>
-                <div class="integration-card fade-up">
-                    <i class="fas fa-shield" style="font-size: 36px; color: #3b82f6; margin-bottom: 12px;"></i>
-                    <h4>Selectel</h4>
-                </div>
+                <div class="integration-card fade-up"><i class="fas fa-chart-line" style="font-size: 36px; color: #3b82f6;"></i><h4>AVAYA</h4></div>
+                <div class="integration-card fade-up"><i class="fas fa-database" style="font-size: 36px; color: #3b82f6;"></i><h4>1С</h4></div>
+                <div class="integration-card fade-up"><i class="fas fa-chart-bar" style="font-size: 36px; color: #3b82f6;"></i><h4>Битрикс24</h4></div>
+                <div class="integration-card fade-up"><i class="fas fa-calendar-check" style="font-size: 36px; color: #3b82f6;"></i><h4>Yclients</h4></div>
+                <div class="integration-card fade-up"><i class="fas fa-brain" style="font-size: 36px; color: #3b82f6;"></i><h4>GENESYS</h4></div>
+                <div class="integration-card fade-up"><i class="fas fa-cloud" style="font-size: 36px; color: #3b82f6;"></i><h4>Яндекс.Облако</h4></div>
+                <div class="integration-card fade-up"><i class="fas fa-chart-simple" style="font-size: 36px; color: #3b82f6;"></i><h4>Мегаплан</h4></div>
+                <div class="integration-card fade-up"><i class="fas fa-shield" style="font-size: 36px; color: #3b82f6;"></i><h4>Selectel</h4></div>
             </div>
         </div>
     </div>
@@ -239,10 +197,117 @@
 
 <!-- CTA блок -->
 <section class="hero" style="background: linear-gradient(135deg, #eff6ff, #ffffff); margin-top: 40px;">
-    <div class="container text-center">
-        <h2>Готовы автоматизировать свой бизнес?</h2>
+    <div class="container" style="text-align: center;">
+        <h2 style="font-size: 36px;">Готовы автоматизировать свой бизнес?</h2>
         <p style="font-size: 18px; margin: 20px 0;">Получите бесплатную консультацию и расчет экономического эффекта</p>
         <a href="{% url 'main:contact' %}" class="btn">Оставить заявку</a>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Печатная машинка
+    const typedElement = document.getElementById('typed-text');
+    if (typedElement) {
+        const words = ['меняют бизнес', 'увеличивают прибыль', 'автоматизируют всё'];
+        let wordIndex = 0, charIndex = 0, isDeleting = false;
+        
+        function typeEffect() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                typedElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typedElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            if (!isDeleting && charIndex === currentWord.length) {
+                isDeleting = true;
+                setTimeout(typeEffect, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                setTimeout(typeEffect, 500);
+            } else {
+                setTimeout(typeEffect, isDeleting ? 50 : 100);
+            }
+        }
+        typeEffect();
+    }
+    
+    // Canvas анимация
+    const canvas = document.getElementById('heroCanvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let width = canvas.clientWidth, height = canvas.clientHeight;
+        canvas.width = width; canvas.height = height;
+        let particles = [];
+        for (let i = 0; i < 80; i++) {
+            particles.push({
+                x: Math.random() * width, y: Math.random() * height,
+                radius: Math.random() * 2 + 1, alpha: Math.random() * 0.5 + 0.2,
+                speedX: (Math.random() - 0.5) * 0.5, speedY: (Math.random() - 0.5) * 0.5
+            });
+        }
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.x += p.speedX; p.y += p.speedY;
+                if (p.x < 0) p.x = width; if (p.x > width) p.x = 0;
+                if (p.y < 0) p.y = height; if (p.y > height) p.y = 0;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(59, 130, 246, ${p.alpha})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+        window.addEventListener('resize', () => {
+            width = canvas.clientWidth; height = canvas.clientHeight;
+            canvas.width = width; canvas.height = height;
+        });
+    }
+    
+    // Счётчики
+    const counters = document.querySelectorAll('.counter-number');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = parseInt(el.getAttribute('data-target'));
+                if (!el.classList.contains('counted')) {
+                    el.classList.add('counted');
+                    let current = 0;
+                    const increment = target / 50;
+                    function update() {
+                        current += increment;
+                        if (current < target) {
+                            el.textContent = Math.floor(current);
+                            requestAnimationFrame(update);
+                        } else {
+                            el.textContent = target;
+                        }
+                    }
+                    update();
+                }
+                observer.unobserve(el);
+            }
+        });
+    }, { threshold: 0.3 });
+    counters.forEach(c => observer.observe(c));
+    
+    // Scroll анимация
+    const fadeElements = document.querySelectorAll('.fade-up');
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                scrollObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    fadeElements.forEach(el => scrollObserver.observe(el));
+</script>
 {% endblock %}

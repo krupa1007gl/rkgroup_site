@@ -1,0 +1,82 @@
+from django.http import JsonResponse
+from django.views.generic.edit import FormView
+from django.core.cache import cache
+from django.conf import settings
+
+
+class AjaxFormMixin(FormView):
+    """Миксин для обработки AJAX-запросов форм"""
+    
+    def get_success_message(self, cleaned_data):
+        return "Спасибо! Мы свяжемся с вами."
+    
+    def form_valid(self, form):
+        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({
+                'status': 'ok',
+                'message': self.get_success_message(form.cleaned_data)
+            })
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            errors = {}
+            for field, error_list in form.errors.items():
+                errors[field] = error_list[0] if error_list else 'Ошибка'
+            return JsonResponse({
+                'status': 'error',
+                'errors': errors,
+                'message': 'Проверьте правильность заполнения формы'
+            }, status=400)
+        return super().form_invalid(form)
+
+
+class RateLimitMixin:
+    """Миксин для ограничения частоты запросов"""
+    
+    rate_limit_key = 'form_submit'
+    rate_limit_per_hour = 10
+    
+    def get_rate_limit_key(self, request):
+        ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', ''))
+        return f"ratelimit_{self.rate_limit_key}_{ip}"
+    
+    def check_rate_limit(self, request):
+        if not getattr(settings, 'RATELIMIT_ENABLED', False):
+            return True
+        
+        key = self.get_rate_limit_key(request)
+        count = cache.get(key, 0)
+        
+        if count >= self.rate_limit_per_hour:
+            return False
+        
+        cache.set(key, count + 1, 3600)
+        return True
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not self.check_rate_limit(request):
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Слишком много запросов. Попробуйте через час.'
+                }, status=429)
+        return super().dispatch(request, *args, **kwargs)
+
+
+class HoneypotMixin:
+    """Миксин для защиты от ботов через honeypot поле"""
+    
+    honeypot_field = 'website'
+    
+    def check_honeypot(self, request):
+        if request.POST.get(self.honeypot_field):
+            return False
+        return True
+    
+    def post(self, request, *args, **kwargs):
+        if not self.check_honeypot(request):
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'status': 'ok', 'message': 'Спасибо!'})
+            return self.form_valid(None)
+        return super().post(request, *args, **kwargs)

@@ -7,7 +7,9 @@
     {% load static %}
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- БАЗОВЫЕ СТИЛИ (хедер, футер, общие) -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <!-- ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ КОНКРЕТНЫХ СТРАНИЦ -->
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -87,9 +89,9 @@
         </div>
     </footer>
 
-    <!-- Базовые скрипты -->
     <script src="{% static 'js/base.js' %}"></script>
-    <!-- Скрипты для конкретных страниц -->
+    <script src="{% static 'js/pages/bots.js' %}"></script>
+    <script src="{% static 'js/pages/contact.js' %}"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

@@ -4,10 +4,12 @@
     "pk": 1,
     "fields": {
       "name": "Twin",
-      "logo": "partners/twin.png",
+      "logo": "",
       "website": "https://twin24.ai",
       "order": 1,
-      "is_active": true
+      "is_active": true,
+      "created_at": "2025-03-15T10:00:00Z",
+      "updated_at": "2025-03-15T10:00:00Z"
     }
   },
   {
@@ -15,10 +17,12 @@
     "pk": 2,
     "fields": {
       "name": "Сколково",
-      "logo": "partners/skolkovo.png",
+      "logo": "",
       "website": "https://sk.ru",
       "order": 2,
-      "is_active": true
+      "is_active": true,
+      "created_at": "2025-03-15T10:00:00Z",
+      "updated_at": "2025-03-15T10:00:00Z"
     }
   },
   {
@@ -26,10 +30,12 @@
     "pk": 3,
     "fields": {
       "name": "Ростелеком",
-      "logo": "partners/rostelecom.png",
+      "logo": "",
       "website": "https://rostelecom.ru",
       "order": 3,
-      "is_active": true
+      "is_active": true,
+      "created_at": "2025-03-15T10:00:00Z",
+      "updated_at": "2025-03-15T10:00:00Z"
     }
   },
   {
@@ -37,10 +43,12 @@
     "pk": 4,
     "fields": {
       "name": "ПЭК",
-      "logo": "partners/pek.png",
+      "logo": "",
       "website": "https://pecom.ru",
       "order": 4,
-      "is_active": true
+      "is_active": true,
+      "created_at": "2025-03-15T10:00:00Z",
+      "updated_at": "2025-03-15T10:00:00Z"
     }
   },
   {
@@ -48,10 +56,12 @@
     "pk": 5,
     "fields": {
       "name": "ТТК",
-      "logo": "partners/ttk.png",
+      "logo": "",
       "website": "https://ttk.ru",
       "order": 5,
-      "is_active": true
+      "is_active": true,
+      "created_at": "2025-03-15T10:00:00Z",
+      "updated_at": "2025-03-15T10:00:00Z"
     }
   },
   {
@@ -59,10 +69,12 @@
     "pk": 6,
     "fields": {
       "name": "2ГИС",
-      "logo": "partners/2gis.png",
+      "logo": "",
       "website": "https://2gis.ru",
       "order": 6,
-      "is_active": true
+      "is_active": true,
+      "created_at": "2025-03-15T10:00:00Z",
+      "updated_at": "2025-03-15T10:00:00Z"
     }
   },
   {
@@ -70,10 +82,12 @@
     "pk": 7,
     "fields": {
       "name": "X5 Retail Group",
-      "logo": "partners/x5.png",
+      "logo": "",
       "website": "https://x5.ru",
       "order": 7,
-      "is_active": true
+      "is_active": true,
+      "created_at": "2025-03-15T10:00:00Z",
+      "updated_at": "2025-03-15T10:00:00Z"
     }
   },
   {
@@ -81,10 +95,12 @@
     "pk": 8,
     "fields": {
       "name": "Битрикс24",
-      "logo": "partners/bitrix24.png",
+      "logo": "",
       "website": "https://bitrix24.ru",
       "order": 8,
-      "is_active": true
+      "is_active": true,
+      "created_at": "2025-03-15T10:00:00Z",
+      "updated_at": "2025-03-15T10:00:00Z"
     }
   },
   {
@@ -92,10 +108,12 @@
     "pk": 9,
     "fields": {
       "name": "1С",
-      "logo": "partners/1c.png",
+      "logo": "",
       "website": "https://1c.ru",
       "order": 9,
-      "is_active": true
+      "is_active": true,
+      "created_at": "2025-03-15T10:00:00Z",
+      "updated_at": "2025-03-15T10:00:00Z"
     }
   }
 ]

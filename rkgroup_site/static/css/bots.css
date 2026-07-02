@@ -1,6 +1,5 @@
 /* static/css/bots.css - Стили для страниц с ботами */
 
-/* Контейнер для сетки карточек */
 .bots-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -8,7 +7,6 @@
     align-items: stretch;
 }
 
-/* Карточка бота */
 .bot-card {
     background: white;
     border-radius: 28px;
@@ -27,7 +25,6 @@
     border-color: #3b82f6;
 }
 
-/* Иконка */
 .bot-icon {
     font-size: 48px;
     color: #3b82f6;
@@ -35,7 +32,6 @@
     text-align: center;
 }
 
-/* Название */
 .bot-name {
     font-size: 24px;
     font-weight: 700;
@@ -44,7 +40,6 @@
     color: #0f172a;
 }
 
-/* Описание */
 .bot-description {
     color: #6b7280;
     margin-bottom: 20px;
@@ -53,7 +48,6 @@
     flex: 1;
 }
 
-/* Теги */
 .bot-tags {
     display: flex;
     flex-wrap: wrap;
@@ -72,7 +66,6 @@
     color: #2563eb;
 }
 
-/* Цена */
 .bot-price {
     font-size: 28px;
     font-weight: 700;
@@ -89,7 +82,6 @@
     color: #64748b;
 }
 
-/* Кнопка */
 .bot-btn {
     margin-top: auto;
     text-align: center;
@@ -101,7 +93,6 @@
     text-align: center;
 }
 
-/* Навигация между ботами */
 .bot-navigation {
     display: flex;
     justify-content: space-between;
@@ -149,17 +140,6 @@
 .bot-counter {
     font-size: 14px;
     color: #64748b;
-}
-
-.bot-features-list {
-    list-style: none;
-    padding: 0;
-    color: #6b7280;
-    line-height: 2;
-}
-
-.bot-features-list li {
-    padding: 4px 0;
 }
 
 @media (max-width: 1024px) {

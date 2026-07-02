@@ -1,4 +1,6 @@
-/* static/css/home.css - Стили для главной страницы */
+/* ========================================
+   СТИЛИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ
+   ======================================== */
 
 .hero {
     padding: 100px 0 80px;
@@ -26,12 +28,10 @@
     gap: 8px;
 }
 
-/* Статическая часть на первой строке */
 .hero h1 .hero-static {
     display: block;
 }
 
-/* Анимированная часть на второй строке - фиксированная высота */
 .hero h1 .hero-gradient {
     background: linear-gradient(135deg, #2563eb, #8b5cf6);
     -webkit-background-clip: text;
@@ -383,7 +383,6 @@
     .stats-grid, .stages-grid, .integrations-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
     .problems-solutions {
         grid-template-columns: 1fr;
     }
@@ -393,21 +392,17 @@
     .stats-grid, .stages-grid, .integrations-grid {
         grid-template-columns: 1fr;
     }
-    
     .hero {
         padding: 60px 0 40px;
     }
-    
     .hero h1 .hero-static {
         font-size: clamp(36px, 8vw, 72px);
     }
-    
     .hero h1 .hero-gradient {
         font-size: clamp(36px, 8vw, 72px);
         white-space: normal;
         word-break: keep-all;
     }
-    
     .mockup-stats {
         flex-direction: column;
         gap: 20px;

@@ -14,18 +14,17 @@
 {% block content %}
 <section class="contact-hero">
     <div class="container">
-        <h1 class="section-title" style="margin-bottom: 16px;">Свяжитесь с нами</h1>
-        <p class="section-subtitle" style="margin-bottom: 0;">Мы всегда рады ответить на ваши вопросы и обсудить новые проекты</p>
+        <h1 class="section-title">Свяжитесь с нами</h1>
+        <p class="section-subtitle">Мы всегда рады ответить на ваши вопросы и обсудить новые проекты</p>
     </div>
 </section>
 
 <section class="section" style="padding-top: 40px;">
     <div class="container">
         <div class="grid-2" style="gap: 48px;">
-            <!-- Форма обратной связи -->
             <div>
                 <div class="contact-form-card">
-                    <h3 style="font-size: 24px; margin-bottom: 28px; color: #0f172a;">Напишите нам</h3>
+                    <h3 style="font-size: 24px; margin-bottom: 28px;">Напишите нам</h3>
                     <form method="post" action="{% url 'main:contact' %}" id="contact-form">
                         {% csrf_token %}
                         <div class="form-group">
@@ -37,46 +36,37 @@
                         <div class="form-group">
                             <textarea name="message" class="form-input-custom" rows="5" placeholder="Сообщение" required style="resize: vertical;"></textarea>
                         </div>
-                        <button type="submit" class="submit-btn" id="submit-contact-btn">
-                            <span>Отправить сообщение</span>
-                        </button>
+                        <button type="submit" class="submit-btn" id="submit-contact-btn">Отправить сообщение</button>
                         <div class="form-message" style="margin-top: 20px;"></div>
                     </form>
                 </div>
             </div>
             
-            <!-- Контактная информация -->
             <div>
                 <div class="contact-info-card">
-                    <h3 style="font-size: 24px; margin-bottom: 28px; color: #0f172a;">Контактная информация</h3>
+                    <h3 style="font-size: 24px; margin-bottom: 28px;">Контактная информация</h3>
                     
                     <div style="margin-bottom: 28px; display: flex; align-items: flex-start; gap: 16px;">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
                         <div>
-                            <strong style="display: block; margin-bottom: 6px; color: #1e293b;">Телефон</strong>
-                            <a href="tel:+79157258878" style="color: #475569; text-decoration: none;">+7 (915) 725-88-78</a>
+                            <strong>Телефон</strong><br>
+                            <a href="tel:+79157258878" style="color: #475569;">+7 (915) 725-88-78</a>
                         </div>
                     </div>
                     
                     <div style="margin-bottom: 28px; display: flex; align-items: flex-start; gap: 16px;">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                         <div>
-                            <strong style="display: block; margin-bottom: 6px; color: #1e293b;">Email</strong>
-                            <a href="mailto:info@rkgroup.tech" style="color: #475569; text-decoration: none;">info@rkgroup.tech</a>
+                            <strong>Email</strong><br>
+                            <a href="mailto:info@rkgroup.tech" style="color: #475569;">info@rkgroup.tech</a>
                         </div>
                     </div>
                     
                     <div style="margin-bottom: 28px; display: flex; align-items: flex-start; gap: 16px;">
-                        <div class="contact-icon">
-                            <i class="fab fa-telegram"></i>
-                        </div>
+                        <div class="contact-icon"><i class="fab fa-telegram"></i></div>
                         <div>
-                            <strong style="display: block; margin-bottom: 6px; color: #1e293b;">Telegram</strong>
-                            <a href="https://t.me/rkgtech" target="_blank" style="color: #475569; text-decoration: none;">@rkgtech</a>
+                            <strong>Telegram</strong><br>
+                            <a href="https://t.me/rkgtech" target="_blank" style="color: #475569;">@rkgtech</a>
                         </div>
                     </div>
                 </div>

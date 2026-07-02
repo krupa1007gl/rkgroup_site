@@ -10,19 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const submitBtn = document.getElementById('submit-contact-btn');
             const originalText = submitBtn.innerHTML;
             
-            // Анимация загрузки
             submitBtn.innerHTML = '<span>⏳ Отправка...</span>';
             submitBtn.disabled = true;
             
             const formData = new FormData(this);
-            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
-            
-            if (!csrfToken) {
-                console.error('CSRF token not found');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                return;
-            }
             
             fetch(this.action, {
                 method: 'POST',
@@ -53,7 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }, 4000);
                 } else if (data.status === 'error') {
-                    messageDiv.innerHTML = '<div class="alert-error-custom"><i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i> ' + (data.message || 'Ошибка отправки. Попробуйте позже.') + '</div>';
+                    let errorMsg = data.message || 'Ошибка отправки. Попробуйте позже.';
+                    if (data.errors) {
+                        errorMsg = Object.values(data.errors).join(', ');
+                    }
+                    messageDiv.innerHTML = '<div class="alert-error-custom"><i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i> ' + errorMsg + '</div>';
                     
                     setTimeout(() => {
                         const alert = messageDiv.querySelector('.alert-error-custom');

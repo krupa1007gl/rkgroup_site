@@ -163,7 +163,6 @@
 {% block extra_js %}
 <script src="{% static 'js/pages/bots.js' %}"></script>
 <script>
-    // Маска для телефона
     const phoneInput = document.getElementById('phone-input');
     if (phoneInput) {
         phoneInput.addEventListener('input', function(e) {
@@ -179,7 +178,6 @@
         });
     }
     
-    // Модальное окно
     const modal = document.getElementById('consultation-modal');
     const closeBtn = document.querySelector('.modal__close');
     const openBtns = document.querySelectorAll('.js-open-modal');

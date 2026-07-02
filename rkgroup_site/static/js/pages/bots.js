@@ -15,13 +15,16 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.disabled = true;
             
             const formData = new FormData(this);
-            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
+            
+            // Получаем CSRF токен из cookie
+            const csrftoken = getCookie('csrftoken');
             
             fetch(this.action, {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': csrftoken
                 }
             })
             .then(response => response.json())
@@ -39,7 +42,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         messageDiv.innerHTML = '';
                     }, 3000);
                 } else if (data.status === 'error') {
-                    messageDiv.innerHTML = '<div class="alert-error" style="background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 12px;">' + (data.message || 'Ошибка отправки') + '</div>';
+                    let errorMsg = data.message || 'Ошибка отправки';
+                    if (data.errors) {
+                        errorMsg = Object.values(data.errors).join(', ');
+                    }
+                    messageDiv.innerHTML = '<div class="alert-error" style="background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 12px;">' + errorMsg + '</div>';
                     
                     setTimeout(() => {
                         messageDiv.innerHTML = '';
@@ -59,5 +66,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 3000);
             });
         });
+    }
+    
+    // Маска для телефона
+    const phoneInputs = document.querySelectorAll('input[name="phone"]');
+    phoneInputs.forEach(phoneInput => {
+        phoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            let formatted = '';
+            if (value.length > 0) formatted = '+7';
+            if (value.length > 1) formatted += ' (' + value.slice(1, 4);
+            if (value.length > 4) formatted += ') ' + value.slice(4, 7);
+            if (value.length > 7) formatted += '-' + value.slice(7, 9);
+            if (value.length > 9) formatted += '-' + value.slice(9, 11);
+            e.target.value = formatted;
+        });
+    });
+    
+    // Функция получения CSRF токена
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
     }
 });
