@@ -139,6 +139,7 @@
         <form id="consultation-form" method="post" action="{% url 'bots:consultation' %}">
             {% csrf_token %}
             <input type="hidden" name="bot_name" value="{{ bot.name }}">
+            <input type="text" name="website" value="" tabindex="-1" autocomplete="off" style="position: absolute; left: -9999px;">
             
             <div class="form-group">
                 <input type="text" name="name" class="form-input" placeholder="Ваше имя" required>

@@ -1,8 +1,6 @@
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
-from django.http import JsonResponse
-from django.core.paginator import Paginator
 
 from .models import Bot
 from .forms import ConsultationForm
@@ -68,8 +66,3 @@ class ConsultationCreateView(RateLimitMixin, HoneypotMixin, AjaxFormMixin, FormV
         )
 
         return super().form_valid(form)
-    
-    def form_invalid(self, form):
-        if form is None:
-            return JsonResponse({'status': 'ok', 'message': 'Спасибо!'})
-        return super().form_invalid(form)

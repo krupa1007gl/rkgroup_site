@@ -1,4 +1,4 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic.edit import FormView
 from django.core.cache import cache
 from django.conf import settings
@@ -79,7 +79,9 @@ class HoneypotMixin:
     
     def post(self, request, *args, **kwargs):
         if not self.check_honeypot(request):
+            # Ничего не сохраняем и не логируем как ошибку — просто делаем
+            # вид, что всё прошло успешно, не выдавая боту, что он пойман.
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 return JsonResponse({'status': 'ok', 'message': 'Спасибо!'})
-            return self.form_valid(None)
+            return HttpResponseRedirect(self.get_success_url())
         return super().post(request, *args, **kwargs)

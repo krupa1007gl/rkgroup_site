@@ -60,6 +60,7 @@
             <p>Заполните форму, и мы свяжемся с вами для обсуждения сотрудничества</p>
             <form method="post" action="{% url 'main:partners' %}" style="max-width: 500px; margin: 0 auto;" id="partner-form">
                 {% csrf_token %}
+                <input type="text" name="website" value="" tabindex="-1" autocomplete="off" style="position: absolute; left: -9999px;">
                 <input type="text" name="name" class="form-input" placeholder="Ваше имя" required style="margin-bottom: 15px; width: 100%;">
                 <input type="email" name="email" class="form-input" placeholder="Ваш email" required style="margin-bottom: 15px; width: 100%;">
                 <input type="text" name="company" class="form-input" placeholder="Компания" required style="margin-bottom: 15px; width: 100%;">
