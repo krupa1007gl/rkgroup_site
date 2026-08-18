@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+
+import dj_database_url
 from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +29,7 @@ INSTALLED_APPS = [
     'bots',
     'cases',
     'news',
+    'leads',
 ]
 
 MIDDLEWARE = [
@@ -60,12 +63,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rkgroup.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Лиды и статистика визитов хранятся в этой БД (см. приложения leads, visits).
+# SQLite — приемлемый вариант для разработки и небольшой нагрузки, но не
+# рассчитан на конкурентную запись при реальном трафике.
+# TODO: при деплое задать DATABASE_URL (например
+# postgres://user:password@host:5432/dbname) и перейти на PostgreSQL —
+# psycopg2-binary и dj-database-url уже есть в зависимостях.
+if os.environ.get('DATABASE_URL'):
+    DATABASES = {'default': dj_database_url.parse(os.environ['DATABASE_URL'])}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
