@@ -101,6 +101,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# ========== TELEGRAM-УВЕДОМЛЕНИЯ ==========
+# Если не заданы — telegram_notifier просто пишет предупреждение в лог и
+# не отправляет ничего (см. telegram_notifier.send_telegram_message).
+TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
+TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
+
 # ========== RATE LIMITING ==========
 RATELIMIT_ENABLED = os.environ.get('RATELIMIT_ENABLED', 'True') == 'True'
 
