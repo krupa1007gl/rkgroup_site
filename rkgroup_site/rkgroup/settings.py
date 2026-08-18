@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'cases',
     'news',
     'leads',
+    'visits',
 ]
 
 MIDDLEWARE = [

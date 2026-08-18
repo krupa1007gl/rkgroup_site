@@ -1,7 +1,8 @@
 import re
 import logging
 from django.utils.deprecation import MiddlewareMixin
-from services.visit_tracker import visit_tracker
+
+from visits.models import Visit
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +27,13 @@ class VisitTrackingMiddleware(MiddlewareMixin):
 
         ip = self._get_client_ip(request)
         if response.status_code in [200, 404]:
-            visit_tracker.add_visit(ip, request.path, request.referer, request.META.get('HTTP_USER_AGENT', ''), response.status_code)
+            Visit.objects.create(
+                ip=ip,
+                path=request.path,
+                referer=request.referer or '',
+                user_agent=request.META.get('HTTP_USER_AGENT', ''),
+                status_code=response.status_code,
+            )
 
         return response
 
