@@ -88,6 +88,20 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# ========== RATE LIMITING ==========
+RATELIMIT_ENABLED = os.environ.get('RATELIMIT_ENABLED', 'True') == 'True'
+
+# LocMemCache хватает для одного воркера. Для деплоя с несколькими
+# процессами/воркерами лимиты не будут общими между процессами —
+# в этом случае стоит подключить django-redis и Redis.
+# TODO: перейти на django-redis (CACHES['default']['BACKEND'] =
+# 'django_redis.cache.RedisCache'), если потребуется multi-worker деплой.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
+
 # ========== НАСТРОЙКИ ДЛЯ ФАЙЛОВ ==========
 DATA_DIR = os.environ.get('DATA_DIR', str(Path(BASE_DIR).parent / 'data'))
 

@@ -1,7 +1,9 @@
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.generic.edit import FormView
 from django.core.cache import cache
 from django.conf import settings
+
+RATE_LIMIT_MESSAGE = 'Слишком много запросов. Попробуйте через час.'
 
 
 class AjaxFormMixin(FormView):
@@ -59,8 +61,9 @@ class RateLimitMixin:
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 return JsonResponse({
                     'status': 'error',
-                    'message': 'Слишком много запросов. Попробуйте через час.'
+                    'message': RATE_LIMIT_MESSAGE
                 }, status=429)
+            return HttpResponse(RATE_LIMIT_MESSAGE, status=429, content_type='text/plain; charset=utf-8')
         return super().dispatch(request, *args, **kwargs)
 
 
