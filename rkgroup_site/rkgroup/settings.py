@@ -115,17 +115,6 @@ CACHES = {
     }
 }
 
-# ========== НАСТРОЙКИ ДЛЯ ФАЙЛОВ ==========
-DATA_DIR = os.environ.get('DATA_DIR', str(Path(BASE_DIR).parent / 'data'))
-
-LEADS_DIR = os.path.join(DATA_DIR, 'leads')
-VISITS_DIR = os.path.join(DATA_DIR, 'visits')
-BACKUPS_DIR = os.path.join(DATA_DIR, 'backups')
-
-os.makedirs(LEADS_DIR, exist_ok=True)
-os.makedirs(VISITS_DIR, exist_ok=True)
-os.makedirs(BACKUPS_DIR, exist_ok=True)
-
 # ========== ЛОГИРОВАНИЕ ==========
 LOGGING = {
     'version': 1,
@@ -170,5 +159,3 @@ LOGGING = {
         'level': 'INFO',
     },
 }
-#========== НАСТРОЙКИ EXCEL ==========
-LEADS_MAX_RECORDS_PER_FILE = 100

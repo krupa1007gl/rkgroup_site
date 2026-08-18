@@ -4,9 +4,10 @@ from django.http import JsonResponse
 from bots.models import Bot
 from cases.models import Case
 from news.models import News
+from leads.models import Lead
+from leads.services import create_lead
 from .models import Partner
 from .forms import CallbackForm, ContactForm
-from services.excel_service import excel_service
 
 
 class HomePageView(TemplateView):
@@ -38,18 +39,22 @@ class PartnersPageView(TemplateView):
         name = request.POST.get('name')
         email = request.POST.get('email')
         company = request.POST.get('company')
-        
+
         source = getattr(request, 'referer', '')
-        success = excel_service.add_partner(name, email, company, source)
-        
+        create_lead(
+            lead_type=Lead.LeadType.PARTNER,
+            name=name,
+            email=email,
+            company=company,
+            description='Заявка на партнёрство',
+            source=source,
+        )
+
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            if success:
-                return JsonResponse({'status': 'ok', 'message': 'Спасибо! Мы свяжемся с вами.'})
-            return JsonResponse({'status': 'error', 'message': 'Ошибка сервера'}, status=500)
-        
+            return JsonResponse({'status': 'ok', 'message': 'Спасибо! Мы свяжемся с вами.'})
+
         context = self.get_context_data(**kwargs)
-        if success:
-            context['message'] = 'Спасибо! Мы свяжемся с вами.'
+        context['message'] = 'Спасибо! Мы свяжемся с вами.'
         return self.render_to_response(context)
 
 
@@ -62,20 +67,20 @@ class ContactPageView(FormView):
         name = form.cleaned_data['name']
         email = form.cleaned_data['email']
         message = form.cleaned_data['message']
-        
+
         source = getattr(self.request, 'referer', '')
-        success = excel_service.add_contact(name, email, '', message, source)
-        
+        create_lead(
+            lead_type=Lead.LeadType.CONTACT,
+            name=name,
+            email=email,
+            description=message,
+            source=source,
+        )
+
         if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            if success:
-                return JsonResponse({'status': 'ok', 'message': 'Спасибо! Мы свяжемся с вами.'})
-            return JsonResponse({'status': 'error', 'message': 'Ошибка сервера'}, status=500)
-        
-        if success:
-            return super().form_valid(form)
-        else:
-            form.add_error(None, 'Ошибка сохранения')
-            return self.form_invalid(form)
+            return JsonResponse({'status': 'ok', 'message': 'Спасибо! Мы свяжемся с вами.'})
+
+        return super().form_valid(form)
     
     def form_invalid(self, form):
         if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -93,20 +98,20 @@ class CallbackCreateView(FormView):
     def form_valid(self, form):
         name = form.cleaned_data['name']
         phone = form.cleaned_data['phone']
-        
+
         source = getattr(self.request, 'referer', '')
-        success = excel_service.add_callback(name, phone, source)
-        
+        create_lead(
+            lead_type=Lead.LeadType.CALLBACK,
+            name=name,
+            phone=phone,
+            description='Заявка на обратный звонок',
+            source=source,
+        )
+
         if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            if success:
-                return JsonResponse({'status': 'ok', 'message': 'Спасибо! Мы перезвоним.'})
-            return JsonResponse({'status': 'error', 'message': 'Ошибка сервера'}, status=500)
-        
-        if success:
-            return super().form_valid(form)
-        else:
-            form.add_error(None, 'Ошибка сохранения')
-            return self.form_invalid(form)
+            return JsonResponse({'status': 'ok', 'message': 'Спасибо! Мы перезвоним.'})
+
+        return super().form_valid(form)
     
     def form_invalid(self, form):
         if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':

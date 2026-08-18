@@ -6,7 +6,8 @@ from django.core.paginator import Paginator
 
 from .models import Bot
 from .forms import ConsultationForm
-from services.excel_service import excel_service
+from leads.models import Lead
+from leads.services import create_lead
 from common.mixins import AjaxFormMixin, RateLimitMixin, HoneypotMixin
 
 
@@ -55,12 +56,17 @@ class ConsultationCreateView(RateLimitMixin, HoneypotMixin, AjaxFormMixin, FormV
         phone = form.cleaned_data['phone']
         message = form.cleaned_data.get('message', '')
         bot_name = form.cleaned_data.get('bot_name', '')
-        
-        success = excel_service.add_consultation(name, email, phone, message, bot_name)
-        
-        if not success and self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'status': 'error', 'message': 'Ошибка сервера'}, status=500)
-        
+
+        description = f"Консультация по боту: {bot_name}\nСообщение: {message}" if bot_name else f"Консультация\nСообщение: {message}"
+        create_lead(
+            lead_type=Lead.LeadType.CONSULTATION,
+            name=name,
+            email=email,
+            phone=phone,
+            bot_name=bot_name,
+            description=description,
+        )
+
         return super().form_valid(form)
     
     def form_invalid(self, form):
