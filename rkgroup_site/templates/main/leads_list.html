@@ -44,28 +44,28 @@
             </thead>
             <tbody id="leads-tbody">
                 {% for lead in leads %}
-                <tr data-row-num="{{ lead.row_num }}" data-status="{{ lead.status }}">
+                <tr data-lead-id="{{ lead.id }}" data-status="{{ lead.status }}">
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ lead.data.1|default:"" }}</td>
-                    <td>{{ lead.data.2|default:"" }}</td>
-                    <td>{{ lead.data.3|default:"" }}</td>
-                    <td style="max-width: 250px; word-break: break-word;">{{ lead.data.4|default:""|truncatechars:60 }}</td>
-                    <td style="max-width: 200px; word-break: break-word;">{{ lead.data.5|default:""|truncatechars:50 }}</td>
+                    <td>{{ lead.name|default:"" }}</td>
+                    <td>{{ lead.email|default:"" }}</td>
+                    <td>{{ lead.phone|default:"" }}</td>
+                    <td style="max-width: 250px; word-break: break-word;">{{ lead.description|default:""|truncatechars:60 }}</td>
+                    <td style="max-width: 200px; word-break: break-word;">{{ lead.source|default:""|truncatechars:50 }}</td>
                     <td>
-                        {% if lead.status == "Обработано" %}
+                        {% if lead.status == "processed" %}
                         <span class="status-badge processed">✅ Обработано</span>
                         {% else %}
                         <span class="status-badge not-processed">❌ Не обработано</span>
                         {% endif %}
                     </td>
-                    <td>{{ lead.data.7|default:"" }}</td>
+                    <td>{{ lead.created_at|default:"" }}</td>
                     <td>
-                        {% if lead.status == "Обработано" %}
-                        <button class="status-btn unprocess" onclick="updateStatus(this, 'Не обработано')">
+                        {% if lead.status == "processed" %}
+                        <button class="status-btn unprocess" onclick="updateStatus(this, 'not_processed')">
                             ↺ Отменить
                         </button>
                         {% else %}
-                        <button class="status-btn process" onclick="updateStatus(this, 'Обработано')">
+                        <button class="status-btn process" onclick="updateStatus(this, 'processed')">
                             ✅ Отметить обработанным
                         </button>
                         {% endif %}
@@ -86,13 +86,13 @@
 <script>
     function updateStatus(button, newStatus) {
         const row = button.closest('tr');
-        const rowNum = row.dataset.rowNum;
+        const leadId = row.dataset.leadId;
         const originalHtml = button.innerHTML;
-        
+
         button.innerHTML = '<span class="loading"></span>';
         button.disabled = true;
-        
-        fetch('{% url "main:update_lead_status" %}', {
+
+        fetch('{% url "admin:leads_update_status" %}', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -100,7 +100,7 @@
                 'X-Requested-With': 'XMLHttpRequest'
             },
             body: JSON.stringify({
-                row_num: rowNum,
+                lead_id: leadId,
                 status: newStatus
             })
         })
@@ -108,21 +108,21 @@
         .then(data => {
             if (data.success) {
                 const statusCell = row.querySelector('td:nth-child(7)');
-                const newStatusText = newStatus === 'Обработано' ? '✅ Обработано' : '❌ Не обработано';
-                const statusClass = newStatus === 'Обработано' ? 'processed' : 'not-processed';
-                
+                const newStatusText = newStatus === 'processed' ? '✅ Обработано' : '❌ Не обработано';
+                const statusClass = newStatus === 'processed' ? 'processed' : 'not-processed';
+
                 statusCell.innerHTML = `<span class="status-badge ${statusClass}">${newStatusText}</span>`;
-                
-                if (newStatus === 'Обработано') {
+
+                if (newStatus === 'processed') {
                     button.innerHTML = '↺ Отменить';
                     button.className = 'status-btn unprocess';
-                    button.onclick = function() { updateStatus(this, 'Не обработано'); };
+                    button.onclick = function() { updateStatus(this, 'not_processed'); };
                 } else {
                     button.innerHTML = '✅ Отметить обработанным';
                     button.className = 'status-btn process';
-                    button.onclick = function() { updateStatus(this, 'Обработано'); };
+                    button.onclick = function() { updateStatus(this, 'processed'); };
                 }
-                
+
                 updateCounters();
                 row.dataset.status = newStatus;
                 button.disabled = false;
@@ -141,12 +141,12 @@
     }
     
     function updateCounters() {
-        const rows = document.querySelectorAll('#leads-tbody tr[data-row-num]');
+        const rows = document.querySelectorAll('#leads-tbody tr[data-lead-id]');
         let total = rows.length;
         let processed = 0;
-        
+
         rows.forEach(row => {
-            if (row.dataset.status === 'Обработано') {
+            if (row.dataset.status === 'processed') {
                 processed++;
             }
         });

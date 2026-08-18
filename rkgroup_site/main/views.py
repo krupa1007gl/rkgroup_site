@@ -114,31 +114,3 @@ class CallbackCreateView(FormView):
         return super().form_invalid(form)
 
 
-class LeadListView(TemplateView):
-    template_name = 'main/leads_list.html'
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        leads = excel_service.get_all_leads()
-        context['leads'] = leads
-        return context
-
-
-def update_lead_status(request):
-    if request.method == 'POST':
-        import json
-        data = json.loads(request.body)
-        row_num = data.get('row_num')
-        new_status = data.get('status')
-        
-        if not row_num or not new_status:
-            return JsonResponse({'error': 'Missing parameters'}, status=400)
-        
-        success = excel_service.update_lead_status(int(row_num), new_status)
-        
-        if success:
-            return JsonResponse({'success': True})
-        else:
-            return JsonResponse({'error': 'Failed to update status'}, status=500)
-    
-    return JsonResponse({'error': 'Invalid method'}, status=405)
