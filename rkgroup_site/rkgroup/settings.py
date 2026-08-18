@@ -70,7 +70,9 @@ WSGI_APPLICATION = 'rkgroup.wsgi.application'
 # рассчитан на конкурентную запись при реальном трафике.
 # TODO: при деплое задать DATABASE_URL (например
 # postgres://user:password@host:5432/dbname) и перейти на PostgreSQL —
-# psycopg2-binary и dj-database-url уже есть в зависимостях.
+# psycopg2-binary и dj-database-url уже есть в зависимостях. В репозитории
+# уже есть migrate_to_postgres.py (dumpdata/migrate/loaddata) для переноса
+# данных из SQLite.
 if os.environ.get('DATABASE_URL'):
     DATABASES = {'default': dj_database_url.parse(os.environ['DATABASE_URL'])}
 else:
