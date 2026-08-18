@@ -9,6 +9,7 @@ urlpatterns = [
     path('bots/', include('bots.urls')),
     path('cases/', include('cases.urls')),
     path('news/', include('news.urls')),
+    path('ailab/', include('ailab.urls')),
 ]
 
 if settings.DEBUG:

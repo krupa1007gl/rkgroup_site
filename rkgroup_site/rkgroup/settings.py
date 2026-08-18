@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'news',
     'leads',
     'visits',
+    'ailab',
 ]
 
 MIDDLEWARE = [
@@ -100,6 +101,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ========== AI LAB ==========
+# Заглушка SMS-провайдера использует фиксированный тестовый код вместо
+# реальной отправки (см. ailab/sms.py — TODO про реальный провайдер там же).
+AILAB_STUB_OTP_CODE = os.environ.get('AILAB_STUB_OTP_CODE', '0000')
 
 # ========== TELEGRAM-УВЕДОМЛЕНИЯ ==========
 # Если не заданы — telegram_notifier просто пишет предупреждение в лог и
