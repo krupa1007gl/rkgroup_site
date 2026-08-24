@@ -8,10 +8,125 @@
 {% endblock %}
 
 {% block content %}
-<section class="section">
+{% csrf_token %}
+<section class="page-hero">
     <div class="container">
         <h1 class="section-title">AI Lab</h1>
-        <p class="section-subtitle">Здесь будет живой бот. Страница в разработке.</p>
+        <p class="section-subtitle">Не рассказ о технологии, а доказательство: сначала сценарий, потом — настоящий бот</p>
     </div>
 </section>
+
+<section class="section">
+    <div class="container">
+        <div class="ailab-stage">
+
+            <!-- Состояние 1: автопроигрываемый сценарий -->
+            <div id="state-scenario" class="ailab-panel is-active">
+                <div class="ui-mockup">
+                    <div class="mockup-header">
+                        <span class="mockup-title">Демонстрационный сценарий</span>
+                        <span class="mockup-badge">Записанный диалог</span>
+                    </div>
+                    <div class="mockup-chat" id="scenario-chat"></div>
+                </div>
+            </div>
+
+            <!-- Состояние 2: приглашение -->
+            <div id="state-invite" class="ailab-panel">
+                <div class="ailab-invite-card">
+                    <i class="fas fa-comment-dots"></i>
+                    <h2>Хотите задать свой вопрос настоящему боту?</h2>
+                    <p>Дальше — не сценарий. Подтвердите номер телефона по SMS и пообщайтесь с работающей моделью.</p>
+                    <button type="button" class="btn" id="btn-start-verify">Пообщаться с ботом <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Состояние 3a: ввод телефона -->
+            <div id="state-phone" class="ailab-panel">
+                <div class="ailab-verify-card">
+                    <h2>Подтверждение номера</h2>
+                    <p class="ailab-verify-note">Код придёт в SMS. Номер понадобится, чтобы наш специалист мог связаться с вами позже.</p>
+                    <form id="phone-form" novalidate>
+                        <input type="text" name="website" class="ailab-honeypot" tabindex="-1" autocomplete="off">
+                        <div class="form-group">
+                            <input type="tel" id="phone-input" class="form-input" placeholder="+7 (___) ___-__-__" required>
+                        </div>
+                        <label class="ailab-consent">
+                            <input type="checkbox" id="consent-checkbox">
+                            <span>Я согласен(-на) на обработку персональных данных и на связь по указанному номеру</span>
+                        </label>
+                        <button type="submit" class="btn" id="btn-send-code" disabled style="width: 100%; justify-content: center;">Получить код</button>
+                        <div class="ailab-form-message"></div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Состояние 3b: ввод кода -->
+            <div id="state-code" class="ailab-panel">
+                <div class="ailab-verify-card">
+                    <h2>Введите код из SMS</h2>
+                    <p class="ailab-verify-note">Отправили код на <span id="code-phone-display"></span></p>
+                    <form id="code-form" novalidate>
+                        <div class="form-group">
+                            <input type="text" id="code-input" class="form-input ailab-code-input" placeholder="0000" maxlength="4" inputmode="numeric" required>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%; justify-content: center;">Подтвердить</button>
+                        <div class="ailab-form-message"></div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Состояние 3в: живой бот -->
+            <div id="state-livebot" class="ailab-panel">
+                <div id="livebot-coming-soon" class="ailab-verify-card">
+                    <i class="fas fa-flask"></i>
+                    <h2>Живой бот скоро запустится</h2>
+                    <p>Номер подтверждён — как только бот на платформе Twin будет готов, мы вам сообщим. Хотите, чтобы мы написали, когда это произойдёт?</p>
+                    <form id="notify-form" novalidate>
+                        <input type="text" name="website" class="ailab-honeypot" tabindex="-1" autocomplete="off">
+                        <input type="hidden" id="notify-phone" name="phone">
+                        <div class="form-group">
+                            <input type="text" id="notify-name" class="form-input" placeholder="Ваше имя (необязательно)">
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%; justify-content: center;">Сообщить о запуске</button>
+                        <div class="ailab-form-message"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Вкладки CRM / Excel -->
+<section class="section" style="background: #f8fafc;">
+    <div class="container">
+        <h2 class="section-title fade-up">Как бот работает с вашими данными</h2>
+        <p class="section-subtitle fade-up">Срежиссированная демонстрация — реальные данные клиентов на сайте не показываются</p>
+
+        <div class="ailab-tabs">
+            <button type="button" class="ailab-tab-btn is-active" data-tab="crm">Работа с CRM</button>
+            <button type="button" class="ailab-tab-btn" data-tab="excel">Импорт Excel</button>
+        </div>
+
+        <div class="ailab-tab-panel is-active" id="tab-crm" data-endpoint="{% url 'ailab:demo_crm' %}">
+            <div class="ailab-demo-loading">Загрузка...</div>
+        </div>
+        <div class="ailab-tab-panel" id="tab-excel" data-endpoint="{% url 'ailab:demo_excel' %}">
+            <div class="ailab-demo-loading">Загрузка...</div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+window.AILAB_URLS = {
+    scenario: "{% url 'ailab:scenario' %}",
+    verifyStart: "{% url 'ailab:verify_start' %}",
+    verifyConfirm: "{% url 'ailab:verify_confirm' %}",
+    botStatus: "{% url 'ailab:bot_status' %}",
+    botNotifyMe: "{% url 'ailab:bot_notify_me' %}"
+};
+</script>
+<script src="{% static 'js/pages/ailab.js' %}"></script>
 {% endblock %}
