@@ -5,6 +5,7 @@ from . import views
 app_name = 'ailab'
 
 urlpatterns = [
+    path('', views.AILabPageView.as_view(), name='page'),
     path('scenario/', views.scenario_view, name='scenario'),
     path('demo/crm/', views.demo_crm_view, name='demo_crm'),
     path('demo/excel/', views.demo_excel_view, name='demo_excel'),

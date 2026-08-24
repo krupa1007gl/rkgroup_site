@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.views import View
 from django.views.decorators.http import require_GET
+from django.views.generic import TemplateView
 
 from common.mixins import check_rate_limit_key
 from common.validators import validate_phone
@@ -15,6 +16,10 @@ from .sms import sms_provider
 
 FIXTURES_DIR = Path(__file__).resolve().parent / 'fixtures'
 HONEYPOT_FIELD = 'website'
+
+
+class AILabPageView(TemplateView):
+    template_name = 'ailab/ailab.html'
 
 
 def _parse_json(request):

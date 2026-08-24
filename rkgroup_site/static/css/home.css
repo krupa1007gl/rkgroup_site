@@ -48,6 +48,151 @@
     margin-bottom: 32px;
 }
 
+.hero-status {
+    display: inline-block;
+    font-size: 15px !important;
+    font-weight: 600;
+    color: #2563eb !important;
+    background: #eff6ff;
+    padding: 6px 16px;
+    border-radius: 40px;
+    margin-bottom: 20px !important;
+}
+
+/* Партнёрские бейджи */
+.badges-strip {
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.badges-strip-inner {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 40px;
+    padding: 8px 18px;
+    text-decoration: none;
+    color: #1e40af;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.badge-pill:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.badge-pill img {
+    height: 20px;
+    width: auto;
+}
+
+/* Логотипы клиентов */
+.client-logos-title {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+.client-logos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.client-logo-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 72px;
+    text-align: center;
+}
+
+.client-logo-card img {
+    max-width: 100%;
+    max-height: 40px;
+}
+
+.client-logo-card span {
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Возможности агента */
+.capability-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.capability-icon {
+    font-size: 32px;
+    color: #3b82f6;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.capability-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.capability-card p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Мостики-ссылки */
+.bridge-card {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.bridge-card i {
+    font-size: 28px;
+    color: #3b82f6;
+}
+
+.bridge-card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.bridge-card span {
+    color: #2563eb;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+}
+
 .wireframe-bg {
     position: absolute;
     right: 0;
@@ -380,7 +525,7 @@
 }
 
 @media (max-width: 1024px) {
-    .stats-grid, .stages-grid, .integrations-grid {
+    .stats-grid, .stages-grid, .integrations-grid, .capability-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     .problems-solutions {
@@ -389,7 +534,7 @@
 }
 
 @media (max-width: 768px) {
-    .stats-grid, .stages-grid, .integrations-grid {
+    .stats-grid, .stages-grid, .integrations-grid, .capability-grid {
         grid-template-columns: 1fr;
     }
     .hero {

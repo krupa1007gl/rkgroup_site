@@ -14,13 +14,19 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cases'] = Case.objects.filter(is_active=True)[:4]
-        context['partners'] = Partner.objects.filter(is_active=True)[:6]
+        context['partner_badges'] = Partner.objects.filter(is_active=True, partner_type=Partner.PartnerType.BADGE)
+        context['client_logos'] = Partner.objects.filter(is_active=True, partner_type=Partner.PartnerType.CLIENT)
         context['callback_form'] = CallbackForm()
         return context
 
 
 class AboutPageView(TemplateView):
+    """Страница «О ботах» — простое объяснение AI-агентов (см. main/about.html)."""
     template_name = 'main/about.html'
+
+
+class FAQPageView(TemplateView):
+    template_name = 'main/faq.html'
 
 
 class PartnersPageView(RateLimitMixin, HoneypotMixin, AjaxFormMixin, FormView):

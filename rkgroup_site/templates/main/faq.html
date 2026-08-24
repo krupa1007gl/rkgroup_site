@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Частые вопросы | RK Group{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/faq.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="section-title">Частые вопросы</h1>
+        <p class="section-subtitle">Если ответа на ваш вопрос здесь нет — просто напишите нам, адрес и телефон есть в шапке сайта.</p>
+
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question">
+                    Почему мне позвонил робот, а не человек?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>RK Group разрабатывает голосовых и чат AI-агентов для компаний, которые обзванивают клиентов вместо (или вместе с) живых операторов — это ускоряет и удешевляет обработку обращений. Если вам позвонил такой агент — значит, компания, которую вы указали, работает с нами.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Откуда у вас мои контакты?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Мы не собираем контакты сами — номер вам передаёт компания-клиент, с которой вы уже взаимодействовали (оставляли заявку, являетесь абонентом/клиентом и т.п.). RK Group только предоставляет технологию обзвона.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Это не мошенничество?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Нет. Вы можете проверить это прямо сейчас: на этом сайте есть страница <a href="{% url 'ailab:page' %}">AI Lab</a>, где можно вживую пообщаться с настоящим ботом на той же технологии, а также телефон и почта компании — они указаны в шапке каждой страницы, не спрятаны в футере.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Кто такие RK Group?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>RK Group — разработчик AI-агентов (голосовых и чат-ботов) для автоматизации коммуникаций с клиентами: продажи, поддержка, работа с CRM, внутренние процессы компании.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Что за партнёрство с TWIN и Сколково?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>TWIN — платформа, на которой строятся живые AI-агенты RK Group (в том числе тот, с которым можно пообщаться в AI Lab). Сколково — RK Group участвует в этой технологической экосистеме.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    С какими CRM есть интеграция?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Битрикс24, amoCRM, 1С и другие популярные системы — конкретный набор интеграций обсуждается индивидуально под задачу клиента, напишите нам через форму на странице <a href="{% url 'main:contact' %}">Контакты</a>.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Как связаться напрямую?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Телефон и почта — в шапке любой страницы сайта: <a href="tel:+79157258878">+7 (915) 725-88-78</a>, <a href="mailto:info@rkgroup.tech">info@rkgroup.tech</a>. Либо форма на странице <a href="{% url 'main:contact' %}">Контакты</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/pages/faq.js' %}"></script>
+{% endblock %}

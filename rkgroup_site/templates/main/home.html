@@ -8,16 +8,17 @@
 {% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
+<!-- 1. Hero — спокойное подтверждение статуса -->
 <section class="hero">
     <div class="container">
         <div class="hero-content">
             <h1>
-                <span class="hero-static">AI-агенты,</span>
-                <span class="hero-gradient" id="typed-text"></span>
+                <span class="hero-static">RK Group</span>
+                <span class="hero-gradient">разработчик AI-агентов</span>
             </h1>
-            <p>Автоматизируйте коммуникации с клиентами, снижайте затраты и повышайте продажи с помощью умных голосовых и чат-ботов 24/7.</p>
-            <a href="{% url 'bots:bot_list' %}" class="btn">Начать сейчас <i class="fas fa-arrow-right"></i></a>
+            <p class="hero-status">Партнёр TWIN · участник экосистемы Сколково</p>
+            <p>Мы делаем голосовых и чат-ботов, которые обзванивают клиентов, отвечают на сообщения и ведут CRM — вместо ваших операторов или вместе с ними.</p>
+            <a href="{% url 'ailab:page' %}" class="btn">Посмотреть живого бота <i class="fas fa-arrow-right"></i></a>
         </div>
         <div class="wireframe-bg">
             <svg width="100%" height="100%" viewBox="0 0 400 500" fill="none">
@@ -30,112 +31,65 @@
     <canvas id="heroCanvas" style="position: absolute; top: 0; right: 0; width: 40%; height: 100%; pointer-events: none;"></canvas>
 </section>
 
-<!-- Решение: AI-агенты от RK Group -->
-<section class="section">
+<!-- 2. Партнёрские бейджи -->
+{% if partner_badges %}
+<section class="badges-strip">
+    <div class="container badges-strip-inner">
+        {% for badge in partner_badges %}
+        <a href="{{ badge.website|default:'#' }}" target="_blank" class="badge-pill" rel="noopener">
+            {% if badge.logo %}<img src="{{ badge.logo.url }}" alt="{{ badge.name }}">{% endif %}
+            <span>{{ badge.name }}</span>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- 3. Логотипы клиентов -->
+{% if client_logos %}
+<section class="section" style="padding: 56px 0;">
     <div class="container">
-        <h2 class="section-title fade-up">Решение: AI-агенты от RK Group</h2>
-        <div class="grid-2" style="margin-top: 40px;">
-            <div class="ai-solution-card fade-up">
-                <i class="fas fa-microphone-alt ai-solution-icon"></i>
-                <h3>AI-Голосовой агент</h3>
-                <p>Обрабатывает входящие до 1500 параллельных вызовов, осуществляет массовые исходящие (напоминания, обзвон должников, акции), понимает естественную речь и переключает на оператора при необходимости.</p>
+        <p class="client-logos-title">Нам доверяют</p>
+        <div class="client-logos-grid">
+            {% for client in client_logos %}
+            <div class="client-logo-card">
+                {% if client.logo %}
+                <img src="{{ client.logo.url }}" alt="{{ client.name }}">
+                {% else %}
+                <span>{{ client.name }}</span>
+                {% endif %}
             </div>
-            <div class="ai-solution-card fade-up">
-                <i class="fas fa-comment-dots ai-solution-icon"></i>
-                <h3>AI-Чат-бот</h3>
-                <p>Работает 24/7 на сайте и в мессенджерах, квалифицирует лиды, собирает контакты и передаёт готовых клиентов в отдел продаж с метками и приоритетом.</p>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
+{% endif %}
 
-<!-- Что вы получаете — выгоды через цифры -->
+<!-- 4. Тизер живого бота (live console) -->
 <section class="section">
     <div class="container">
-        <h2 class="section-title fade-up">Что вы получаете — выгоды через цифры</h2>
-        <div class="stats-grid">
-            <div class="stat-card fade-up">
-                <div class="stat-value counter-number" data-target="60">0</div>
-                <div class="stat-label">Экономия ФОТ</div>
-            </div>
-            <div class="stat-card fade-up">
-                <div class="stat-value">15-20%</div>
-                <div class="stat-label">Рост собираемости</div>
-            </div>
-            <div class="stat-card fade-up">
-                <div class="stat-value counter-number" data-target="4">0</div>
-                <div class="stat-label">Ускорение обработки</div>
-            </div>
-            <div class="stat-card fade-up">
-                <div class="stat-value counter-number" data-target="7">0</div>
-                <div class="stat-label">Снижение стоимости диалога</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Как это работает -->
-<section class="section">
-    <div class="container">
-        <h2 class="section-title fade-up">Как это работает</h2>
+        <h2 class="section-title fade-up">Так это выглядит на практике</h2>
+        <p class="section-subtitle fade-up">Фрагмент реального сценария: приём показаний счётчиков для управляющей компании</p>
         <div class="ui-mockup">
             <div class="mockup-header">
                 <span class="mockup-title">AI-агент в действии</span>
                 <span class="mockup-badge">Активен 24/7</span>
             </div>
-            <div class="mockup-stats">
-                <div class="mockup-stat">
-                    <div class="mockup-stat-value">-60%</div>
-                    <div class="mockup-stat-label">нагрузка колл-центра</div>
-                </div>
-                <div class="mockup-stat">
-                    <div class="mockup-stat-value">+25%</div>
-                    <div class="mockup-stat-label">рост продаж</div>
-                </div>
-                <div class="mockup-stat">
-                    <div class="mockup-stat-value">94%</div>
-                    <div class="mockup-stat-label">лояльность клиентов</div>
-                </div>
-            </div>
-            
-            <div class="problems-solutions">
-                <div class="problems-box">
-                    <h4><i class="fas fa-exclamation-triangle"></i> Какие проблемы решает</h4>
-                    <ul class="problems-list">
-                        <li><i class="fas fa-circle"></i> Перегруженность колл-центров</li>
-                        <li><i class="fas fa-circle"></i> Ручной приём показаний</li>
-                        <li><i class="fas fa-circle"></i> Низкая собираемость платежей</li>
-                        <li><i class="fas fa-circle"></i> Медленное информирование об авариях</li>
-                        <li><i class="fas fa-circle"></i> Высокая нагрузка на HR</li>
-                    </ul>
-                </div>
-                <div class="solutions-box">
-                    <h4><i class="fas fa-check-circle"></i> Как AI решает эти задачи</h4>
-                    <ul class="solutions-list">
-                        <li><i class="fas fa-check"></i> Автоматический приём показаний за 30 сек</li>
-                        <li><i class="fas fa-check"></i> Обзвон должников с ссылками на оплату</li>
-                        <li><i class="fas fa-check"></i> Оповещения об отключениях в мессенджеры</li>
-                        <li><i class="fas fa-check"></i> Аварийные заявки 24/7</li>
-                        <li><i class="fas fa-check"></i> HR-помощник для подбора персонала</li>
-                    </ul>
-                </div>
-            </div>
-            
             <div class="mockup-chat">
                 <div class="chat-message ai">
-                    <div class="chat-bubble ai">🤖 Добрый день! Я виртуальный помощник RK Group. Чем могу помочь?</div>
+                    <div class="chat-bubble ai">🤖 Добрый день! Я виртуальный помощник управляющей компании. Чем могу помочь?</div>
                 </div>
                 <div class="chat-message user">
                     <div class="chat-bubble user">Здравствуйте! Хочу передать показания счётчиков воды</div>
                 </div>
                 <div class="chat-message ai">
-                    <div class="chat-bubble ai">✅ Отлично! Назовите номер лицевого счёта</div>
+                    <div class="chat-bubble ai">Отлично! Назовите номер лицевого счёта</div>
                 </div>
                 <div class="chat-message user">
                     <div class="chat-bubble user">1234567890</div>
                 </div>
                 <div class="chat-message ai">
-                    <div class="chat-bubble ai">✅ Показания сохранены! Что-то ещё?</div>
+                    <div class="chat-bubble ai">Показания сохранены. Что-то ещё?</div>
                 </div>
                 <div class="chat-message user">
                     <div class="chat-bubble user">Нет, спасибо</div>
@@ -144,14 +98,56 @@
                     <div class="chat-bubble ai">🤖 Хорошего дня! Я на связи 24/7</div>
                 </div>
             </div>
+            <div style="text-align: center; margin-top: 24px;">
+                <a href="{% url 'ailab:page' %}" class="btn">Посмотреть живого бота → AI Lab <i class="fas fa-arrow-right"></i></a>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Этапы внедрения -->
+<!-- 5. Возможности агента — без цифр-обещаний -->
 <section class="section">
     <div class="container">
-        <h2 class="section-title fade-up">Этапы внедрения — дорожная карта</h2>
+        <h2 class="section-title fade-up">Возможности агента</h2>
+        <div class="capability-grid">
+            <div class="card capability-card fade-up">
+                <i class="fas fa-phone-volume capability-icon"></i>
+                <h3>До 1500 параллельных вызовов</h3>
+                <p>Обрабатывает входящие и делает массовые исходящие звонки (напоминания, обзвон должников, акции).</p>
+            </div>
+            <div class="card capability-card fade-up">
+                <i class="fas fa-comments capability-icon"></i>
+                <h3>Понимает естественную речь</h3>
+                <p>Ведёт диалог голосом и текстом, не требует нажимать цифры на клавиатуре или подбирать формулировки.</p>
+            </div>
+            <div class="card capability-card fade-up">
+                <i class="fas fa-clock capability-icon"></i>
+                <h3>Работает 24/7</h3>
+                <p>Не пропускает обращения ночью, в выходные и в праздники — отвечает мгновенно в любое время.</p>
+            </div>
+            <div class="card capability-card fade-up">
+                <i class="fas fa-database capability-icon"></i>
+                <h3>Интеграция с CRM</h3>
+                <p>Битрикс24, amoCRM, 1С и другие системы — заявки и данные попадают туда, где вы уже работаете.</p>
+            </div>
+            <div class="card capability-card fade-up">
+                <i class="fas fa-user-check capability-icon"></i>
+                <h3>Переключает на оператора</h3>
+                <p>Если вопрос нестандартный — агент передаёт разговор живому сотруднику, а не зацикливается.</p>
+            </div>
+            <div class="card capability-card fade-up">
+                <i class="fas fa-chart-simple capability-icon"></i>
+                <h3>Аналитика по каждому диалогу</h3>
+                <p>Записи звонков, тексты переписки и статусы обращений — всё доступно для разбора.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. Как внедряем -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title fade-up">Как внедряем — дорожная карта</h2>
         <div class="stages-grid">
             <div class="stage-card fade-up">
                 <div class="stage-number">01</div>
@@ -160,83 +156,111 @@
             </div>
             <div class="stage-card fade-up">
                 <div class="stage-number">02</div>
-                <h4>Проектирование решений</h4>
-                <p>Архитектура, интеграция с партнёрами</p>
+                <h4>Проектирование решения</h4>
+                <p>Сценарий диалога, интеграции, архитектура</p>
             </div>
             <div class="stage-card fade-up">
                 <div class="stage-number">03</div>
                 <h4>Внедрение и поддержка</h4>
-                <p>Пилоты, масштабирование, сопровождение</p>
+                <p>Запуск, наблюдение за качеством, доработки</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Интеграции -->
+<!-- 7. Продукты — 4 роли агента (тизер) -->
 <section class="section">
     <div class="container">
-        <div class="integrations-block">
-            <div style="text-align: center; margin-bottom: 40px;">
-                <span style="background: #eff6ff; color: #2563eb; padding: 6px 14px; border-radius: 40px; font-size: 13px;">ИНТЕГРАЦИИ</span>
-                <h2 class="section-title" style="margin-top: 16px;">Подключайтесь ко всему</h2>
-                <p style="color: #64748b;">Наша платформа поддерживает интеграции с большинством известных систем</p>
+        <h2 class="section-title fade-up">Продукты</h2>
+        <p class="section-subtitle fade-up">Один и тот же агент можно настроить под разные роли в компании</p>
+        <div class="grid-4 products-teaser">
+            <div class="card fade-up">
+                <i class="fas fa-bullhorn" style="font-size: 32px; color: #3b82f6; margin-bottom: 16px;"></i>
+                <h3>Sales AI</h3>
+                <p>Обзванивает базу, квалифицирует интерес, передаёт тёплых клиентов менеджеру.</p>
             </div>
-            <div class="integrations-grid">
-                <div class="integration-card fade-up"><i class="fas fa-chart-line" style="font-size: 36px; color: #3b82f6;"></i><h4>AVAYA</h4></div>
-                <div class="integration-card fade-up"><i class="fas fa-database" style="font-size: 36px; color: #3b82f6;"></i><h4>1С</h4></div>
-                <div class="integration-card fade-up"><i class="fas fa-chart-bar" style="font-size: 36px; color: #3b82f6;"></i><h4>Битрикс24</h4></div>
-                <div class="integration-card fade-up"><i class="fas fa-calendar-check" style="font-size: 36px; color: #3b82f6;"></i><h4>Yclients</h4></div>
-                <div class="integration-card fade-up"><i class="fas fa-brain" style="font-size: 36px; color: #3b82f6;"></i><h4>GENESYS</h4></div>
-                <div class="integration-card fade-up"><i class="fas fa-cloud" style="font-size: 36px; color: #3b82f6;"></i><h4>Яндекс.Облако</h4></div>
-                <div class="integration-card fade-up"><i class="fas fa-chart-simple" style="font-size: 36px; color: #3b82f6;"></i><h4>Мегаплан</h4></div>
-                <div class="integration-card fade-up"><i class="fas fa-shield" style="font-size: 36px; color: #3b82f6;"></i><h4>Selectel</h4></div>
+            <div class="card fade-up">
+                <i class="fas fa-headset" style="font-size: 32px; color: #3b82f6; margin-bottom: 16px;"></i>
+                <h3>Support AI</h3>
+                <p>Отвечает на частые вопросы клиентов 24/7, эскалирует сложные случаи на человека.</p>
+            </div>
+            <div class="card fade-up">
+                <i class="fas fa-table-list" style="font-size: 32px; color: #3b82f6; margin-bottom: 16px;"></i>
+                <h3>CRM AI</h3>
+                <p>Заполняет и обновляет карточки клиентов в CRM по итогам звонков и переписки.</p>
+            </div>
+            <div class="card fade-up">
+                <i class="fas fa-building" style="font-size: 32px; color: #3b82f6; margin-bottom: 16px;"></i>
+                <h3>Internal AI</h3>
+                <p>Помогает внутри компании: подбор персонала, ответы сотрудникам, напоминания.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- CTA блок -->
-<section class="hero" style="background: linear-gradient(135deg, #eff6ff, #ffffff); margin-top: 40px;">
-    <div class="container" style="text-align: center;">
-        <h2 style="font-size: 36px;">Готовы автоматизировать свой бизнес?</h2>
-        <p style="font-size: 18px; margin: 20px 0;">Получите бесплатную консультацию и расчет экономического эффекта</p>
-        <a href="{% url 'main:contact' %}" class="btn">Оставить заявку</a>
+<!-- 8. Мостики-ссылки -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title fade-up">Куда дальше</h2>
+        <div class="grid-4 bridge-links">
+            <a href="{% url 'main:about' %}" class="card bridge-card fade-up">
+                <i class="fas fa-robot"></i>
+                <h4>Не понимаете, что такое AI-агент?</h4>
+                <span>О ботах <i class="fas fa-arrow-right"></i></span>
+            </a>
+            <a href="{% url 'ailab:page' %}" class="card bridge-card fade-up">
+                <i class="fas fa-flask"></i>
+                <h4>Хотите увидеть живого бота?</h4>
+                <span>AI Lab <i class="fas fa-arrow-right"></i></span>
+            </a>
+            <a href="{% url 'main:partners' %}" class="card bridge-card fade-up">
+                <i class="fas fa-handshake"></i>
+                <h4>CRM-интегратор или агентство?</h4>
+                <span>Партнёрам <i class="fas fa-arrow-right"></i></span>
+            </a>
+            <a href="{% url 'cases:case_list' %}" class="card bridge-card fade-up">
+                <i class="fas fa-lightbulb"></i>
+                <h4>Хотите примеры применения?</h4>
+                <span>Кейсы <i class="fas fa-arrow-right"></i></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 9. Мини-FAQ -->
+<section class="section" style="padding-bottom: 100px;">
+    <div class="container">
+        <h2 class="section-title fade-up">Коротко о частых вопросах</h2>
+        <div class="faq-list" style="max-width: 700px;">
+            <div class="faq-item">
+                <button class="faq-question">
+                    Это не мошенничество?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Нет — проверьте сами на странице <a href="{% url 'ailab:page' %}">AI Lab</a>, там можно вживую пообщаться с настоящим ботом. Телефон и почта компании указаны в шапке этой страницы.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Откуда у вас мои контакты?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Номер передаёт компания-клиент, с которой вы уже взаимодействовали. RK Group только предоставляет технологию обзвона.</p>
+                </div>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 24px;">
+            <a href="{% url 'main:faq' %}" class="btn-outline">Все вопросы и ответы</a>
+        </p>
     </div>
 </section>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-    // Печатная машинка
-    const typedElement = document.getElementById('typed-text');
-    if (typedElement) {
-        const words = ['меняют бизнес', 'увеличивают прибыль', 'автоматизируют всё'];
-        let wordIndex = 0, charIndex = 0, isDeleting = false;
-        
-        function typeEffect() {
-            const currentWord = words[wordIndex];
-            if (isDeleting) {
-                typedElement.textContent = currentWord.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typedElement.textContent = currentWord.substring(0, charIndex + 1);
-                charIndex++;
-            }
-            if (!isDeleting && charIndex === currentWord.length) {
-                isDeleting = true;
-                setTimeout(typeEffect, 2000);
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                wordIndex = (wordIndex + 1) % words.length;
-                setTimeout(typeEffect, 500);
-            } else {
-                setTimeout(typeEffect, isDeleting ? 50 : 100);
-            }
-        }
-        typeEffect();
-    }
-    
-    // Canvas анимация
+    // Canvas анимация фона Hero
     const canvas = document.getElementById('heroCanvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -269,45 +293,6 @@
             canvas.width = width; canvas.height = height;
         });
     }
-    
-    // Счётчики
-    const counters = document.querySelectorAll('.counter-number');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-                const target = parseInt(el.getAttribute('data-target'));
-                if (!el.classList.contains('counted')) {
-                    el.classList.add('counted');
-                    let current = 0;
-                    const increment = target / 50;
-                    function update() {
-                        current += increment;
-                        if (current < target) {
-                            el.textContent = Math.floor(current);
-                            requestAnimationFrame(update);
-                        } else {
-                            el.textContent = target;
-                        }
-                    }
-                    update();
-                }
-                observer.unobserve(el);
-            }
-        });
-    }, { threshold: 0.3 });
-    counters.forEach(c => observer.observe(c));
-    
-    // Scroll анимация
-    const fadeElements = document.querySelectorAll('.fade-up');
-    const scrollObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                scrollObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    fadeElements.forEach(el => scrollObserver.observe(el));
 </script>
+<script src="{% static 'js/pages/faq.js' %}"></script>
 {% endblock %}
