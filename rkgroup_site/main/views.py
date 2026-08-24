@@ -1,8 +1,6 @@
 from django.views.generic import TemplateView, FormView
 from django.urls import reverse_lazy
-from bots.models import Bot
 from cases.models import Case
-from news.models import News
 from leads.models import Lead
 from leads.services import create_lead
 from common.mixins import AjaxFormMixin, RateLimitMixin, HoneypotMixin
@@ -16,8 +14,6 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cases'] = Case.objects.filter(is_active=True)[:4]
-        context['news'] = News.objects.filter(is_active=True)[:3]
-        context['bots'] = Bot.objects.filter(is_active=True)[:3]
         context['partners'] = Partner.objects.filter(is_active=True)[:6]
         context['callback_form'] = CallbackForm()
         return context
