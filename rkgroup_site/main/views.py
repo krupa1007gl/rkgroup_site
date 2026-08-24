@@ -30,16 +30,15 @@ class FAQPageView(TemplateView):
 
 
 class PartnersPageView(RateLimitMixin, HoneypotMixin, AjaxFormMixin, FormView):
+    """
+    Страница для CRM-интеграторов/агентств (white-label партнёрство) —
+    логотипы клиентов и партнёрские бейджи сюда не относятся, они на Главной.
+    """
     template_name = 'main/partners.html'
     form_class = PartnerForm
     success_url = reverse_lazy('main:partners')
     rate_limit_key = 'partners'
     rate_limit_per_hour = 10
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['partners'] = Partner.objects.filter(is_active=True)
-        return context
 
     def get_success_message(self, cleaned_data):
         return 'Спасибо! Мы свяжемся с вами.'

@@ -1,64 +1,106 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Партнеры | RK Group{% endblock %}
+{% block title %}Партнёрам | RK Group{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/partners.css' %}">
 {% endblock %}
 
 {% block content %}
-<section class="cases-hero">
+<section class="page-hero">
     <div class="container">
-        <h1 class="section-title">Наши партнеры</h1>
-        <p class="section-subtitle">Мы сотрудничаем с ведущими технологическими компаниями и платформами</p>
-    </div>
-</section>
-
-<section style="padding: 40px 0;">
-    <div class="container">
-        <div class="partners-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 32px; text-align: center;">
-            {% for partner in partners %}
-            <div class="partner-card" style="background: white; border-radius: 20px; padding: 24px; border: 1px solid #e2e8f0; transition: all 0.3s ease;">
-                <div class="partner-icon" style="font-size: 48px; color: #2563eb; margin-bottom: 16px;">
-                    <i class="fas fa-handshake"></i>
-                </div>
-                <div class="partner-info">
-                    <h3 style="font-size: 18px; margin-bottom: 8px;">{{ partner.name }}</h3>
-                    {% if partner.website %}
-                    <p><a href="{{ partner.website }}" target="_blank" style="color: #64748b; font-size: 13px; text-decoration: none;">{{ partner.website|cut:"https://"|cut:"http://" }}</a></p>
-                    {% endif %}
-                </div>
-            </div>
-            {% endfor %}
+        <h1 class="section-title">Партнёрам</h1>
+        <p class="section-subtitle">Для CRM-интеграторов и агентств: продавайте AI-агентов под своим брендом, RK Group разрабатывает и обслуживает</p>
+        <div style="text-align: center; margin-top: 24px;">
+            <a href="#partner-form" class="btn">Стать партнёром <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
 
-<section style="padding: 60px 0; background: #f8fafc;">
+<section class="section">
     <div class="container">
-        <h2 class="section-title">Технологическое партнерство</h2>
-        <div class="grid-2">
-            <div class="card">
-                <i class="fas fa-microchip" style="font-size: 48px; color: #2563eb; margin-bottom: 20px;"></i>
-                <h3>Официальный партнер Twin</h3>
-                <p>RK Group — официальный партнёр Twin, поставляющего комплексные цифровые решения для автоматизации процессов и облачных интеграций.</p>
+        <h2 class="section-title fade-up">Два формата работы</h2>
+        <div class="grid-2" style="margin-top: 32px;">
+            <div class="card fade-up">
+                <i class="fas fa-tag" style="font-size: 40px; color: #2563eb; margin-bottom: 20px;"></i>
+                <h3>White-label</h3>
+                <p style="color: #64748b; margin-top: 12px;">Вы продаёте AI-агентов клиентам под своим брендом. RK Group полностью разрабатывает и обслуживает решение «под капотом» — клиент видит только вас.</p>
             </div>
-            <div class="card">
-                <i class="fas fa-flask" style="font-size: 48px; color: #2563eb; margin-bottom: 20px;"></i>
-                <h3>Участник «Сколково»</h3>
-                <p>Мы — участники экосистемы «Сколково», что подтверждает нашу приверженность научно-техническому развитию.</p>
+            <div class="card fade-up">
+                <i class="fas fa-people-arrows" style="font-size: 40px; color: #2563eb; margin-bottom: 20px;"></i>
+                <h3>Совместный бренд</h3>
+                <p style="color: #64748b; margin-top: 12px;">Проект ведётся открыто как партнёрство RK Group и вашей компании — используется, когда клиенту важно видеть обе стороны.</p>
             </div>
         </div>
     </div>
 </section>
 
-<section style="padding: 60px 0;">
+<section class="section" style="background: #f8fafc;">
+    <div class="container">
+        <h2 class="section-title fade-up">Кто за что отвечает</h2>
+        <div class="grid-2" style="margin-top: 32px;">
+            <div class="card fade-up">
+                <h3><i class="fas fa-robot" style="color: #2563eb; margin-right: 8px;"></i>RK Group</h3>
+                <ul class="about-points" style="grid-template-columns: 1fr; margin-top: 16px;">
+                    <li><i class="fas fa-check"></i> Разработка и настройка AI-агента</li>
+                    <li><i class="fas fa-check"></i> Техническая поддержка и доработки</li>
+                    <li><i class="fas fa-check"></i> Интеграции с CRM и телефонией</li>
+                </ul>
+            </div>
+            <div class="card fade-up">
+                <h3><i class="fas fa-briefcase" style="color: #2563eb; margin-right: 8px;"></i>Партнёр</h3>
+                <ul class="about-points" style="grid-template-columns: 1fr; margin-top: 16px;">
+                    <li><i class="fas fa-check"></i> Отношения с клиентом и продажи</li>
+                    <li><i class="fas fa-check"></i> Постановка задачи и требований</li>
+                    <li><i class="fas fa-check"></i> Первая линия коммуникации с клиентом</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="section-title fade-up">Вопросы партнёров</h2>
+        <div class="faq-list" style="max-width: 700px;">
+            <div class="faq-item">
+                <button class="faq-question">
+                    Нужно ли подписывать NDA?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Да, перед обсуждением деталей проекта мы подписываем соглашение о неразглашении — это стандартная практика для white-label работы.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    На каких условиях строится партнёрство?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Условия обсуждаются индивидуально под масштаб и формат сотрудничества (white-label или совместный бренд) — напишите нам, и мы подготовим предложение.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Как быстро можно подключиться к проекту?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>После обсуждения задачи и подписания NDA — обычно можно начать работу над первым пилотным проектом в течение нескольких дней.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="background: #f8fafc;" id="partner-form">
     <div class="container">
         <div class="partner-form-block">
-            <h2>Стать партнером</h2>
+            <h2>Стать партнёром</h2>
             <p>Заполните форму, и мы свяжемся с вами для обсуждения сотрудничества</p>
-            <form method="post" action="{% url 'main:partners' %}" style="max-width: 500px; margin: 0 auto;" id="partner-form">
+            <form method="post" action="{% url 'main:partners' %}" style="max-width: 500px; margin: 0 auto;" id="partner-form-el">
                 {% csrf_token %}
                 <input type="text" name="website" value="" tabindex="-1" autocomplete="off" style="position: absolute; left: -9999px;">
                 <input type="text" name="name" class="form-input" placeholder="Ваше имя" required style="margin-bottom: 15px; width: 100%;">
@@ -74,4 +116,5 @@
 
 {% block extra_js %}
 <script src="{% static 'js/pages/contact.js' %}"></script>
+<script src="{% static 'js/pages/faq.js' %}"></script>
 {% endblock %}
