@@ -12,6 +12,13 @@ def post_json(client, url, payload):
     return client.post(url, data=json.dumps(payload), content_type='application/json')
 
 
+class AILabPageTests(TestCase):
+    def test_page_returns_200(self):
+        response = self.client.get('/ailab/')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'ailab.js')
+
+
 class StaticEndpointsTests(TestCase):
     def test_scenario_returns_lines(self):
         response = self.client.get('/ailab/scenario/')

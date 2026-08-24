@@ -67,3 +67,24 @@ class FormLeadCreationTests(TestCase):
         )
         self.assertEqual(response.status_code, 429)
         self.assertEqual(Lead.objects.filter(lead_type=Lead.LeadType.CALLBACK).count(), 10)
+
+
+class SiteMapPagesTests(TestCase):
+    """
+    Карта сайта по концепции: 5 страниц + FAQ отдают 200, старых
+    приложений bots/news (удалены — их нет в концепции) больше не
+    существует.
+    """
+
+    def test_concept_pages_return_200(self):
+        for url in ['/', '/about/', '/partners/', '/cases/', '/faq/', '/contact/']:
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, 200, msg=url)
+
+    def test_ailab_page_returns_200(self):
+        response = self.client.get('/ailab/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_removed_apps_are_gone(self):
+        for url in ['/bots/', '/news/']:
+            self.assertEqual(self.client.get(url).status_code, 404, msg=url)
