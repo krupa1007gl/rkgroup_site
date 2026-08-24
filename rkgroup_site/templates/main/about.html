@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}О компании RK Group{% endblock %}
+{% block title %}О ботах | RK Group{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/about.css' %}">
@@ -11,73 +11,95 @@
 <section class="section">
     <div class="container">
         <div class="about-container">
-            <h1 class="section-title">О компании RK Group</h1>
-            <p style="font-size: 18px; color: #475569; margin-top: 16px;">Мы создаём AI-агентов, которые меняют подход к бизнес-коммуникациям</p>
+            <h1 class="section-title">Что такое AI-агент</h1>
+            <p class="reading-time">Читать 1–2 минуты</p>
+            <p style="font-size: 18px; color: #475569; max-width: 700px; margin: 16px auto 0;">
+                Если вы никогда не сталкивались с AI-агентами — это простое объяснение
+                без терминов. Если термин всё же встретится, мы сразу поясним его
+                обычными словами.
+            </p>
         </div>
-        
-        <div style="margin: 60px 0;">
-            <h2 class="section-title" style="text-align: center;">Наша миссия</h2>
-            <p style="text-align: center; color: #475569; max-width: 700px; margin: 0 auto;">Помогаем бизнесу автоматизировать коммуникации с клиентами, снижая затраты и повышая качество сервиса. Наши AI-агенты работают 24/7, обрабатывают тысячи обращений и освобождают сотрудников от рутины.</p>
-        </div>
-        
-        <div class="grid-3" style="margin: 60px 0;">
-            <div class="card" style="text-align: center;">
-                <i class="fas fa-star" style="font-size: 32px; color: #3b82f6; margin-bottom: 20px;"></i>
-                <h3>Качество</h3>
-                <p style="color: #64748b;">Только проверенные решения и индивидуальный подход к каждому клиенту</p>
-            </div>
-            <div class="card" style="text-align: center;">
-                <i class="fas fa-rocket" style="font-size: 32px; color: #3b82f6; margin-bottom: 20px;"></i>
-                <h3>Инновации</h3>
-                <p style="color: #64748b;">Используем передовые технологии AI и нейросетей</p>
-            </div>
-            <div class="card" style="text-align: center;">
-                <i class="fas fa-handshake" style="font-size: 32px; color: #3b82f6; margin-bottom: 20px;"></i>
-                <h3>Надёжность</h3>
-                <p style="color: #64748b;">Долгосрочное партнёрство и гарантия результата</p>
-            </div>
-        </div>
-        
-        <h2 class="section-title" style="text-align: center;">Наша команда</h2>
-        <div class="team-grid">
-            <div class="team-card card">
-                <div class="team-photo"><i class="fas fa-user-circle"></i></div>
-                <h3>Артём Рыбаков</h3>
-                <p style="color: #64748b;">Сооснователь, CEO</p>
-            </div>
-            <div class="team-card card">
-                <div class="team-photo"><i class="fas fa-user-circle"></i></div>
-                <h3>Крупеников Глеб Алексеевич</h3>
-                <p style="color: #64748b;">Сооснователь, CEO</p>
-            </div>
-        </div>
-        
-        <div style="margin-top: 60px; padding: 40px; background: linear-gradient(135deg, #eff6ff, #ffffff); border-radius: 32px;">
-            <h3 style="text-align: center; margin-bottom: 32px;">Ключевые вехи</h3>
-            <div class="timeline-grid">
-                <div style="text-align: center;">
-                    <div class="timeline-year">2025</div>
-                    <div style="color: #64748b;">Основание компании</div>
+
+        <div style="margin: 56px 0;">
+            <h2 class="section-title" style="text-align: center; font-size: 30px;">Чем это отличается от обычного бота</h2>
+            <div class="grid-2" style="margin-top: 32px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <div class="card">
+                    <h3><i class="fas fa-comment-slash" style="color: #94a3b8; margin-right: 8px;"></i>Обычный бот</h3>
+                    <p style="color: #64748b; margin-top: 12px;">Работает по жёстким кнопкам и заранее заданным фразам. Скажете что-то не по сценарию — не поймёт и зациклится.</p>
                 </div>
-                <div style="text-align: center;">
-                    <div class="timeline-year">2025</div>
-                    <div style="color: #64748b;">Первый крупный проект</div>
-                </div>
-                <div style="text-align: center;">
-                    <div class="timeline-year">2025</div>
-                    <div style="color: #64748b;">Запуск платформы</div>
-                </div>
-                <div style="text-align: center;">
-                    <div class="timeline-year">2025</div>
-                    <div style="color: #64748b;">Первые клиенты</div>
+                <div class="card" style="border-color: rgba(59, 130, 246, 0.4);">
+                    <h3><i class="fas fa-robot" style="color: #2563eb; margin-right: 8px;"></i>AI-агент</h3>
+                    <p style="color: #64748b; margin-top: 12px;">Понимает обычную речь и текст, отвечает своими словами по смыслу, помнит контекст разговора и знает, когда лучше передать человеку.</p>
                 </div>
             </div>
+            <ul class="about-points">
+                <li><i class="fas fa-check"></i> Понимает вопрос, даже если он сформулирован не так, как «ожидал» разработчик</li>
+                <li><i class="fas fa-check"></i> Ведёт диалог голосом по телефону или текстом в мессенджере</li>
+                <li><i class="fas fa-check"></i> Помнит, что вы уже сказали в этом же разговоре</li>
+                <li><i class="fas fa-check"></i> Сам решает, когда переключить на живого сотрудника</li>
+            </ul>
         </div>
-        
+
+        <div style="margin: 72px 0;">
+            <h2 class="section-title" style="text-align: center; font-size: 30px;">Как это выглядит на практике</h2>
+            <p class="section-subtitle">Три примера целиком — от вопроса до результата</p>
+
+            <div class="example-dialogs">
+                <div class="ui-mockup example-dialog">
+                    <div class="mockup-header">
+                        <span class="mockup-title">Пример 1 · Запись на приём</span>
+                    </div>
+                    <div class="mockup-chat">
+                        <div class="chat-message user"><div class="chat-bubble user">Здравствуйте, хочу записаться на приём к терапевту</div></div>
+                        <div class="chat-message ai"><div class="chat-bubble ai">Здравствуйте! На какое число вам удобно?</div></div>
+                        <div class="chat-message user"><div class="chat-bubble user">Можно на завтра после обеда?</div></div>
+                        <div class="chat-message ai"><div class="chat-bubble ai">Есть свободное время завтра в 15:40. Записать вас?</div></div>
+                        <div class="chat-message user"><div class="chat-bubble user">Да, отлично</div></div>
+                        <div class="chat-message ai"><div class="chat-bubble ai">✅ Готово, вы записаны на завтра в 15:40. Пришлю напоминание за час.</div></div>
+                    </div>
+                </div>
+
+                <div class="ui-mockup example-dialog">
+                    <div class="mockup-header">
+                        <span class="mockup-title">Пример 2 · Вопрос по тарифу</span>
+                    </div>
+                    <div class="mockup-chat">
+                        <div class="chat-message user"><div class="chat-bubble user">А у вас можно поменять тариф без визита в офис?</div></div>
+                        <div class="chat-message ai"><div class="chat-bubble ai">Да, я могу сделать это прямо сейчас. Назовите номер лицевого счёта или телефон, привязанный к договору</div></div>
+                        <div class="chat-message user"><div class="chat-bubble user">+7 900 123-45-67</div></div>
+                        <div class="chat-message ai"><div class="chat-bubble ai">Нашла ваш договор. Сейчас у вас тариф «Базовый». Перевести на «Расширенный»?</div></div>
+                        <div class="chat-message user"><div class="chat-bubble user">Да, переводите</div></div>
+                        <div class="chat-message ai"><div class="chat-bubble ai">✅ Готово, тариф изменён с завтрашнего дня</div></div>
+                    </div>
+                </div>
+
+                <div class="ui-mockup example-dialog">
+                    <div class="mockup-header">
+                        <span class="mockup-title">Пример 3 · Нестандартный случай</span>
+                    </div>
+                    <div class="mockup-chat">
+                        <div class="chat-message user"><div class="chat-bubble user">У меня спор по начислению за прошлый месяц, это долго объяснять</div></div>
+                        <div class="chat-message ai"><div class="chat-bubble ai">Понимаю, такие случаи разбирает специалист лично. Соединяю вас с оператором, он уже видит ваш номер договора</div></div>
+                        <div class="chat-message ai"><div class="chat-bubble ai">🤖 → 👤 Переключаю на сотрудника поддержки...</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin: 72px 0; text-align: center;">
+            <h2 class="section-title" style="font-size: 30px;">Что агент умеет технически</h2>
+            <ul class="about-points" style="max-width: 600px; margin: 24px auto 0; text-align: left;">
+                <li><i class="fas fa-check"></i> Принимает и совершает звонки, ведёт переписку в мессенджерах</li>
+                <li><i class="fas fa-check"></i> Записывает клиентов, принимает показания, оформляет заявки</li>
+                <li><i class="fas fa-check"></i> Сверяется с данными в CRM и обновляет их по итогам разговора</li>
+                <li><i class="fas fa-check"></i> Передаёт сложные случаи живому сотруднику вместе с контекстом разговора</li>
+            </ul>
+        </div>
+
         <div style="margin-top: 60px; text-align: center;">
-            <h3 style="margin-bottom: 20px;">Обсудим ваш проект?</h3>
-            <p style="color: #64748b; margin-bottom: 24px;">Рассчитаем экономический эффект для вашей компании бесплатно</p>
-            <a href="{% url 'main:contact' %}" class="btn">Связаться с нами</a>
+            <h3 style="margin-bottom: 20px;">Не постановка — а настоящий бот</h3>
+            <p style="color: #64748b; margin-bottom: 24px;">На странице AI Lab можно вживую пообщаться с работающим ботом, а не посмотреть анимацию</p>
+            <a href="{% url 'ailab:page' %}" class="btn">Перейти в AI Lab <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
