@@ -115,17 +115,57 @@ document.addEventListener('DOMContentLoaded', function() {
     counters.forEach(counter => counterObserver.observe(counter));
 
     // ========== ПОЯВЛЕНИЕ ЭЛЕМЕНТОВ ПРИ СКРОЛЛЕ ==========
-    const fadeElements = document.querySelectorAll('.fade-up, .card, .bot-card, .case-card, .news-card, .stat-card, .stage-card');
-    const scrollObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                scrollObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px' });
+    const fadeElements = Array.from(document.querySelectorAll('.fade-up, .card, .bot-card, .case-card, .news-card, .stat-card, .stage-card'));
 
-    fadeElements.forEach(el => scrollObserver.observe(el));
+    // Пользователь просил не анимировать — показываем всё сразу.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        fadeElements.forEach(el => el.classList.add('visible'));
+    } else {
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    scrollObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px' });
+
+        fadeElements.forEach(el => scrollObserver.observe(el));
+
+        // Страховка: IntersectionObserver — основной механизм, но если он по
+        // какой-то причине не сработал (например, вкладка была фоновой во
+        // время загрузки), контент не должен остаться невидимым навсегда.
+        // Дублируем проверку через getBoundingClientRect.
+        // Нижнюю границу не проверяем намеренно: элемент, который уже уехал
+        // вверх за пределы экрана, тоже должен быть раскрыт — иначе при
+        // быстрой прокрутке (или переходе по якорю) пропущенные блоки
+        // остаются невидимыми навсегда.
+        function revealIfInView(el) {
+            if (el.classList.contains('visible')) return;
+            if (el.getBoundingClientRect().top < window.innerHeight * 0.95) {
+                el.classList.add('visible');
+            }
+        }
+
+        // Троттлинг по таймеру, а не через requestAnimationFrame: rAF не
+        // выполняется, пока вкладка скрыта/фоновая, и тогда контент так и
+        // остаётся невидимым — ровно тот сбой, от которого эта страховка.
+        let fadeCheckTimer = null;
+        function checkFadeElements() {
+            fadeCheckTimer = null;
+            fadeElements.forEach(revealIfInView);
+        }
+        function scheduleFadeCheck() {
+            if (fadeCheckTimer === null) {
+                fadeCheckTimer = setTimeout(checkFadeElements, 100);
+            }
+        }
+
+        window.addEventListener('scroll', scheduleFadeCheck, { passive: true });
+        window.addEventListener('resize', scheduleFadeCheck, { passive: true });
+        window.addEventListener('load', checkFadeElements);
+        checkFadeElements();
+    }
 
     // ========== МОБИЛЬНОЕ МЕНЮ ==========
     const mobileBtn = document.querySelector('.mobile-menu-btn');
