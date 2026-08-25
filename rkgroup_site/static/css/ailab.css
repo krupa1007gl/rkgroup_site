@@ -19,6 +19,22 @@
     overflow-y: auto;
 }
 
+.ailab-skip-btn {
+    display: block;
+    margin: 16px auto 0;
+    background: none;
+    border: none;
+    color: #64748b;
+    font-family: inherit;
+    font-size: 13px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.ailab-skip-btn:hover {
+    color: #2563eb;
+}
+
 .ailab-invite-card,
 .ailab-verify-card {
     background: white;
@@ -27,6 +43,12 @@
     text-align: center;
     border: 1px solid rgba(59, 130, 246, 0.2);
     box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.05);
+}
+
+.ailab-invite-card {
+    margin-top: 24px;
+    background: linear-gradient(135deg, #eff6ff, #ffffff);
+    border-color: rgba(59, 130, 246, 0.35);
 }
 
 .ailab-invite-card i,
@@ -147,6 +169,15 @@
     border: 1px solid #e2e8f0;
 }
 
+.ailab-demo-side.is-after {
+    border-color: rgba(22, 163, 74, 0.35);
+    box-shadow: 0 10px 25px -12px rgba(22, 163, 74, 0.25);
+}
+
+.ailab-demo-side.is-after h4 {
+    color: #16a34a;
+}
+
 .ailab-demo-side h4 {
     font-size: 18px;
     margin-bottom: 8px;
@@ -173,6 +204,36 @@
     background: #f8fafc;
     border-radius: 12px;
     font-size: 14px;
+    border-left: 3px solid transparent;
+}
+
+.ailab-demo-item.is-changed {
+    background: #f0fdf4;
+    border-left-color: #16a34a;
+}
+
+.ailab-demo-legend {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.ailab-demo-legend-swatch {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    background: #f0fdf4;
+    border-left: 3px solid #16a34a;
+}
+
+.ailab-demo-table-wrap {
+    overflow-x: auto;
 }
 
 .ailab-demo-label {
@@ -201,6 +262,12 @@
 .ailab-demo-table th {
     background: #f8fafc;
     color: #64748b;
+}
+
+.ailab-demo-table td.is-changed {
+    background: #f0fdf4;
+    color: #14532d;
+    font-weight: 500;
 }
 
 @media (max-width: 768px) {

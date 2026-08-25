@@ -36,28 +36,53 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ===== Состояние 1: автопроигрываемый сценарий =====
+    // Приглашение (состояние 2) видно сразу под сценарием, а не заменяет его
+    // через полминуты — иначе ядро страницы (живой бот и верификация)
+    // недостижимо, пока не досмотришь весь диалог.
     const chatBox = document.getElementById('scenario-chat');
+    const skipBtn = document.getElementById('btn-skip-scenario');
+
     if (chatBox && urls.scenario) {
+        // Темп проигрывания: тайминги из сценария сжимаются, чтобы диалог
+        // читался живо, а не тянулся полминуты.
+        const SPEED = 0.45;
+        let scenarioTimers = [];
+
+        function appendLine(line) {
+            const msg = document.createElement('div');
+            msg.className = 'chat-message ' + (line.speaker === 'bot' ? 'ai' : 'user');
+            const bubble = document.createElement('div');
+            bubble.className = 'chat-bubble ' + (line.speaker === 'bot' ? 'ai' : 'user');
+            bubble.textContent = line.text;
+            msg.appendChild(bubble);
+            chatBox.appendChild(msg);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
         fetch(urls.scenario)
             .then(function(r) { return r.json(); })
             .then(function(data) {
-                (data.lines || []).forEach(function(line) {
-                    setTimeout(function() {
-                        const msg = document.createElement('div');
-                        msg.className = 'chat-message ' + (line.speaker === 'bot' ? 'ai' : 'user');
-                        const bubble = document.createElement('div');
-                        bubble.className = 'chat-bubble ' + (line.speaker === 'bot' ? 'ai' : 'user');
-                        bubble.textContent = line.text;
-                        msg.appendChild(bubble);
-                        chatBox.appendChild(msg);
-                        chatBox.scrollTop = chatBox.scrollHeight;
-                    }, line.delay_ms || 0);
+                const lines = data.lines || [];
+
+                lines.forEach(function(line, idx) {
+                    const timer = setTimeout(function() {
+                        appendLine(line);
+                        if (idx === lines.length - 1 && skipBtn) {
+                            skipBtn.style.display = 'none';
+                        }
+                    }, (line.delay_ms || 0) * SPEED);
+                    scenarioTimers.push(timer);
                 });
 
-                const lastDelay = (data.lines || []).reduce(function(max, l) { return Math.max(max, l.delay_ms || 0); }, 0);
-                setTimeout(function() {
-                    showPanel('state-invite');
-                }, lastDelay + 2000);
+                if (skipBtn) {
+                    skipBtn.addEventListener('click', function() {
+                        scenarioTimers.forEach(clearTimeout);
+                        scenarioTimers = [];
+                        chatBox.innerHTML = '';
+                        lines.forEach(appendLine);
+                        skipBtn.style.display = 'none';
+                    });
+                }
             })
             .catch(function() {
                 chatBox.textContent = 'Не удалось загрузить сценарий.';
@@ -69,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (btnStartVerify) {
         btnStartVerify.addEventListener('click', function() {
             showPanel('state-phone');
+            document.querySelector('.ailab-stage').scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
     }
 
@@ -189,30 +215,51 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===== Вкладки CRM / Excel =====
     const loadedTabs = {};
 
+    function escapeHtml(value) {
+        const div = document.createElement('div');
+        div.textContent = value == null ? '' : String(value);
+        return div.innerHTML;
+    }
+
     function renderDemoPanel(panel, data) {
-        function renderSide(side) {
-            let inner = '<div class="ailab-demo-side"><h4>' + side.title + '</h4><p>' + side.description + '</p>';
+        function renderSide(side, isAfter) {
+            let inner = '<div class="ailab-demo-side' + (isAfter ? ' is-after' : '') + '">' +
+                '<h4>' + escapeHtml(side.title) + '</h4>' +
+                '<p>' + escapeHtml(side.description) + '</p>';
+
             if (side.items) {
                 inner += '<div class="ailab-demo-items">';
                 side.items.forEach(function(item) {
-                    inner += '<div class="ailab-demo-item"><span class="ailab-demo-label">' + item.label + '</span><span class="ailab-demo-value">' + item.value + '</span></div>';
+                    inner += '<div class="ailab-demo-item' + (item.changed ? ' is-changed' : '') + '">' +
+                        '<span class="ailab-demo-label">' + escapeHtml(item.label) + '</span>' +
+                        '<span class="ailab-demo-value">' + escapeHtml(item.value) + '</span>' +
+                        '</div>';
                 });
                 inner += '</div>';
             }
+
             if (side.rows) {
-                inner += '<table class="ailab-demo-table"><tbody>';
-                side.rows.forEach(function(row, idx) {
-                    inner += '<tr>' + row.map(function(cell) {
-                        return idx === 0 ? '<th>' + cell + '</th>' : '<td>' + cell + '</td>';
+                const changedCols = side.changed_cols || [];
+                inner += '<div class="ailab-demo-table-wrap"><table class="ailab-demo-table"><tbody>';
+                side.rows.forEach(function(row, rowIdx) {
+                    inner += '<tr>' + row.map(function(cell, colIdx) {
+                        if (rowIdx === 0) return '<th>' + escapeHtml(cell) + '</th>';
+                        const changed = changedCols.indexOf(colIdx) !== -1;
+                        return '<td' + (changed ? ' class="is-changed"' : '') + '>' + escapeHtml(cell) + '</td>';
                     }).join('') + '</tr>';
                 });
-                inner += '</tbody></table>';
+                inner += '</tbody></table></div>';
             }
+
             inner += '</div>';
             return inner;
         }
 
-        panel.innerHTML = '<div class="ailab-demo-grid">' + renderSide(data.before) + renderSide(data.after) + '</div>';
+        panel.innerHTML = '<div class="ailab-demo-grid">' +
+            renderSide(data.before, false) +
+            renderSide(data.after, true) +
+            '</div>' +
+            '<p class="ailab-demo-legend"><span class="ailab-demo-legend-swatch"></span> подсвечено то, что заполнил бот</p>';
     }
 
     document.querySelectorAll('.ailab-tab-btn').forEach(function(btn) {

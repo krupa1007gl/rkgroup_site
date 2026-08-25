@@ -20,7 +20,7 @@
     <div class="container">
         <div class="ailab-stage">
 
-            <!-- Состояние 1: автопроигрываемый сценарий -->
+            <!-- Состояния 1 и 2: сценарий проигрывается, приглашение видно сразу под ним -->
             <div id="state-scenario" class="ailab-panel is-active">
                 <div class="ui-mockup">
                     <div class="mockup-header">
@@ -28,15 +28,13 @@
                         <span class="mockup-badge">Записанный диалог</span>
                     </div>
                     <div class="mockup-chat" id="scenario-chat"></div>
+                    <button type="button" class="ailab-skip-btn" id="btn-skip-scenario">Показать диалог целиком</button>
                 </div>
-            </div>
 
-            <!-- Состояние 2: приглашение -->
-            <div id="state-invite" class="ailab-panel">
-                <div class="ailab-invite-card">
+                <div class="ailab-invite-card" id="invite-card">
                     <i class="fas fa-comment-dots"></i>
                     <h2>Хотите задать свой вопрос настоящему боту?</h2>
-                    <p>Дальше — не сценарий. Подтвердите номер телефона по SMS и пообщайтесь с работающей моделью.</p>
+                    <p>Выше — записанный сценарий. Дальше будет не постановка: подтвердите номер телефона по SMS и пообщайтесь с работающей моделью.</p>
                     <button type="button" class="btn" id="btn-start-verify">Пообщаться с ботом <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
