@@ -88,3 +88,47 @@ class SiteMapPagesTests(TestCase):
     def test_removed_apps_are_gone(self):
         for url in ['/bots/', '/news/']:
             self.assertEqual(self.client.get(url).status_code, 404, msg=url)
+
+
+class SeededContentTests(TestCase):
+    """
+    Контент наполняется data-миграциями, а не только фикстурами: на свежей
+    БД (как на деплое) партнёрские бейджи, логотипы клиентов и карточки
+    кейсов должны быть на месте, иначе блоки под {% if %} исчезают и
+    страницы выглядят пустыми.
+    """
+
+    def test_home_shows_badges_and_client_logos(self):
+        response = self.client.get('/')
+        self.assertContains(response, 'badge-pill')
+        self.assertContains(response, 'Twin')
+        self.assertContains(response, 'Сколково')
+        self.assertContains(response, 'client-logo-card')
+
+    def test_cases_page_is_not_empty(self):
+        response = self.client.get('/cases/')
+        self.assertContains(response, 'case-card-modern')
+
+
+class StylesheetWiringTests(TestCase):
+    """
+    Регрессия на повторявшийся класс багов: шаблон использует CSS-классы
+    из файла, который сам не подключает, — вёрстка молча остаётся без
+    стилей (так было с .cases-hero, .alert-*, .faq-item, .chat-bubble).
+    """
+
+    CSS_FOR_MARKER = {
+        'faq-item': 'css/faq.css',
+        'chat-bubble': 'css/base.css',
+        'ui-mockup': 'css/base.css',
+    }
+
+    def test_pages_load_stylesheets_for_markup_they_use(self):
+        for url in ['/', '/about/', '/partners/', '/faq/', '/ailab/']:
+            content = self.client.get(url).content.decode()
+            for marker, stylesheet in self.CSS_FOR_MARKER.items():
+                if marker in content:
+                    self.assertIn(
+                        stylesheet, content,
+                        msg=f'{url} использует .{marker}, но не подключает {stylesheet}',
+                    )
