@@ -38,7 +38,11 @@
     <div class="container badges-strip-inner">
         {% for badge in partner_badges %}
         <a href="{{ badge.website|default:'#' }}" target="_blank" class="badge-pill" rel="noopener">
-            {% if badge.logo %}<img src="{{ badge.logo.url }}" alt="{{ badge.name }}">{% endif %}
+            {% if badge.logo %}
+            <img src="{{ badge.logo.url }}" alt="{{ badge.name }}">
+            {% else %}
+            <i class="fas fa-certificate"></i>
+            {% endif %}
             <span>{{ badge.name }}</span>
         </a>
         {% endfor %}

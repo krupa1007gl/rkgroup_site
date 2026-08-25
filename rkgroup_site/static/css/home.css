@@ -58,41 +58,49 @@
     margin-bottom: 20px !important;
 }
 
-/* Партнёрские бейджи */
+/* Партнёрские бейджи — сразу под hero, крупно */
 .badges-strip {
-    padding: 24px 0;
-    border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+    padding: 32px 0;
+    background: white;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.12);
 }
 
 .badges-strip-inner {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
 }
 
 .badge-pill {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: white;
-    border: 1px solid rgba(59, 130, 246, 0.2);
+    gap: 12px;
+    background: linear-gradient(135deg, #eff6ff, #ffffff);
+    border: 1.5px solid rgba(59, 130, 246, 0.3);
     border-radius: 40px;
-    padding: 8px 18px;
+    padding: 14px 32px;
     text-decoration: none;
     color: #1e40af;
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: 700;
+    font-size: 18px;
     transition: all 0.2s ease;
+}
+
+.badge-pill i {
+    font-size: 20px;
+    color: #2563eb;
 }
 
 .badge-pill:hover {
     border-color: #3b82f6;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.18);
 }
 
 .badge-pill img {
-    height: 20px;
+    height: 28px;
     width: auto;
 }
 
