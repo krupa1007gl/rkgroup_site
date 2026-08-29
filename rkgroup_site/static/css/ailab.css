@@ -13,28 +13,6 @@
     display: block;
 }
 
-#state-scenario .mockup-chat {
-    min-height: 320px;
-    max-height: 480px;
-    overflow-y: auto;
-}
-
-.ailab-skip-btn {
-    display: block;
-    margin: 16px auto 0;
-    background: none;
-    border: none;
-    color: #64748b;
-    font-family: inherit;
-    font-size: 13px;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.ailab-skip-btn:hover {
-    color: #2563eb;
-}
-
 .ailab-invite-card,
 .ailab-verify-card {
     background: white;
@@ -46,7 +24,6 @@
 }
 
 .ailab-invite-card {
-    margin-top: 24px;
     background: linear-gradient(135deg, #eff6ff, #ffffff);
     border-color: rgba(59, 130, 246, 0.35);
 }

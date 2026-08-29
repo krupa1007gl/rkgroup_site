@@ -12,7 +12,7 @@
 <section class="page-hero">
     <div class="container">
         <h1 class="section-title">AI Lab</h1>
-        <p class="section-subtitle">Не рассказ о технологии, а доказательство: сначала сценарий, потом — настоящий бот</p>
+        <p class="section-subtitle">Не рассказ о технологии, а доказательство: задайте свой вопрос настоящему боту</p>
     </div>
 </section>
 
@@ -20,22 +20,13 @@
     <div class="container">
         <div class="ailab-stage">
 
-            <!-- Состояния 1 и 2: сценарий проигрывается, приглашение видно сразу под ним -->
-            <div id="state-scenario" class="ailab-panel is-active">
-                <div class="ui-mockup">
-                    <div class="mockup-header">
-                        <span class="mockup-title">Демонстрационный сценарий</span>
-                        <span class="mockup-badge">Записанный диалог</span>
-                    </div>
-                    <div class="mockup-chat" id="scenario-chat"></div>
-                    <button type="button" class="ailab-skip-btn" id="btn-skip-scenario">Показать диалог целиком</button>
-                </div>
-
+            <!-- Состояние 1: приглашение — первый экран страницы -->
+            <div id="state-invite" class="ailab-panel is-active">
                 <div class="ailab-invite-card" id="invite-card">
                     <i class="fas fa-comment-dots"></i>
                     <h2>Хотите задать свой вопрос настоящему боту?</h2>
-                    <p>Выше — записанный сценарий. Дальше будет не постановка: подтвердите номер телефона по SMS и пообщайтесь с работающей моделью.</p>
-                    <button type="button" class="btn" id="btn-start-verify">Пообщаться с ботом <i class="fas fa-arrow-right"></i></button>
+                    <p>Это не постановка и не запись: подтвердите номер телефона по SMS и пообщайтесь с работающей моделью в реальном времени.</p>
+                    <button type="button" class="btn js-magnetic" id="btn-start-verify">Пообщаться с ботом <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
 
@@ -119,7 +110,6 @@
 {% block extra_js %}
 <script>
 window.AILAB_URLS = {
-    scenario: "{% url 'ailab:scenario' %}",
     verifyStart: "{% url 'ailab:verify_start' %}",
     verifyConfirm: "{% url 'ailab:verify_confirm' %}",
     botStatus: "{% url 'ailab:bot_status' %}",

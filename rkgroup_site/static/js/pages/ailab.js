@@ -1,4 +1,4 @@
-// static/js/pages/ailab.js — состояния страницы AI Lab (сценарий → приглашение → верификация → живой бот) + демо-вкладки CRM/Excel
+// static/js/pages/ailab.js — состояния страницы AI Lab (приглашение → SMS-верификация → живой бот) + демо-вкладки CRM/Excel
 
 document.addEventListener('DOMContentLoaded', function() {
     const urls = window.AILAB_URLS || {};
@@ -35,61 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===== Состояние 1: автопроигрываемый сценарий =====
-    // Приглашение (состояние 2) видно сразу под сценарием, а не заменяет его
-    // через полминуты — иначе ядро страницы (живой бот и верификация)
-    // недостижимо, пока не досмотришь весь диалог.
-    const chatBox = document.getElementById('scenario-chat');
-    const skipBtn = document.getElementById('btn-skip-scenario');
-
-    if (chatBox && urls.scenario) {
-        // Темп проигрывания: тайминги из сценария сжимаются, чтобы диалог
-        // читался живо, а не тянулся полминуты.
-        const SPEED = 0.45;
-        let scenarioTimers = [];
-
-        function appendLine(line) {
-            const msg = document.createElement('div');
-            msg.className = 'chat-message ' + (line.speaker === 'bot' ? 'ai' : 'user');
-            const bubble = document.createElement('div');
-            bubble.className = 'chat-bubble ' + (line.speaker === 'bot' ? 'ai' : 'user');
-            bubble.textContent = line.text;
-            msg.appendChild(bubble);
-            chatBox.appendChild(msg);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        fetch(urls.scenario)
-            .then(function(r) { return r.json(); })
-            .then(function(data) {
-                const lines = data.lines || [];
-
-                lines.forEach(function(line, idx) {
-                    const timer = setTimeout(function() {
-                        appendLine(line);
-                        if (idx === lines.length - 1 && skipBtn) {
-                            skipBtn.style.display = 'none';
-                        }
-                    }, (line.delay_ms || 0) * SPEED);
-                    scenarioTimers.push(timer);
-                });
-
-                if (skipBtn) {
-                    skipBtn.addEventListener('click', function() {
-                        scenarioTimers.forEach(clearTimeout);
-                        scenarioTimers = [];
-                        chatBox.innerHTML = '';
-                        lines.forEach(appendLine);
-                        skipBtn.style.display = 'none';
-                    });
-                }
-            })
-            .catch(function() {
-                chatBox.textContent = 'Не удалось загрузить сценарий.';
-            });
-    }
-
-    // ===== Состояние 2 → 3a =====
+    // ===== Состояние 1 (приглашение) → 2 (ввод телефона) =====
     const btnStartVerify = document.getElementById('btn-start-verify');
     if (btnStartVerify) {
         btnStartVerify.addEventListener('click', function() {
