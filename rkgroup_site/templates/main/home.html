@@ -11,6 +11,15 @@
 {% block content %}
 <!-- 1. Hero — спокойное подтверждение статуса -->
 <section class="hero">
+    <div class="hero-bubbles" aria-hidden="true">
+        <span class="hero-bubble" style="--size: 120px; --left: 8%; --delay: 0s; --duration: 18s;"></span>
+        <span class="hero-bubble" style="--size: 64px; --left: 22%; --delay: 3s; --duration: 14s;"></span>
+        <span class="hero-bubble" style="--size: 180px; --left: 38%; --delay: 6s; --duration: 22s;"></span>
+        <span class="hero-bubble" style="--size: 44px; --left: 55%; --delay: 1.5s; --duration: 12s;"></span>
+        <span class="hero-bubble" style="--size: 96px; --left: 68%; --delay: 8s; --duration: 20s;"></span>
+        <span class="hero-bubble" style="--size: 56px; --left: 82%; --delay: 4.5s; --duration: 16s;"></span>
+        <span class="hero-bubble" style="--size: 140px; --left: 92%; --delay: 10s; --duration: 24s;"></span>
+    </div>
     <div class="container">
         <div class="hero-content">
             <h1>
@@ -18,8 +27,8 @@
                 <span class="hero-gradient">разработчик AI-агентов</span>
             </h1>
             <p class="hero-status">Партнёр TWIN · участник экосистемы Сколково</p>
-            <p>Мы делаем голосовых и чат-ботов, которые обзванивают клиентов, отвечают на сообщения и ведут CRM — вместо ваших операторов или вместе с ними.</p>
-            <a href="{% url 'ailab:page' %}" class="btn">Посмотреть живого бота <i class="fas fa-arrow-right"></i></a>
+            <p>Автоматизируем ваш бизнес с помощью AI.</p>
+            <a href="{% url 'ailab:page' %}" class="btn js-magnetic">Посмотреть живого бота <i class="fas fa-arrow-right"></i></a>
         </div>
         <div class="wireframe-bg">
             <svg width="100%" height="100%" viewBox="0 0 400 500" fill="none">
@@ -30,11 +39,15 @@
         </div>
     </div>
     <canvas id="heroCanvas" style="position: absolute; top: 0; right: 0; width: 40%; height: 100%; pointer-events: none;"></canvas>
+    <a href="#next-section" class="scroll-indicator" aria-label="Прокрутить вниз">
+        <span class="scroll-indicator-mouse"><span class="scroll-indicator-wheel"></span></span>
+        <i class="fas fa-chevron-down"></i>
+    </a>
 </section>
 
 <!-- 2. Партнёрские бейджи -->
 {% if partner_badges %}
-<section class="badges-strip">
+<section class="badges-strip" id="next-section">
     <div class="container badges-strip-inner">
         {% for badge in partner_badges %}
         <a href="{{ badge.website|default:'#' }}" target="_blank" class="badge-pill" rel="noopener">
@@ -50,97 +63,49 @@
 </section>
 {% endif %}
 
-<!-- 3. Логотипы клиентов -->
-{% if client_logos %}
-<section class="section" style="padding: 56px 0;">
-    <div class="container">
-        <p class="client-logos-title">Нам доверяют</p>
-        <div class="client-logos-grid">
-            {% for client in client_logos %}
-            <div class="client-logo-card">
-                {% if client.logo %}
-                <img src="{{ client.logo.url }}" alt="{{ client.name }}">
-                {% else %}
-                <span>{{ client.name }}</span>
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-{% endif %}
-
-<!-- 4. Тизер живого бота (live console) -->
+<!-- 3. Приглашение протестировать бота вживую -->
 <section class="section">
     <div class="container">
-        <h2 class="section-title fade-up">Так это выглядит на практике</h2>
-        <p class="section-subtitle fade-up">Фрагмент реального сценария: приём показаний счётчиков для управляющей компании</p>
-        <div class="ui-mockup">
-            <div class="mockup-header">
-                <span class="mockup-title">AI-агент в действии</span>
-                <span class="mockup-badge">Активен 24/7</span>
-            </div>
-            <div class="mockup-chat">
-                <div class="chat-message ai">
-                    <div class="chat-bubble ai">🤖 Добрый день! Я виртуальный помощник управляющей компании. Чем могу помочь?</div>
-                </div>
-                <div class="chat-message user">
-                    <div class="chat-bubble user">Здравствуйте! Хочу передать показания счётчиков воды</div>
-                </div>
-                <div class="chat-message ai">
-                    <div class="chat-bubble ai">Отлично! Назовите номер лицевого счёта</div>
-                </div>
-                <div class="chat-message user">
-                    <div class="chat-bubble user">1234567890</div>
-                </div>
-                <div class="chat-message ai">
-                    <div class="chat-bubble ai">Показания сохранены. Что-то ещё?</div>
-                </div>
-                <div class="chat-message user">
-                    <div class="chat-bubble user">Нет, спасибо</div>
-                </div>
-                <div class="chat-message ai">
-                    <div class="chat-bubble ai">🤖 Хорошего дня! Я на связи 24/7</div>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 24px;">
-                <a href="{% url 'ailab:page' %}" class="btn">Посмотреть живого бота → AI Lab <i class="fas fa-arrow-right"></i></a>
-            </div>
+        <div class="card glow-card live-invite fade-up">
+            <i class="fas fa-flask live-invite-icon"></i>
+            <h2>Живой бот, а не запись</h2>
+            <p>Задайте свой вопрос настоящему AI-агенту и посмотрите, как он отвечает в реальном времени.</p>
+            <a href="{% url 'ailab:page' %}" class="btn js-magnetic">Протестировать в реальном времени → AI Lab <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
 
-<!-- 5. Возможности агента — без цифр-обещаний -->
+<!-- 4. Возможности агента — без цифр-обещаний -->
 <section class="section">
     <div class="container">
         <h2 class="section-title fade-up">Возможности агента</h2>
         <div class="capability-grid">
-            <div class="card capability-card fade-up">
+            <div class="card glow-card capability-card fade-up">
                 <i class="fas fa-phone-volume capability-icon"></i>
                 <h3>До 1500 параллельных вызовов</h3>
                 <p>Обрабатывает входящие и делает массовые исходящие звонки (напоминания, обзвон должников, акции).</p>
             </div>
-            <div class="card capability-card fade-up">
+            <div class="card glow-card capability-card fade-up">
                 <i class="fas fa-comments capability-icon"></i>
                 <h3>Понимает естественную речь</h3>
                 <p>Ведёт диалог голосом и текстом, не требует нажимать цифры на клавиатуре или подбирать формулировки.</p>
             </div>
-            <div class="card capability-card fade-up">
+            <div class="card glow-card capability-card fade-up">
                 <i class="fas fa-clock capability-icon"></i>
                 <h3>Работает 24/7</h3>
                 <p>Не пропускает обращения ночью, в выходные и в праздники — отвечает мгновенно в любое время.</p>
             </div>
-            <div class="card capability-card fade-up">
+            <div class="card glow-card capability-card fade-up">
                 <i class="fas fa-database capability-icon"></i>
                 <h3>Интеграция с CRM</h3>
                 <p>Битрикс24, amoCRM, 1С и другие системы — заявки и данные попадают туда, где вы уже работаете.</p>
             </div>
-            <div class="card capability-card fade-up">
+            <div class="card glow-card capability-card fade-up">
                 <i class="fas fa-user-check capability-icon"></i>
                 <h3>Переключает на оператора</h3>
                 <p>Если вопрос нестандартный — агент передаёт разговор живому сотруднику, а не зацикливается.</p>
             </div>
-            <div class="card capability-card fade-up">
+            <div class="card glow-card capability-card fade-up">
                 <i class="fas fa-chart-simple capability-icon"></i>
                 <h3>Аналитика по каждому диалогу</h3>
                 <p>Записи звонков, тексты переписки и статусы обращений — всё доступно для разбора.</p>
@@ -149,110 +114,89 @@
     </div>
 </section>
 
-<!-- 6. Как внедряем -->
+<!-- 5. Как внедряем -->
 <section class="section">
     <div class="container">
         <h2 class="section-title fade-up">Как внедряем — дорожная карта</h2>
-        <div class="stages-grid">
+        <div class="stages-grid stages-grid-4">
             <div class="stage-card fade-up">
-                <div class="stage-number">01</div>
-                <h4>Анализ потребностей</h4>
-                <p>Выявляем бизнес-цели и точки роста</p>
+                <div class="stage-number" data-count-to="1">01</div>
+                <h4>Анализ</h4>
+                <p>Разбираем, куда уходит время операторов и какие обращения повторяются чаще всего. Считаем объём звонков и сообщений. Фиксируем, что именно должен закрывать агент.</p>
             </div>
             <div class="stage-card fade-up">
-                <div class="stage-number">02</div>
-                <h4>Проектирование решения</h4>
-                <p>Сценарий диалога, интеграции, архитектура</p>
+                <div class="stage-number" data-count-to="2">02</div>
+                <h4>Проектирование + пилот</h4>
+                <p>Пишем сценарий диалога и схему интеграций с вашей CRM и телефонией. Собираем пилот на ограниченном потоке обращений. Показываем результат до полного запуска.</p>
             </div>
             <div class="stage-card fade-up">
-                <div class="stage-number">03</div>
-                <h4>Внедрение и поддержка</h4>
-                <p>Запуск, наблюдение за качеством, доработки</p>
+                <div class="stage-number" data-count-to="3">03</div>
+                <h4>Внедрение</h4>
+                <p>Подключаем агента к боевым каналам связи и переносим на него поток. Настраиваем передачу сложных случаев оператору. Обучаем вашу команду работе с системой.</p>
+            </div>
+            <div class="stage-card fade-up">
+                <div class="stage-number" data-count-to="4">04</div>
+                <h4>Поддержка</h4>
+                <p>Следим за качеством ответов и разбираем спорные диалоги. Дорабатываем сценарии под новые задачи. Остаёмся на связи и отвечаем за работоспособность.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 7. Продукты — 4 роли агента (тизер) -->
+<!-- 6. Мостики-ссылки -->
 <section class="section">
     <div class="container">
-        <h2 class="section-title fade-up">Продукты</h2>
-        <p class="section-subtitle fade-up">Один и тот же агент можно настроить под разные роли в компании</p>
-        <div class="grid-4 products-teaser">
-            <div class="card fade-up">
-                <i class="fas fa-bullhorn" style="font-size: 32px; color: #3b82f6; margin-bottom: 16px;"></i>
-                <h3>Sales AI</h3>
-                <p>Обзванивает базу, квалифицирует интерес, передаёт тёплых клиентов менеджеру.</p>
-            </div>
-            <div class="card fade-up">
-                <i class="fas fa-headset" style="font-size: 32px; color: #3b82f6; margin-bottom: 16px;"></i>
-                <h3>Support AI</h3>
-                <p>Отвечает на частые вопросы клиентов 24/7, эскалирует сложные случаи на человека.</p>
-            </div>
-            <div class="card fade-up">
-                <i class="fas fa-table-list" style="font-size: 32px; color: #3b82f6; margin-bottom: 16px;"></i>
-                <h3>CRM AI</h3>
-                <p>Заполняет и обновляет карточки клиентов в CRM по итогам звонков и переписки.</p>
-            </div>
-            <div class="card fade-up">
-                <i class="fas fa-building" style="font-size: 32px; color: #3b82f6; margin-bottom: 16px;"></i>
-                <h3>Internal AI</h3>
-                <p>Помогает внутри компании: подбор персонала, ответы сотрудникам, напоминания.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 8. Мостики-ссылки -->
-<section class="section">
-    <div class="container">
-        <h2 class="section-title fade-up">Куда дальше</h2>
-        <div class="grid-4 bridge-links">
-            <a href="{% url 'main:about' %}" class="card bridge-card fade-up">
+        <h2 class="section-title fade-up">Подробнее</h2>
+        <div class="grid-3 bridge-links">
+            <a href="{% url 'main:about' %}" class="card glow-card bridge-card fade-up">
                 <i class="fas fa-robot"></i>
                 <h4>Не понимаете, что такое AI-агент?</h4>
                 <span>О ботах <i class="fas fa-arrow-right"></i></span>
             </a>
-            <a href="{% url 'ailab:page' %}" class="card bridge-card fade-up">
+            <a href="{% url 'ailab:page' %}" class="card glow-card bridge-card fade-up">
                 <i class="fas fa-flask"></i>
                 <h4>Хотите увидеть живого бота?</h4>
                 <span>AI Lab <i class="fas fa-arrow-right"></i></span>
             </a>
-            <a href="{% url 'main:partners' %}" class="card bridge-card fade-up">
+            <a href="{% url 'main:partners' %}" class="card glow-card bridge-card fade-up">
                 <i class="fas fa-handshake"></i>
                 <h4>CRM-интегратор или агентство?</h4>
                 <span>Партнёрам <i class="fas fa-arrow-right"></i></span>
-            </a>
-            <a href="{% url 'cases:case_list' %}" class="card bridge-card fade-up">
-                <i class="fas fa-lightbulb"></i>
-                <h4>Хотите примеры применения?</h4>
-                <span>Кейсы <i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
     </div>
 </section>
 
-<!-- 9. Мини-FAQ -->
+<!-- 7. Мини-FAQ -->
 <section class="section" style="padding-bottom: 100px;">
     <div class="container">
         <h2 class="section-title fade-up">Коротко о частых вопросах</h2>
         <div class="faq-list" style="max-width: 700px;">
             <div class="faq-item">
                 <button class="faq-question">
-                    Это не мошенничество?
+                    Что умеет AI-агент на практике?
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>Нет — проверьте сами на странице <a href="{% url 'ailab:page' %}">AI Lab</a>, там можно вживую пообщаться с настоящим ботом. Телефон и почта компании указаны в шапке этой страницы.</p>
+                    <p>Принимает и совершает звонки, отвечает в мессенджерах, записывает клиентов, принимает заявки и показания, заполняет карточки в CRM по итогам разговора. Сложные случаи передаёт живому сотруднику вместе с контекстом — посмотреть вживую можно в <a href="{% url 'ailab:page' %}">AI Lab</a>.</p>
                 </div>
             </div>
             <div class="faq-item">
                 <button class="faq-question">
-                    Откуда у вас мои контакты?
+                    Сколько занимает запуск?
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>Номер передаёт компания-клиент, с которой вы уже взаимодействовали. RK Group только предоставляет технологию обзвона.</p>
+                    <p>Зависит от количества сценариев и интеграций. Мы работаем по этапам: сначала анализ и пилот на ограниченном потоке обращений, чтобы вы увидели результат до полного запуска, и только потом перевод боевого трафика на агента.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Что с безопасностью данных клиентов?
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Агент работает с вашими системами через согласованные интеграции, данные остаются в вашем контуре CRM. На публичных демо на сайте реальные клиентские данные не используются — там заранее подготовленные примеры.</p>
                 </div>
             </div>
         </div>
