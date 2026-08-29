@@ -77,7 +77,7 @@ class SiteMapPagesTests(TestCase):
     """
 
     def test_concept_pages_return_200(self):
-        for url in ['/', '/about/', '/partners/', '/cases/', '/faq/', '/contact/']:
+        for url in ['/', '/about/', '/partners/', '/faq/', '/contact/']:
             response = self.client.get(url)
             self.assertEqual(response.status_code, 200, msg=url)
 
@@ -90,24 +90,34 @@ class SiteMapPagesTests(TestCase):
             self.assertEqual(self.client.get(url).status_code, 404, msg=url)
 
 
+class CasesSectionHiddenTests(TestCase):
+    """
+    Раздел «Кейсы» скрыт целиком: не только убраны ссылки, но и прямой
+    заход по URL не открывает страницу.
+    """
+
+    def test_direct_urls_are_not_reachable(self):
+        for url in ['/cases/', '/cases/1/']:
+            self.assertEqual(self.client.get(url).status_code, 404, msg=url)
+
+    def test_no_links_to_cases_in_navigation(self):
+        for url in ['/', '/about/', '/partners/', '/faq/', '/ailab/']:
+            content = self.client.get(url).content.decode()
+            self.assertNotIn('href="/cases/', content, msg=url)
+
+
 class SeededContentTests(TestCase):
     """
     Контент наполняется data-миграциями, а не только фикстурами: на свежей
-    БД (как на деплое) партнёрские бейджи, логотипы клиентов и карточки
-    кейсов должны быть на месте, иначе блоки под {% if %} исчезают и
-    страницы выглядят пустыми.
+    БД (как на деплое) партнёрские бейджи должны быть на месте, иначе блок
+    под {% if %} исчезает и страница выглядит пустой.
     """
 
-    def test_home_shows_badges_and_client_logos(self):
+    def test_home_shows_partner_badges(self):
         response = self.client.get('/')
         self.assertContains(response, 'badge-pill')
         self.assertContains(response, 'Twin')
         self.assertContains(response, 'Сколково')
-        self.assertContains(response, 'client-logo-card')
-
-    def test_cases_page_is_not_empty(self):
-        response = self.client.get('/cases/')
-        self.assertContains(response, 'case-card-modern')
 
 
 class StylesheetWiringTests(TestCase):

@@ -37,9 +37,6 @@
                         <a href="{% url 'ailab:page' %}" class="nav-link {% if request.resolver_match.app_name == 'ailab' %}active{% endif %}">AI Lab</a>
                     </div>
                     <div class="nav-item">
-                        <a href="{% url 'cases:case_list' %}" class="nav-link {% if request.resolver_match.app_name == 'cases' %}active{% endif %}">Кейсы</a>
-                    </div>
-                    <div class="nav-item">
                         <a href="{% url 'main:partners' %}" class="nav-link {% if request.resolver_match.url_name == 'partners' %}active{% endif %}">Партнёрам</a>
                     </div>
                     <div class="nav-item nav-item-cta">
@@ -74,7 +71,6 @@
                     <a href="{% url 'main:home' %}">Главная</a>
                     <a href="{% url 'main:about' %}">О ботах</a>
                     <a href="{% url 'ailab:page' %}">AI Lab</a>
-                    <a href="{% url 'cases:case_list' %}">Кейсы</a>
                     <a href="{% url 'main:partners' %}">Партнёрам</a>
                 </div>
                 <div class="footer-col">
