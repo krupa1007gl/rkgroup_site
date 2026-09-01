@@ -583,7 +583,21 @@
     .stats-grid, .stages-grid, .stages-grid-4, .integrations-grid, .capability-grid {
         grid-template-columns: 1fr;
     }
-    .hero-bubble { display: none; }
+    /* Пузырьки остаются видимыми, но статичными: анимация всплытия на
+       телефоне не нужна (постоянная перерисовка ради декора), а пустой
+       hero без них выглядит голым. Раскладываем их по высоте вручную,
+       потому что без анимации они все стояли бы под нижней границей. */
+    .hero-bubble {
+        animation: none;
+        bottom: auto;
+        top: var(--top-mobile, 20%);
+        opacity: 0.5;
+        transform: scale(0.65);
+    }
+    .hero-bubble:nth-child(odd) { --top-mobile: 12%; }
+    .hero-bubble:nth-child(even) { --top-mobile: 46%; }
+    .hero-bubble:nth-child(3n) { --top-mobile: 72%; }
+
     .scroll-indicator { display: none; }
     .live-invite { padding: 32px 24px; }
     .hero {

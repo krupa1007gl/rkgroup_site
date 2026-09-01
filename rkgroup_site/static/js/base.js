@@ -156,6 +156,13 @@ document.addEventListener('DOMContentLoaded', function() {
             card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
             card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
         });
+        // Без этого при быстром уводе курсора пятно застывает в последней
+        // точке: сама подсветка гаснет по opacity, но её центр остаётся у
+        // края, и при следующем наведении свечение «прыгает» оттуда.
+        card.addEventListener('mouseleave', function() {
+            card.style.setProperty('--mx', '50%');
+            card.style.setProperty('--my', '50%');
+        });
     });
 
     // ========== MAGNETIC-КНОПКИ ==========
