@@ -16,6 +16,7 @@ db.sqlite3-journal
 /staticfiles/
 /media/
 leads.xlsx
+visits.xlsx
 leads_csv/
 
 # Secret

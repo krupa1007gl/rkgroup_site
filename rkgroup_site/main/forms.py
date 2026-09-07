@@ -46,3 +46,29 @@ class ContactForm(forms.Form):
         })
     )
     # Убираем phone, так как в контактной форме его нет
+
+
+class PartnerForm(forms.Form):
+    name = forms.CharField(
+        max_length=200,
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Ваше имя',
+            'class': 'form-input',
+            'required': 'required'
+        })
+    )
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'Ваш email',
+            'class': 'form-input',
+            'required': 'required'
+        })
+    )
+    company = forms.CharField(
+        max_length=200,
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Компания',
+            'class': 'form-input',
+            'required': 'required'
+        })
+    )

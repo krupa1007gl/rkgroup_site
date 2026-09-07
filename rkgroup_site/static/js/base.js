@@ -114,18 +114,124 @@ document.addEventListener('DOMContentLoaded', function() {
 
     counters.forEach(counter => counterObserver.observe(counter));
 
-    // ========== ПОЯВЛЕНИЕ ЭЛЕМЕНТОВ ПРИ СКРОЛЛЕ ==========
-    const fadeElements = document.querySelectorAll('.fade-up, .card, .bot-card, .case-card, .news-card, .stat-card, .stage-card');
-    const scrollObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                scrollObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px' });
+    // ========== АНИМИРОВАННЫЕ ЦИФРЫ ДОРОЖНОЙ КАРТЫ ==========
+    // Каждый заход в зону видимости прокручивает номер шага с 0 до
+    // значения data-count-to, сохраняя формат "01", "02" и т.д.
+    const stageNumbers = Array.from(document.querySelectorAll('.stage-number[data-count-to]'));
+    if (stageNumbers.length) {
+        const format = (value) => String(value).padStart(2, '0');
 
-    fadeElements.forEach(el => scrollObserver.observe(el));
+        const runStageCount = (el) => {
+            const target = parseInt(el.dataset.countTo, 10);
+            if (!target || el.dataset.counting === '1') return;
+            el.dataset.counting = '1';
+
+            let current = 0;
+            const step = () => {
+                current += 1;
+                el.textContent = format(current);
+                if (current < target) {
+                    setTimeout(step, 140);
+                } else {
+                    el.dataset.counting = '0';
+                }
+            };
+            el.textContent = format(0);
+            setTimeout(step, 120);
+        };
+
+        const stageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) runStageCount(entry.target);
+            });
+        }, { threshold: 0.4 });
+
+        stageNumbers.forEach(el => stageObserver.observe(el));
+    }
+
+    // ========== КУРСОР-GLOW НА ИНФО-БЛОКАХ ==========
+    document.querySelectorAll('.glow-card').forEach(card => {
+        card.addEventListener('mousemove', function(e) {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+            card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+        });
+        // Без этого при быстром уводе курсора пятно застывает в последней
+        // точке: сама подсветка гаснет по opacity, но её центр остаётся у
+        // края, и при следующем наведении свечение «прыгает» оттуда.
+        card.addEventListener('mouseleave', function() {
+            card.style.setProperty('--mx', '50%');
+            card.style.setProperty('--my', '50%');
+        });
+    });
+
+    // ========== MAGNETIC-КНОПКИ ==========
+    // Кнопка слегка тянется к курсору — смещение ограничено парой пикселей.
+    const MAGNET_STRENGTH = 0.25;
+    const MAGNET_MAX = 6;
+    document.querySelectorAll('.js-magnetic').forEach(btn => {
+        btn.addEventListener('mousemove', function(e) {
+            const rect = btn.getBoundingClientRect();
+            const dx = e.clientX - (rect.left + rect.width / 2);
+            const dy = e.clientY - (rect.top + rect.height / 2);
+            const clamp = (v) => Math.max(-MAGNET_MAX, Math.min(MAGNET_MAX, v * MAGNET_STRENGTH));
+            btn.style.setProperty('--tx', clamp(dx) + 'px');
+            btn.style.setProperty('--ty', clamp(dy) + 'px');
+        });
+        btn.addEventListener('mouseleave', function() {
+            btn.style.setProperty('--tx', '0px');
+            btn.style.setProperty('--ty', '0px');
+        });
+    });
+
+    // ========== ПОЯВЛЕНИЕ ЭЛЕМЕНТОВ ПРИ СКРОЛЛЕ ==========
+    const fadeElements = Array.from(document.querySelectorAll('.fade-up, .card, .bot-card, .case-card, .news-card, .stat-card, .stage-card'));
+
+    // Пользователь просил не анимировать — показываем всё сразу.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        fadeElements.forEach(el => el.classList.add('visible'));
+    } else {
+        // Элемент не снимается с наблюдения: класс переключается в обе
+        // стороны, чтобы анимация повторялась при каждом заходе элемента
+        // в зону видимости, а не только при первом.
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                entry.target.classList.toggle('visible', entry.isIntersecting);
+            });
+        }, { threshold: 0.1, rootMargin: '0px' });
+
+        fadeElements.forEach(el => scrollObserver.observe(el));
+
+        // Страховка на случай, если IntersectionObserver не сработал
+        // (например, вкладка была фоновой во время загрузки). Логика
+        // зеркалит наблюдатель — показываем в зоне видимости, скрываем за
+        // её пределами, — иначе два механизма конфликтуют: наблюдатель
+        // снимает класс при выходе, а страховка тут же возвращает его.
+        function syncFadeElement(el) {
+            const rect = el.getBoundingClientRect();
+            const inView = rect.top < window.innerHeight * 0.95 && rect.bottom > 0;
+            el.classList.toggle('visible', inView);
+        }
+
+        // Троттлинг по таймеру, а не через requestAnimationFrame: rAF не
+        // выполняется, пока вкладка скрыта/фоновая, и тогда контент так и
+        // остаётся невидимым — ровно тот сбой, от которого эта страховка.
+        let fadeCheckTimer = null;
+        function checkFadeElements() {
+            fadeCheckTimer = null;
+            fadeElements.forEach(syncFadeElement);
+        }
+        function scheduleFadeCheck() {
+            if (fadeCheckTimer === null) {
+                fadeCheckTimer = setTimeout(checkFadeElements, 100);
+            }
+        }
+
+        window.addEventListener('scroll', scheduleFadeCheck, { passive: true });
+        window.addEventListener('resize', scheduleFadeCheck, { passive: true });
+        window.addEventListener('load', checkFadeElements);
+        checkFadeElements();
+    }
 
     // ========== МОБИЛЬНОЕ МЕНЮ ==========
     const mobileBtn = document.querySelector('.mobile-menu-btn');

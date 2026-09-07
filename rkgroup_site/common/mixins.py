@@ -1,7 +1,27 @@
-from django.http import JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic.edit import FormView
 from django.core.cache import cache
 from django.conf import settings
+
+RATE_LIMIT_MESSAGE = 'Слишком много запросов. Попробуйте через час.'
+
+
+def check_rate_limit_key(key, limit, period=3600):
+    """
+    Общая проверка rate limit по произвольному ключу кэша — используется
+    и RateLimitMixin (лимит по IP на форме), и вьюхами AI Lab (лимит по
+    номеру телефона отдельно от лимита по IP).
+    Возвращает True, если запрос ещё разрешён (и увеличивает счётчик).
+    """
+    if not getattr(settings, 'RATELIMIT_ENABLED', False):
+        return True
+
+    count = cache.get(key, 0)
+    if count >= limit:
+        return False
+
+    cache.set(key, count + 1, period)
+    return True
 
 
 class AjaxFormMixin(FormView):
@@ -42,25 +62,17 @@ class RateLimitMixin:
         return f"ratelimit_{self.rate_limit_key}_{ip}"
     
     def check_rate_limit(self, request):
-        if not getattr(settings, 'RATELIMIT_ENABLED', False):
-            return True
-        
         key = self.get_rate_limit_key(request)
-        count = cache.get(key, 0)
-        
-        if count >= self.rate_limit_per_hour:
-            return False
-        
-        cache.set(key, count + 1, 3600)
-        return True
+        return check_rate_limit_key(key, self.rate_limit_per_hour, period=3600)
     
     def dispatch(self, request, *args, **kwargs):
         if not self.check_rate_limit(request):
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 return JsonResponse({
                     'status': 'error',
-                    'message': 'Слишком много запросов. Попробуйте через час.'
+                    'message': RATE_LIMIT_MESSAGE
                 }, status=429)
+            return HttpResponse(RATE_LIMIT_MESSAGE, status=429, content_type='text/plain; charset=utf-8')
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -76,7 +88,9 @@ class HoneypotMixin:
     
     def post(self, request, *args, **kwargs):
         if not self.check_honeypot(request):
+            # Ничего не сохраняем и не логируем как ошибку — просто делаем
+            # вид, что всё прошло успешно, не выдавая боту, что он пойман.
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 return JsonResponse({'status': 'ok', 'message': 'Спасибо!'})
-            return self.form_valid(None)
+            return HttpResponseRedirect(self.get_success_url())
         return super().post(request, *args, **kwargs)

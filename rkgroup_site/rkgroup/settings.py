@@ -1,13 +1,22 @@
 import os
 from pathlib import Path
 
+import dj_database_url
+from dotenv import load_dotenv
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-8x%6v&@k9q#m!2x$p4r7t8y9u0i1o2p3a4s5d6f7g8h9j0k1l2z3x4c5v6b7n8m9'
+load_dotenv(BASE_DIR / '.env')
 
-DEBUG = True
+SECRET_KEY = os.environ['SECRET_KEY']
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+    if host.strip()
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -17,9 +26,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-    'bots',
     'cases',
-    'news',
+    'leads',
+    'visits',
+    'ailab',
 ]
 
 MIDDLEWARE = [
@@ -53,12 +63,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rkgroup.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Лиды и статистика визитов хранятся в этой БД (см. приложения leads, visits).
+# SQLite — приемлемый вариант для разработки и небольшой нагрузки, но не
+# рассчитан на конкурентную запись при реальном трафике.
+# TODO: при деплое задать DATABASE_URL (например
+# postgres://user:password@host:5432/dbname) и перейти на PostgreSQL —
+# psycopg2-binary и dj-database-url уже есть в зависимостях. В репозитории
+# уже есть migrate_to_postgres.py (dumpdata/migrate/loaddata) для переноса
+# данных из SQLite.
+if os.environ.get('DATABASE_URL'):
+    DATABASES = {'default': dj_database_url.parse(os.environ['DATABASE_URL'])}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -81,16 +102,30 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ========== НАСТРОЙКИ ДЛЯ ФАЙЛОВ ==========
-DATA_DIR = os.environ.get('DATA_DIR', str(Path(BASE_DIR).parent / 'data'))
+# ========== AI LAB ==========
+# Заглушка SMS-провайдера использует фиксированный тестовый код вместо
+# реальной отправки (см. ailab/sms.py — TODO про реальный провайдер там же).
+AILAB_STUB_OTP_CODE = os.environ.get('AILAB_STUB_OTP_CODE', '0000')
 
-LEADS_DIR = os.path.join(DATA_DIR, 'leads')
-VISITS_DIR = os.path.join(DATA_DIR, 'visits')
-BACKUPS_DIR = os.path.join(DATA_DIR, 'backups')
+# ========== TELEGRAM-УВЕДОМЛЕНИЯ ==========
+# Если не заданы — telegram_notifier просто пишет предупреждение в лог и
+# не отправляет ничего (см. telegram_notifier.send_telegram_message).
+TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
+TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
 
-os.makedirs(LEADS_DIR, exist_ok=True)
-os.makedirs(VISITS_DIR, exist_ok=True)
-os.makedirs(BACKUPS_DIR, exist_ok=True)
+# ========== RATE LIMITING ==========
+RATELIMIT_ENABLED = os.environ.get('RATELIMIT_ENABLED', 'True') == 'True'
+
+# LocMemCache хватает для одного воркера. Для деплоя с несколькими
+# процессами/воркерами лимиты не будут общими между процессами —
+# в этом случае стоит подключить django-redis и Redis.
+# TODO: перейти на django-redis (CACHES['default']['BACKEND'] =
+# 'django_redis.cache.RedisCache'), если потребуется multi-worker деплой.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
 
 # ========== ЛОГИРОВАНИЕ ==========
 LOGGING = {
@@ -136,5 +171,3 @@ LOGGING = {
         'level': 'INFO',
     },
 }
-#========== НАСТРОЙКИ EXCEL ==========
-LEADS_MAX_RECORDS_PER_FILE = 100

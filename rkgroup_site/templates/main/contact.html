@@ -27,6 +27,7 @@
                     <h3 style="font-size: 24px; margin-bottom: 28px;">Напишите нам</h3>
                     <form method="post" action="{% url 'main:contact' %}" id="contact-form">
                         {% csrf_token %}
+                        <input type="text" name="website" value="" tabindex="-1" autocomplete="off" style="position: absolute; left: -9999px;">
                         <div class="form-group">
                             <input type="text" name="name" class="form-input-custom" placeholder="Ваше имя" required>
                         </div>

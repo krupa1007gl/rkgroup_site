@@ -1,7 +1,16 @@
 from django.db import models
 
+
 class Partner(models.Model):
+    class PartnerType(models.TextChoices):
+        BADGE = 'badge', 'Партнёрский бейдж (TWIN, Сколково)'
+        CLIENT = 'client', 'Логотип клиента'
+
     name = models.CharField(max_length=200, verbose_name="Название")
+    partner_type = models.CharField(
+        max_length=20, choices=PartnerType.choices, default=PartnerType.CLIENT,
+        verbose_name="Тип",
+    )
     logo = models.ImageField(upload_to='partners/', blank=True, null=True)
     website = models.URLField(blank=True, verbose_name="Сайт")
     order = models.IntegerField(default=0, verbose_name="Порядок")

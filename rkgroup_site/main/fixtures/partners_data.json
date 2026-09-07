@@ -4,6 +4,7 @@
     "pk": 1,
     "fields": {
       "name": "Twin",
+      "partner_type": "badge",
       "logo": "",
       "website": "https://twin24.ai",
       "order": 1,
@@ -17,6 +18,7 @@
     "pk": 2,
     "fields": {
       "name": "Сколково",
+      "partner_type": "badge",
       "logo": "",
       "website": "https://sk.ru",
       "order": 2,
@@ -29,9 +31,10 @@
     "model": "main.partner",
     "pk": 3,
     "fields": {
-      "name": "Ростелеком",
+      "name": "PLACEHOLDER — заменить на реального клиента",
+      "partner_type": "client",
       "logo": "",
-      "website": "https://rostelecom.ru",
+      "website": "",
       "order": 3,
       "is_active": true,
       "created_at": "2025-03-15T10:00:00Z",
@@ -42,9 +45,10 @@
     "model": "main.partner",
     "pk": 4,
     "fields": {
-      "name": "ПЭК",
+      "name": "PLACEHOLDER — заменить на реального клиента",
+      "partner_type": "client",
       "logo": "",
-      "website": "https://pecom.ru",
+      "website": "",
       "order": 4,
       "is_active": true,
       "created_at": "2025-03-15T10:00:00Z",
@@ -55,9 +59,10 @@
     "model": "main.partner",
     "pk": 5,
     "fields": {
-      "name": "ТТК",
+      "name": "PLACEHOLDER — заменить на реального клиента",
+      "partner_type": "client",
       "logo": "",
-      "website": "https://ttk.ru",
+      "website": "",
       "order": 5,
       "is_active": true,
       "created_at": "2025-03-15T10:00:00Z",
@@ -68,9 +73,10 @@
     "model": "main.partner",
     "pk": 6,
     "fields": {
-      "name": "2ГИС",
+      "name": "PLACEHOLDER — заменить на реального клиента",
+      "partner_type": "client",
       "logo": "",
-      "website": "https://2gis.ru",
+      "website": "",
       "order": 6,
       "is_active": true,
       "created_at": "2025-03-15T10:00:00Z",
@@ -81,9 +87,10 @@
     "model": "main.partner",
     "pk": 7,
     "fields": {
-      "name": "X5 Retail Group",
+      "name": "PLACEHOLDER — заменить на реального клиента",
+      "partner_type": "client",
       "logo": "",
-      "website": "https://x5.ru",
+      "website": "",
       "order": 7,
       "is_active": true,
       "created_at": "2025-03-15T10:00:00Z",
@@ -94,23 +101,11 @@
     "model": "main.partner",
     "pk": 8,
     "fields": {
-      "name": "Битрикс24",
+      "name": "PLACEHOLDER — заменить на реального клиента",
+      "partner_type": "client",
       "logo": "",
-      "website": "https://bitrix24.ru",
+      "website": "",
       "order": 8,
-      "is_active": true,
-      "created_at": "2025-03-15T10:00:00Z",
-      "updated_at": "2025-03-15T10:00:00Z"
-    }
-  },
-  {
-    "model": "main.partner",
-    "pk": 9,
-    "fields": {
-      "name": "1С",
-      "logo": "",
-      "website": "https://1c.ru",
-      "order": 9,
       "is_active": true,
       "created_at": "2025-03-15T10:00:00Z",
       "updated_at": "2025-03-15T10:00:00Z"

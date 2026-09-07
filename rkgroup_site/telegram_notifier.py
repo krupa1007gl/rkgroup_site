@@ -10,8 +10,8 @@ def send_telegram_message(message):
     Отправляет сообщение в Telegram
     Токен и chat_id берутся из настроек
     """
-    bot_token = getattr(settings, 'TELEGRAM_BOT_TOKEN', None)
-    chat_id = getattr(settings, 'TELEGRAM_CHAT_ID', None)
+    bot_token = settings.TELEGRAM_BOT_TOKEN
+    chat_id = settings.TELEGRAM_CHAT_ID
 
     if not bot_token or not chat_id:
         logger.warning("⚠️ TELEGRAM_BOT_TOKEN или TELEGRAM_CHAT_ID не настроены")

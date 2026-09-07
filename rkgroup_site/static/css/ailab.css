@@ -1,0 +1,257 @@
+/* static/css/ailab.css — стили страницы AI Lab */
+
+.ailab-stage {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.ailab-panel {
+    display: none;
+}
+
+.ailab-panel.is-active {
+    display: block;
+}
+
+.ailab-invite-card,
+.ailab-verify-card {
+    background: white;
+    border-radius: 32px;
+    padding: 48px;
+    text-align: center;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.05);
+}
+
+.ailab-invite-card {
+    background: linear-gradient(135deg, #eff6ff, #ffffff);
+    border-color: rgba(59, 130, 246, 0.35);
+}
+
+.ailab-invite-card i,
+.ailab-verify-card > i {
+    font-size: 40px;
+    color: #2563eb;
+    margin-bottom: 20px;
+}
+
+.ailab-invite-card h2,
+.ailab-verify-card h2 {
+    font-size: 26px;
+    margin-bottom: 12px;
+}
+
+.ailab-invite-card p,
+.ailab-verify-card p {
+    color: #64748b;
+    margin-bottom: 24px;
+}
+
+.ailab-verify-card form {
+    max-width: 360px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.ailab-verify-note {
+    text-align: center;
+    font-size: 14px;
+}
+
+.ailab-honeypot {
+    position: absolute;
+    left: -9999px;
+}
+
+.ailab-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 24px;
+    cursor: pointer;
+}
+
+.ailab-consent input {
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.ailab-consent span {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.ailab-code-input {
+    text-align: center;
+    font-size: 28px;
+    letter-spacing: 12px;
+    font-weight: 700;
+}
+
+.ailab-form-message:empty {
+    display: none;
+}
+
+/* Вкладки CRM/Excel */
+.ailab-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.ailab-tab-btn {
+    background: white;
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 40px;
+    padding: 10px 24px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ailab-tab-btn.is-active {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: white;
+}
+
+.ailab-tab-panel {
+    display: none;
+}
+
+.ailab-tab-panel.is-active {
+    display: block;
+}
+
+.ailab-demo-loading {
+    text-align: center;
+    color: #94a3b8;
+    padding: 40px 0;
+}
+
+.ailab-demo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.ailab-demo-side {
+    background: white;
+    border-radius: 24px;
+    padding: 28px;
+    border: 1px solid #e2e8f0;
+}
+
+.ailab-demo-side.is-after {
+    border-color: rgba(22, 163, 74, 0.35);
+    box-shadow: 0 10px 25px -12px rgba(22, 163, 74, 0.25);
+}
+
+.ailab-demo-side.is-after h4 {
+    color: #16a34a;
+}
+
+.ailab-demo-side h4 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #2563eb;
+}
+
+.ailab-demo-side p {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.ailab-demo-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ailab-demo-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    background: #f8fafc;
+    border-radius: 12px;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+}
+
+.ailab-demo-item.is-changed {
+    background: #f0fdf4;
+    border-left-color: #16a34a;
+}
+
+.ailab-demo-legend {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.ailab-demo-legend-swatch {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    background: #f0fdf4;
+    border-left: 3px solid #16a34a;
+}
+
+.ailab-demo-table-wrap {
+    overflow-x: auto;
+}
+
+.ailab-demo-label {
+    color: #94a3b8;
+}
+
+.ailab-demo-value {
+    font-weight: 600;
+    color: #0f172a;
+    text-align: right;
+}
+
+.ailab-demo-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.ailab-demo-table th,
+.ailab-demo-table td {
+    border: 1px solid #e2e8f0;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.ailab-demo-table th {
+    background: #f8fafc;
+    color: #64748b;
+}
+
+.ailab-demo-table td.is-changed {
+    background: #f0fdf4;
+    color: #14532d;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .ailab-invite-card, .ailab-verify-card {
+        padding: 32px 24px;
+    }
+    .ailab-demo-grid {
+        grid-template-columns: 1fr;
+    }
+}

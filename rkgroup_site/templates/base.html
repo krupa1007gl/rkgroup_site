@@ -14,6 +14,12 @@
 </head>
 <body>
     <header class="header">
+        <div class="header-topbar">
+            <div class="container header-topbar-inner">
+                <a href="tel:+79157258878"><i class="fas fa-phone"></i> +7 (915) 725-88-78</a>
+                <a href="mailto:info@rkgroup.tech"><i class="fas fa-envelope"></i> info@rkgroup.tech</a>
+            </div>
+        </div>
         <div class="container">
             <div class="header-inner">
                 <a href="{% url 'main:home' %}" class="logo">RK Group</a>
@@ -24,21 +30,17 @@
                     <div class="nav-item">
                         <a href="{% url 'main:home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">Главная</a>
                     </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle">Продукты <i class="fas fa-chevron-down"></i></a>
-                        <div class="dropdown-menu">
-                            <a href="{% url 'bots:bot_list' %}" class="dropdown-item">Боты</a>
-                            <a href="{% url 'cases:case_list' %}" class="dropdown-item">Кейсы</a>
-                            <a href="{% url 'news:news_list' %}" class="dropdown-item">Новости</a>
-                        </div>
+                    <div class="nav-item">
+                        <a href="{% url 'main:about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">О ботах</a>
                     </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle">О компании <i class="fas fa-chevron-down"></i></a>
-                        <div class="dropdown-menu">
-                            <a href="{% url 'main:about' %}" class="dropdown-item">О нас</a>
-                            <a href="{% url 'main:partners' %}" class="dropdown-item">Партнеры</a>
-                            <a href="{% url 'main:contact' %}" class="dropdown-item">Контакты</a>
-                        </div>
+                    <div class="nav-item">
+                        <a href="{% url 'ailab:page' %}" class="nav-link {% if request.resolver_match.app_name == 'ailab' %}active{% endif %}">AI Lab</a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="{% url 'main:partners' %}" class="nav-link {% if request.resolver_match.url_name == 'partners' %}active{% endif %}">Партнёрам</a>
+                    </div>
+                    <div class="nav-item nav-item-cta">
+                        <a href="{% url 'main:contact' %}" class="btn-outline">Написать нам</a>
                     </div>
                 </nav>
             </div>
@@ -65,32 +67,31 @@
                     <p style="color: #a0c4e8; font-size: 14px;">Автоматизация коммуникаций с помощью AI-агентов</p>
                 </div>
                 <div class="footer-col">
-                    <h4>Продукты</h4>
-                    <a href="{% url 'bots:bot_list' %}">Боты</a>
-                    <a href="{% url 'cases:case_list' %}">Кейсы</a>
-                    <a href="{% url 'news:news_list' %}">Новости</a>
+                    <h4>Страницы</h4>
+                    <a href="{% url 'main:home' %}">Главная</a>
+                    <a href="{% url 'main:about' %}">О ботах</a>
+                    <a href="{% url 'ailab:page' %}">AI Lab</a>
+                    <a href="{% url 'main:partners' %}">Партнёрам</a>
                 </div>
                 <div class="footer-col">
-                    <h4>О компании</h4>
-                    <a href="{% url 'main:about' %}">О нас</a>
-                    <a href="{% url 'main:partners' %}">Партнеры</a>
+                    <h4>Ещё</h4>
+                    <a href="{% url 'main:faq' %}">FAQ</a>
                     <a href="{% url 'main:contact' %}">Контакты</a>
                 </div>
                 <div class="footer-col">
-                    <h4>Контакты</h4>
+                    <h4>Связаться</h4>
                     <a href="tel:+79157258878">+7 (915) 725-88-78</a>
                     <a href="mailto:info@rkgroup.tech">info@rkgroup.tech</a>
                     <a href="https://t.me/rkgtech" target="_blank">Telegram: @rkgtech</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 RK Group. Все права защищены.</p>
+                <p>© {% now "Y" %} RK Group. Все права защищены.</p>
             </div>
         </div>
     </footer>
 
     <script src="{% static 'js/base.js' %}"></script>
-    <script src="{% static 'js/pages/bots.js' %}"></script>
     <script src="{% static 'js/pages/contact.js' %}"></script>
     {% block extra_js %}{% endblock %}
 </body>

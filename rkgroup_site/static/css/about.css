@@ -1,4 +1,4 @@
-/* static/css/about.css - Стили для страницы "О нас" */
+/* static/css/about.css — стили для страницы "О ботах" */
 
 .about-container {
     max-width: 800px;
@@ -6,50 +6,63 @@
     text-align: center;
 }
 
-.team-grid {
+.reading-time {
+    display: inline-block;
+    margin-top: 16px;
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.about-points {
+    list-style: none;
+    padding: 0;
+    margin-top: 32px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
-    max-width: 600px;
-    margin: 40px auto 0;
+    gap: 12px 24px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.team-card {
-    text-align: center;
-}
-
-.team-photo {
-    width: 120px;
-    height: 120px;
-    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-    border-radius: 60px;
-    margin: 0 auto 20px;
+.about-points li {
+    color: #334155;
+    font-size: 15px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    color: #2563eb;
+    align-items: flex-start;
+    gap: 10px;
 }
 
-.timeline-grid {
+.about-points li i {
+    color: #16a34a;
+    margin-top: 4px;
+}
+
+.example-dialogs {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    margin-top: 32px;
+    margin-top: 40px;
+    align-items: start;
 }
 
-.timeline-year {
-    font-size: 24px;
-    font-weight: 700;
-    color: #2563eb;
+.example-dialog {
+    max-width: none;
+    padding: 24px;
 }
 
-@media (max-width: 768px) {
-    .team-grid {
+.example-dialog .mockup-chat {
+    padding: 16px;
+}
+
+@media (max-width: 1024px) {
+    .example-dialogs {
         grid-template-columns: 1fr;
     }
-    
-    .timeline-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .about-points {
+        grid-template-columns: 1fr;
     }
 }
